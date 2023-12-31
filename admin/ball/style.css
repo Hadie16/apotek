@@ -1,0 +1,59 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #000;
+}
+
+.planet {
+    width: 200px;
+    height: 200px;
+    background-color: #0055FF; /* Light blue color for the planet */
+    border-radius: 50%;
+    position: relative;
+    animation: spin 10s linear infinite;
+}
+
+.shiny-planet {
+    width: 180px;
+    height: 180px;
+    background-color: #AAD8E3; /* Lighter shade for the shiny part */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: shine 10s linear infinite alternate;
+    box-shadow: 0 0 30px #FFF; /* Add a white glow */
+}
+
+.ring {
+    width: 230px;
+    height: 20px;
+    background-color: #A8A8A8;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
