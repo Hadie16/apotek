@@ -20,7 +20,9 @@ if($month !== "0"){
     $monthName = $monthNames[$month - 1];
     $date = $monthName . ' ' . $year;
   } else {
-    $date = "Invalid month value";
+    // $date = "Invalid month value";
+  $date =$year;
+
   }
 }else{
   $date =$year;

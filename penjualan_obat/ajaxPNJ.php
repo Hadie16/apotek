@@ -2,69 +2,27 @@
 
 // update
 // Attach event listener to the parent element using event delegation
-$('#myTable1 tbody').on('input', '.qty-input, .unit-price-input', function() {
-  var rows = $(this).closest('tbody').find('tr');
+// $('#myTable1 tbody').on('input', '.qty-input, .unit-price-input', function() {
+//   var rows = $(this).closest('tbody').find('tr');
 
-  rows.each(function() {
-    var qty = parseFloat($(this).find('.qty-input').val());
-    var unitPrice = parseFloat($(this).find('.unit-price-input').val());
-    var totalAmount = qty * unitPrice;
+//   rows.each(function() {
+//     var qty = parseFloat($(this).find('.qty-input').val());
+//     var unitPrice = parseFloat($(this).find('.unit-price-input').val());
+//     var totalAmount = qty * unitPrice;
 
-    if (isNaN(totalAmount)) {
-      totalAmount = 0;
-    }
+//     if (isNaN(totalAmount)) {
+//       totalAmount = 0;
+//     }
 
-    $(this).find('.total-amount-input').val(totalAmount.toFixed(2));
-    // $(this).find('.total-amount-input2').val(totalAmount.toFixed(2));
+//     $(this).find('.total-amount-input').val(totalAmount.toFixed(2));
+//     // $(this).find('.total-amount-input2').val(totalAmount.toFixed(2));
 
-  });
+//   });
  
-});
+// });
 
 </script>
-<script>
-  $(document).ready(function() {
-  // ...
 
-  // Function to calculate and update the grand total
-  function updateGrandTotal() {
-    var grandTotal = 0;
-
-    // Iterate over each row
-    $('#myTable1 tbody tr').each(function() {
-      var totalAmount = parseFloat($(this).find('.total-amount-input').val());
-      
-      if (!isNaN(totalAmount)) {
-        grandTotal += totalAmount;
-      }
-    });
-
-    // Update the grand total field
-    $('#grandTotal').val(grandTotal.toFixed(0));
-  }
-
-  // Event listener for quantity and unit price inputs
-  // $('.qty-input, .unit-price-input').on('input', function() {
-    $('#myTable1').on('input', '.qty-input, .unit-price-input', function() {
-    var qty = parseFloat($(this).closest('tr').find('.qty-input').val());
-    var unitPrice = parseFloat($(this).closest('tr').find('.unit-price-input').val());
-    var totalAmount = qty * unitPrice;
-
-    
-    if (isNaN(totalAmount)) {
-      totalAmount = 0;
-    }
-
-    $(this).closest('tr').find('.total-amount-input').val(totalAmount.toFixed(0));
-    $('.jj').val(totalAmount.toFixed(0));
-
-    updateGrandTotal(); // Calculate and update the grand total
-  });
-
-  // ...
-});
-
-</script>
 <script>
 
 
@@ -117,7 +75,7 @@ $(document).ready(function() {
     $.ajax({
       url: '../penjualan_obat/fetch_penjualan.php',
       type: 'POST',
-      data: { id_stok_obat: selectedOption },
+      data: { id_obat_var: selectedOption },
       dataType: 'json',
       success: function(response) {
         if (response.status === 'success') {
@@ -134,14 +92,28 @@ $(document).ready(function() {
     {
 
 
-        var dd = currentRow.find('.jumlah_stok_obat').val();
-        var jj =  currentRow.find('.jumlah_detail_penjualan_obat').val();
+        // var dd = currentRow.find('.jumlah_stok_obat').val();
+        // var jj =  currentRow.find('.jumlah_detail_penjualan_obat').val();
+
+        var dd = parseInt(currentRow.find('.jumlah_stok_obat').val());
+        var jj =  parseInt(currentRow.find('.jumlah_detail_penjualan_obat').val());
+
 
         var jumlah_stok_obat = dd - jj;
 
-// if(jj > dd){
-//   currentRow.find('.jumlah_detail_penjualan_obat').val(dd);
-// }
+
+   
+
+
+
+if(jj > dd){
+  parseInt(currentRow.find('.jumlah_detail_penjualan_obat').val(dd));
+
+
+
+  // updateGrandTotal();
+
+}
 
         if (isNaN(jumlah_stok_obat)) {
           jumlah_stok_obat = response.data.jumlah_stok_obat;
@@ -184,5 +156,52 @@ $(document).ready(function() {
   }
 });
 
+
+</script>
+
+<script>
+  $(document).ready(function() {
+  // ...
+
+  // Function to calculate and update the grand total
+  function updateGrandTotal() {
+    var grandTotal = 0;
+
+    // Iterate over each row
+    $('#myTable1 tbody tr').each(function() {
+      var totalAmount = parseInt($(this).find('.total-amount-input').val());
+      
+      if (!isNaN(totalAmount)) {
+        grandTotal += totalAmount;
+      }
+    });
+
+    // Update the grand total field
+    $('#grandTotal').val(grandTotal.toFixed(0));
+  }
+
+  // Event listener for quantity and unit price inputs
+  // $('.qty-input, .unit-price-input').on('input', function() {
+    $('#myTable1').on('change', '.qty-input, .unit-price-input', function() {
+  
+    var qty = parseInt($(this).closest('tr').find('.qty-input').val());
+    var unitPrice = parseInt($(this).closest('tr').find('.unit-price-input').val());
+    var totalAmount = qty * unitPrice;
+
+    
+    if (isNaN(totalAmount)) {
+      totalAmount = 0;
+    }
+
+    $(this).closest('tr').find('.total-amount-input').val(totalAmount.toFixed(0));
+    $('.jj').val(totalAmount.toFixed(0));
+
+    
+    updateGrandTotal(); // Calculate and update the grand total
+  
+  });
+
+  // ...
+});
 
 </script>

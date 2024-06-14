@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
     die('Query Error: ' . mysqli_error($con));
 
 }else{
-  echo 1;
+  // echo 1;
 }
 
   $firstTableID = mysqli_insert_id($con);
@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
     // Execute the insert query
     $result = mysqli_query($con, $insert_query);
     if ($result) {
-      echo "<p>query berhasil<p/>";
+      // echo "<p>query berhasil<p/>";
     } else {
       die('invalid Query : ' . mysqli_error($con));
     }
@@ -100,7 +100,7 @@ while ($row = mysqli_fetch_assoc($select)) {
   $jumlah_ko = $row['jumlah_ketersediaan_obat'];
 };
 if ($select) {
-  echo "<p>query select berhasil<p/>";
+  // echo "<p>query select berhasil<p/>";
 } else {
   die('invalid Query : ' . mysqli_error($con));
 }
@@ -130,7 +130,7 @@ if($box == 0){
     $update = mysqli_query($con, "UPDATE ketersediaan_obat SET box='$jumlah_stok_box_result', jumlah_ketersediaan_obat='$jumlah_stok_sisa_result' WHERE id_obat=$id_detailPO and batch_number='$batch_number'");
 
 if ($update) {
-  echo "<p>query berhasil<p/>";
+  // echo "<p>query berhasil<p/>";
   echo "<script>window.location.href = '?page=retur_obat-show';</script>";
 
 } else {
@@ -379,5 +379,8 @@ if ($update) {
     </div>
   </div>
 </div>
-</div>
-</div>
+<!-- </div>
+</div> -->
+
+
+

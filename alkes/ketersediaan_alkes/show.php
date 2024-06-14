@@ -101,7 +101,10 @@ error_reporting(E_ALL);
               include '../connection.php';
               
          
-              $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_ketersediaan_alkes) as jumlah_ketersediaan_alkes,(SELECT tanggal_kadaluarsa_alkes FROM ketersediaan_alkes dso WHERE dso.id_alkes = a.id_alkes AND dso.jumlah_ketersediaan_alkes > 0 AND dso.tanggal_kadaluarsa_alkes >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_alkes ASC LIMIT 1) AS tanggal_kadaluarsa_alkesss,b.nama_alkes alkess FROM ketersediaan_alkes a join alkes b on a.id_alkes=b.id_alkes group by id_alkes ');
+              $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_ketersediaan_alkes) as jumlah_ketersediaan_alkes,
+               (SELECT sum(jumlah_ketersediaan_alkes) FROM ketersediaan_alkes dsos WHERE dsos.id_alkes = a.id_alkes AND dsos.jumlah_ketersediaan_alkes > 0 AND dsos.tanggal_kadaluarsa_alkes >= CURDATE() ORDER BY dsos.tanggal_kadaluarsa_alkes ASC LIMIT 1) AS jumlah_ketersediaan_alkess
+              
+              ,(SELECT tanggal_kadaluarsa_alkes FROM ketersediaan_alkes dso WHERE dso.id_alkes = a.id_alkes AND dso.jumlah_ketersediaan_alkes > 0 AND dso.tanggal_kadaluarsa_alkes >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_alkes ASC LIMIT 1) AS tanggal_kadaluarsa_alkesss,b.nama_alkes alkess FROM ketersediaan_alkes a join alkes b on a.id_alkes=b.id_alkes group by id_alkes ');
        
               if ($query) {
                 // echo "<p>query berhasil<p/>";
@@ -133,9 +136,9 @@ error_reporting(E_ALL);
                     $expirationDate= $data['tanggal_kadaluarsa_alkesss'];
                   }   
 
-                  if($d = $data['jumlah_ketersediaan_alkes']==0 or ""){
+                  if($d = $data['jumlah_ketersediaan_alkess']==0 or ""){
                     $d='0';}else{
-                      $d= $data['jumlah_ketersediaan_alkes'];
+                      $d= $data['jumlah_ketersediaan_alkess'];
                     }   
                 $id = $data['id_ketersediaan_alkes'];
 

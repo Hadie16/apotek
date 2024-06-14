@@ -15,7 +15,11 @@ if (mysqli_num_rows($result) > 0) {
   $birthDateTime = new DateTime($birthDate);
 
   // Create a DateTime object for the current date (today)
-  $currentDateTime = new DateTime();
+  // $currentDateTime = new DateTime();
+ $tgl_cekk= $data['tanggal_cek_kesehatan']; 
+
+  $currentDateTime = new DateTime($tgl_cekk);
+
 
   // Calculate the difference between the current date and the birth date
   $dateInterval = $currentDateTime->diff($birthDateTime);

@@ -6,18 +6,18 @@
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">Penerimaan alkes</h6>
+        <h6 class="m-0 font-weight-bold text-info">Penerimaan Alkes</h6>
 
       </div>
       <!-- <div class="row"> -->
 
-      <div class="card-body">
+      <div class="card-body" data-page="PNMALK">
       <div class="row">
       <div class="col-sm-4">
  
         <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModalPenerimaan"><i class="fas fa-plus"></i> Tambah Data</a>
 
-        <a href="../penerimaan_alkes/print.php" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print"></i>
+        <a href="../alkes/penerimaan_alkes/print.php" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print"></i>
           Cetak</a>
           
           <button onclick="toggleDiv('myDiv1', 'myDiv2','myDiv3','myDiv4','myDivBtn')" class="btn btn-sm" style="background:skyblue;color:white"  id="myDivBtn" ><i class="fas fa-filter"></i></button>
@@ -37,13 +37,13 @@
 
   </div>
   <div class="col-1" style="display: none;" id="myDiv3">
-  <button id="filterButtonPNM" class="btn btn-warning" ><i class="fas fa-print"></i></button>
+  <button id="filterButtonPNMALK" class="btn btn-warning" ><i class="fas fa-print"></i></button>
   </div>       
   </div>
         <hr>
      
         <div class="table-responsive mt-3" >
-          <table class="table table-bordered table-hover" id="viewPenerimaanalkes" style="width: 100%;">
+          <table class="table table-bordered table-hover" id="viewPenerimaanObat" style="width: 100%;">
             <thead class="bg-secondary text-white" >
               <!-- <thead> -->
               <tr align="center">
@@ -135,8 +135,8 @@
         <div class="modal-header">
           <h5 class="modal-title">Pilih Data Barang Diterima</h5>
           <div class="button-container" id="button-container">
-          <button class="btn btn-warning active"  id="pesanBtn" onclick="redirectToPage('pesan')">Pesan</button>
-          <button class="btn btn-secondary"  id="returBtn" onclick="redirectToPage('retur')">Retur</button>
+          <button class="btn btn-warning active"  id="pesanBtn" onclick="redirectToPageALK('pesan')">Pesan</button>
+          <button class="btn btn-secondary"  id="returBtn" onclick="redirectToPageALK('retur')">Retur</button>
 <!-- <input type="hidden" id="switchInput" value="alkesBtn"> -->
 
   </div>
@@ -154,7 +154,7 @@
             <div class="table-responsive mt-3" >
 <div id="tableContainerTambah" style="width: 100%;">
 
-          <table class="table table-bordered table-hover" id="viewPpenerimaanalkes" style="width: 100%;">
+          <table class="table table-bordered table-hover" id="viewPenerimaanObat" style="width: 100%;">
             <thead class="bg-secondary text-white" >
             <?php
 

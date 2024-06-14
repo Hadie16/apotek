@@ -7,10 +7,10 @@ error_reporting(E_ALL);
 // $con = mysqli_connect("localhost", "username", "password", "database_name");
 include '../connection.php';
 
-$id_stok_obat = $_POST['id_stok_obat'];
+$id_obat = $_POST['id_obat_var'];
 
-// Query to retrieve data from table_1 based on id_stok_obat
-$query = mysqli_query($con, "SELECT id_obat,jumlah_stok_obat,satuan,harga_jual_obat FROM stok_obat WHERE id_stok_obat = '$id_stok_obat'");
+// Query to retrieve data from table_1 based on id_obat
+$query = mysqli_query($con, "SELECT tanggal_kadaluarsa_obat, id_obat,sum(jumlah_stok_obat) as sum_jumlah_stok_obat,satuan,harga_jual_obat FROM stok_obat where id_obat = '$id_obat' and tanggal_kadaluarsa_obat > CURDATE() and jumlah_stok_obat>0");
 
 $response = array();
 
@@ -20,7 +20,7 @@ if ($query) {
     $response['status'] = 'success';
     $response['data']['id_obat'] = $row['id_obat'];
   
-    $response['data']['jumlah_stok_obat'] = $row['jumlah_stok_obat'];
+    $response['data']['jumlah_stok_obat'] = $row['sum_jumlah_stok_obat'];
     $response['data']['satuan'] = $row['satuan'];
 
 

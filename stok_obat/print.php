@@ -33,7 +33,7 @@ $keyword = $_GET['keyword'];
       include '../connection.php';
       // $query = mysqli_query($con, 'SELECT a.*,sum(a.jumlah_stok_obat),b.nama_obat obats from stok_obat a join obat b on a.id_obat=b.id_obat group by a.id_obat');
 
-      $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_stok_obat) as jumlah_stok_obat,(SELECT tanggal_kadaluarsa_obat FROM stok_obat dso WHERE dso.id_obat = a.id_obat AND dso.jumlah_stok_obat > 0 AND dso.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_obat ASC LIMIT 1) AS tanggal_kadaluarsa_obatss,b.nama_obat obats FROM stok_obat a join obat b on a.id_obat=b.id_obat group by id_obat ');
+      $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_stok_obat) as jumlah_stok_obat,(SELECT tanggal_kadaluarsa_obat FROM stok_obat dso WHERE dso.id_obat = a.id_obat AND dso.jumlah_stok_obat > 0 AND dso.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_obat ASC LIMIT 1) AS tanggal_kadaluarsa_obatss,b.nama_obat obats FROM stok_obat a join obat b on a.id_obat=b.id_obat where tanggal_kadaluarsa_obat >= CURDATE() group by id_obat ');
 
                            
 $no = 1;

@@ -2,7 +2,7 @@
 
 // update
 // Attach event listener to the parent element using event delegation
-$('#myTable2 tbody').on('input', '.qty-inputALK, .unit-price-input', function() {
+$('#myTable2 tbody').on('change', '.qty-inputALK, .unit-price-input', function() {
   var rows = $(this).closest('tbody').find('tr');
 
   rows.each(function() {
@@ -45,7 +45,7 @@ $('#myTable2 tbody').on('input', '.qty-inputALK, .unit-price-input', function() 
 
   // Event listener for quantity and unit price inputs
   // $('.qty-inputALK, .unit-price-input').on('input', function() {
-    $('#myTable2').on('input', '.qty-inputALK, .unit-price-input', function() {
+    $('#myTable2').on('change', '.qty-inputALK, .unit-price-input', function() {
     var qty = parseFloat($(this).closest('tr').find('.qty-inputALK').val());
     var unitPrice = parseFloat($(this).closest('tr').find('.unit-price-input').val());
     var totalAmount = qty * unitPrice;
@@ -117,7 +117,7 @@ $(document).ready(function() {
     $.ajax({
       url: '../alkes/penjualan_alkes/fetch_penjualan.php',
       type: 'POST',
-      data: { id_stok_alkes: selectedOption },
+      data: { id_alkes_var: selectedOption },
       dataType: 'json',
       success: function(response) {
         if (response.status === 'success') {
@@ -134,14 +134,14 @@ $(document).ready(function() {
     {
 
 
-        var dds = currentRow.find('.jumlah_stok_alkesALK').val();
-        var jjs =  currentRow.find('.qty-inputALK').val();
+        var dds = parseInt(currentRow.find('.jumlah_stok_alkesALK').val());
+        var jjs =  parseInt(currentRow.find('.qty-inputALK').val());
 
         var jumlah_stok_alkes = dds - jjs;
 
-// if(jj > dd){
-//   currentRow.find('.qty-inputALK').val(dd);
-// }
+if(jjs > dds){
+  parseInt(currentRow.find('.qty-inputALK').val(dds));
+}
 
         if (isNaN(jumlah_stok_alkes)) {
           jumlah_stok_alkes = response.data.jumlah_stok_alkes;

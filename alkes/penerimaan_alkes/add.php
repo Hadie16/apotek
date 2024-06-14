@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
     die('Query Error: ' . mysqli_error($con));
 
 }else{
-  echo 1;
+  // echo 1;
 }
 
   $firstTableID = mysqli_insert_id($con);

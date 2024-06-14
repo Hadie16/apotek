@@ -110,7 +110,7 @@ while ($row = $result->fetch_assoc()) {
     // $tableHTML .= '<td>' . $row['jenis_produk'] . '</td>';
     $tableHTML .= '<td>' . $row['tanggal_retur'] . '</td>';
     $tableHTML .= '<td>' . $row['suppliers'] . '</td>';
-    $tableHTML .= '<td> <a class="btn bg-info text-white" href="?page=penerimaan_alkes-add_retur&id1= ' . $row['id_retur_alkes'] . '&id2='. $row['kode_retur_alkes'] .'">Pilih</a></td>';
+    $tableHTML .= '<td> <a class="btn bg-info text-white" href="?page=penerimaan_alkes-add_retur&id1=' . $row['id_retur_alkes'] . '&id2='. $row['kode_retur_alkes'] .'">Pilih</a></td>';
 
     $tableHTML .= '</tr>';
 }

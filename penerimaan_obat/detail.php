@@ -12,7 +12,7 @@ $id = $_GET['id'];
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">Detail penerimaan Obat</h6>
+        <h6 class="m-0 font-weight-bold text-info">Detail Penerimaan Obat</h6>
         <?php
         // $query = mysqli_query($con,  "SELECT a.*,b.kode_penerimaan_obat kode,b.tanggal_penerimaan_obat tanggal FROM detail_penerimaan_obat a join penerimaan_obat b on a.id_penerimaan_obat=b.id_penerimaan_obat  WHERE a.id_penerimaan_obat=$id ");
            $query = mysqli_query($con,  "SELECT * FROM penerimaan_obat WHERE id_penerimaan_obat=$id");
@@ -87,8 +87,8 @@ $id = $_GET['id'];
               // $query = mysqli_query($con, "SELECT * FROM detail_penerimaan_obat  WHERE id_penerimaan_obat=$id ");
               $query = mysqli_query($con,"SELECT a.*, c.nama_obat
           FROM detail_penerimaan_obat a
-          JOIN detail_pengadaan_obat b ON a.id_detail_pengadaan_obat = b.id_detail_pengadaan_obat
-          JOIN obat c ON b.id_obat = c.id_obat where id_penerimaan_obat=$id");
+          -- JOIN detail_pengadaan_obat b ON a.id_detail_pengadaan_obat = b.id_detail_pengadaan_obat
+          JOIN obat c ON a.id_obat = c.id_obat where id_penerimaan_obat=$id");
 //   if ($query) {
 //     echo "<p>query berhasil<p/>";
 // } else {

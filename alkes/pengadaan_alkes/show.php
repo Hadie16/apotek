@@ -156,7 +156,7 @@
               <th >No</th>
           
         <th>Kode Pengadaan</th>
-        <th>Nama alkes</th>
+        <th>Nama Alkes</th>
         <th>Jumlah</th>
         <th>Satuan</th>
 

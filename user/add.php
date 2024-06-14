@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
     exit;
   }
   if($l=='pimpinan'){
-    $insert = mysqli_query($con, "INSERT INTO user(username,password,level,id_ttk) VALUES('$u','$p','$l',0)");
+    $insert = mysqli_query($con, "INSERT INTO user(username,password,level,id_ttk) VALUES('$u','$p','$l',null)");
 }else{
   $insert = mysqli_query($con, "INSERT INTO user(username,password,level,id_ttk) VALUES('$u','$p','$l','$t')");
 }
@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
   <div class="col-md-8">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">User</h6>
+        <h6 class="m-0 font-weight-bold text-info">User</h6>
       </div>
       <div class="card-body">
         <form method="POST">
@@ -62,7 +62,7 @@ if (isset($_POST['submit'])) {
               <select name="level" id="level" class="form-control level_user" name="level" required>
                 <option value="-" selected disabled>- Pilih -</option>
                 <option value="administrator">Administrator</option>
-                <option value="ttk">TTK</option>
+                <option value="operator">Operator</option>
                 <option value="pimpinan">Pimpinan</option>
 
               </select>
@@ -111,3 +111,4 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
 </div>
+

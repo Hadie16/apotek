@@ -1,5 +1,5 @@
 <script>
-    console.log('Script is running...');
+    // console.log('Script is running...');
     // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
@@ -66,6 +66,29 @@ datasets: [{
 }],
 }
 
+var maxValue;
+
+// Check if datas.datasets is not empty and contains valid numeric values
+if (datas.datasets.length > 0 && datas.datasets.some(dataset => Array.isArray(dataset.data) && dataset.data.length > 0)) {
+    maxValue = Math.max.apply(Math, datas.datasets.map(function(dataset) {
+        return Math.max.apply(Math, dataset.data.filter(value => typeof value === 'number' && isFinite(value)));
+    }));
+} else {
+    // If datas.datasets is empty or contains no valid numeric values, set maxValue to a default value
+    maxValue = 0; // Or any other default value you prefer
+}
+
+// Check if maxValue is finite before adding padding
+if (isFinite(maxValue)) {
+    // Set some padding to the maximum value
+    maxValue += 10;
+}
+
+console.log(maxValue);
+
+
+
+
 // Bar Chart Example
 var ctx = document.getElementById("myBarCharts");
 var myBarChart = new Chart(ctx, {
@@ -98,7 +121,7 @@ var myBarChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 100,
+          max: maxValue,
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks

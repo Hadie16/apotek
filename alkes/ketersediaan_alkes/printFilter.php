@@ -1,10 +1,26 @@
 <?php
 include '../template/headerPrint.php';
+include '../connection.php';
+
 $startDate = $_GET['startDate']; // Get the start date from the URL
-$endDate = $_GET['endDate'];     // Get the end date from the URL
+$endDate = $_GET['endDate']; // Get the start date from the URL
+
+// $endDate = $con->query("SELECT MAX(tanggal_kadaluarsa_alkes) AS max_date FROM ketersediaan_alkes")->fetch_assoc()["max_date"];
+
+if(empty($endDate)){
+
+  $endDate = $con->query("SELECT MAX(tanggal_kadaluarsa_alkes) AS max_date FROM ketersediaan_alkes")->fetch_assoc()["max_date"];
+}
+if($startDate == $endDate){
+  $showDate = $startDate;
+}else{
+  $showDate = "$startDate Sampai $endDate";
+
+}
+
 ?>
 <br>
-<h2 align="center">Laporan Data Ketersediaan Alat Kesehatan</h2>
+<h2 align="center">Laporan Data Ketersediaan Alat Kesehatan ( <?php echo $showDate ?>  )</h2>
 <div class="table-responsive mt-3">
   <table border="1" width="95%" align="center" cellpadding="8">
     <thead>
@@ -31,7 +47,7 @@ $endDate = $_GET['endDate'];     // Get the end date from the URL
 
 // $keyword = $_GET['keyword'];
 
-      include '../connection.php';
+      // include '../connection.php';
       // $query = mysqli_query($con, 'SELECT a.*,b.nama_alkes alkess FROM ketersediaan_alkes a join alkes b on a.id_alkes=b.id_alkes');
       $query = mysqli_query($con, "SELECT a.*, sum(a.jumlah_ketersediaan_alkes) as jumlah_ketersediaan_alkes,(SELECT tanggal_kadaluarsa_alkes FROM ketersediaan_alkes dso WHERE dso.id_alkes = a.id_alkes AND dso.jumlah_ketersediaan_alkes > 0 AND dso.tanggal_kadaluarsa_alkes >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_alkes ASC LIMIT 1) AS tanggal_kadaluarsa_alkesss,b.nama_alkes alkess FROM ketersediaan_alkes a join alkes b on a.id_alkes=b.id_alkes where DATE(tanggal_kadaluarsa_alkes) BETWEEN '$startDate' AND '$endDate' group by id_alkes ");
                            

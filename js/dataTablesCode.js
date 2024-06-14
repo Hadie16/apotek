@@ -68,11 +68,11 @@ $(document).ready(function() {
       }]
     });
   });
-  //kasir
+  //ttk
   $(document).ready(function() {
-    $('#viewKasir').DataTable({
+    $('#viewttk').DataTable({
       "columnDefs": [{
-        "targets": [1,4,5],
+        "targets": [6],
         "orderable": false
       }]
     });
@@ -81,7 +81,7 @@ $(document).ready(function() {
   $(document).ready(function() {
     $('#viewAlkes').DataTable({
       "columnDefs": [{
-        "targets": [1,5],
+        "targets": [2,4],
         "orderable": false
       }]
     });
@@ -539,59 +539,116 @@ if (startDateInput) {
 
 })();
 
-//Penjualan obat
+//Penjualan obat / alkes
 
 (function() {
-  $(document).ready(function() {
-    var table = $('#viewPenjualanObat').DataTable({
-      columnDefs: [{
-        targets: [5],
-        orderable: false
-      }]
-    });
-    // Get the search value
-    const print_keyPobat = document.getElementById('print_keyPobat');
 
-    print_keyPobat.addEventListener('click', function() {
-      // Retrieve the search value from the table object using DataTables API
-      const searchValueObject = table.search();
-      const sv = searchValueObject;
+  const pageType = document.querySelector('[data-page]')?.getAttribute('data-page');
   
-      // Create the URL with the parameters
-      const url = '../penjualan_obat/print.php?keyword=' + encodeURIComponent(sv);
+  if (pageType === "PNJALK") {
+    $(document).ready(function() {
+      var table = $('#viewPenjualanAlkes').DataTable({
+        columnDefs: [{
+          targets: [5],
+          orderable: false
+        }]
+      });
+      // Get the search value
+      const print_keyPobat = document.getElementById('print_keyPobats');
   
-      window.open(url, '_blank');
+      print_keyPobat.addEventListener('click', function() {
+        // Retrieve the search value from the table object using DataTables API
+        const searchValueObject = table.search();
+        const sv = searchValueObject;
+    
+        // Create the URL with the parameters
+        const url = '../alkes/penjualan_alkes/print.php?keyword=' + encodeURIComponent(sv);
+    
+        window.open(url, '_blank');
+      });
+  
+  const startDateInput2 = document.getElementById('startDatePNJ');
+  
+      if (startDateInput2) {
+      // Add event listeners to the date inputs
+      $('#startDatePNJ').on('change', function() {
+        table.draw();
+      });
+    
+      $('#endDatePNJ').on('change', function() {
+        table.draw();
+      });
+    
+      // Extend DataTables with a custom filtering function
+      $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+        var startDate = $('#startDatePNJ').val();
+        var endDate = $('#endDatePNJ').val();
+        var date = data[2]; // Assuming the date column is the 7th column (index 6)
+    
+        if ((startDate === '' && endDate === '') ||
+            (startDate === '' && date <= endDate) ||
+            (endDate === '' && date >= startDate) ||
+            (date >= startDate && date <= endDate)) {
+          return true;
+        }
+    
+        return false;
+      });
+  }
     });
-
-const startDateInput2 = document.getElementById('startDatePNJ');
-
-    if (startDateInput2) {
-    // Add event listeners to the date inputs
-    $('#startDatePNJ').on('change', function() {
-      table.draw();
+  } else if (pageType === "PNJ") {
+    $(document).ready(function() {
+      var table = $('#viewPenjualanObat').DataTable({
+        columnDefs: [{
+          targets: [5],
+          orderable: false
+        }]
+      });
+      // Get the search value
+      const print_keyPobat = document.getElementById('print_keyPobat');
+  
+      print_keyPobat.addEventListener('click', function() {
+        // Retrieve the search value from the table object using DataTables API
+        const searchValueObject = table.search();
+        const sv = searchValueObject;
+    
+        // Create the URL with the parameters
+        const url = '../penjualan_obat/print.php?keyword=' + encodeURIComponent(sv);
+    
+        window.open(url, '_blank');
+      });
+  
+  const startDateInput2 = document.getElementById('startDatePNJ');
+  
+      if (startDateInput2) {
+      // Add event listeners to the date inputs
+      $('#startDatePNJ').on('change', function() {
+        table.draw();
+      });
+    
+      $('#endDatePNJ').on('change', function() {
+        table.draw();
+      });
+    
+      // Extend DataTables with a custom filtering function
+      $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+        var startDate = $('#startDatePNJ').val();
+        var endDate = $('#endDatePNJ').val();
+        var date = data[2]; // Assuming the date column is the 7th column (index 6)
+    
+        if ((startDate === '' && endDate === '') ||
+            (startDate === '' && date <= endDate) ||
+            (endDate === '' && date >= startDate) ||
+            (date >= startDate && date <= endDate)) {
+          return true;
+        }
+    
+        return false;
+      });
+  }
     });
+  }
   
-    $('#endDatePNJ').on('change', function() {
-      table.draw();
-    });
-  
-    // Extend DataTables with a custom filtering function
-    $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-      var startDate = $('#startDatePNJ').val();
-      var endDate = $('#endDatePNJ').val();
-      var date = data[2]; // Assuming the date column is the 7th column (index 6)
-  
-      if ((startDate === '' && endDate === '') ||
-          (startDate === '' && date <= endDate) ||
-          (endDate === '' && date >= startDate) ||
-          (date >= startDate && date <= endDate)) {
-        return true;
-      }
-  
-      return false;
-    });
-}
-  });
 
   (function() {
     const pageType = document.querySelector('[data-page]')?.getAttribute('data-page');
@@ -698,7 +755,7 @@ if (startDateInput) {
 })();
 
 
-//penerimaan obat
+//penerimaan obat / penerimaan alkes
 
 (function() {
   $(document).ready(function() {
@@ -845,6 +902,14 @@ filterButton.addEventListener('click', function() {
 }
 })();
 
+
+
+
+
+
+
+
+
 //ketersediaan alkes
 
 (function() {
@@ -978,85 +1043,7 @@ if (startDateInput) {
 })();
 
 //Penjualan alkes
-
-(function() {
-  $(document).ready(function() {
-    var table = $('#viewPenjualanAlkes').DataTable({
-      columnDefs: [{
-        targets: [5],
-        orderable: false
-      }]
-    });
-
-    // const print_keyPalkes = document.getElementById('print_keyPalkess');
-
-    // print_keyPalkes.addEventListener('click', function() {
-    //   // Retrieve the search value from the table object using DataTables API
-    //   const searchValueObjectALK = table.search();
-    //   const svALK = searchValueObjectALK;
-  
-    //   // Create the URL with the parameters
-    //   const url = '../alkes/penjualan_alkes/print.php?keyword=' + encodeURIComponent(svALK);
-  
-    //   window.open(url, '_blank');
-    // });
-
-const startDateInput2 = document.getElementById('startDatePobat');
-
-    if (startDateInput2) {
-    // Add event listeners to the date inputs
-    $('#startDatePobat').on('change', function() {
-      table.draw();
-    });
-  
-    $('#endDatePobat').on('change', function() {
-      table.draw();
-    });
-  
-    // Extend DataTables with a custom filtering function
-    $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-      var startDate = $('#startDatePobat').val();
-      var endDate = $('#endDatePobat').val();
-      var date = data[2]; // Assuming the date column is the 7th column (index 6)
-  
-      if ((startDate === '' && endDate === '') ||
-          (startDate === '' && date <= endDate) ||
-          (endDate === '' && date >= startDate) ||
-          (date >= startDate && date <= endDate)) {
-        return true;
-      }
-  
-      return false;
-    });
-}
-  });
-
-const startDateInput = document.getElementById('startDatePobat');
-const displayDateInput = document.getElementById('displayDatePobat');
-
-if (startDateInput) {
-  startDateInput.addEventListener('input', function() {
-    const selectedDate = startDateInput.value;
-    displayDateInput.value = selectedDate;
-  });
-
-  const filterButton = document.getElementById('filterButtonPobat');
-
-  filterButton.addEventListener('click', function() {
-    const startDate = startDateInput.value;
-    const endDate = document.getElementById('endDatePobat').value;
-
-    // Create the URL with the parameters
-    const url = '../penjualan_alkes/printFilter.php?startDate=' + startDate + '&endDate=' + endDate;
-// filterButton.setAttribute("target","_blank")
-    // Navigate to the other page
-    // window.location.href = url;
-    window.open(url,'_blank')
-  });
-}
-
-})();
-
+//ambil di document code penjualanALK
 
 (function() {
   //retur
@@ -1140,11 +1127,11 @@ const startDateInput1 = document.getElementById('startDateRET');
         const startDate = startDateInput.value;
         const endDate = document.getElementById('endDateRET').value;
   
-        const url = '../alkes/retur_alkes/printFilter.php?startDate=' + startDate + '&endDate=' + endDate;
+        const url = '../alkes/retur_alkes/print3.php?startDate=' + startDate + '&endDate=' + endDate;
         window.open(url, '_blank');
       });
   
-    } else if (pageType === "RET") {0
+    } else if (pageType === "RET") {
       const startDateInput = document.getElementById('startDateRET');
       
       startDateInput.addEventListener('input', function() {

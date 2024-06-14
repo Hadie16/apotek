@@ -100,7 +100,15 @@ error_reporting(E_ALL);
               include '../connection.php';
               
          
-              $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_ketersediaan_obat) as jumlah_ketersediaan_obat,(SELECT tanggal_kadaluarsa_obat FROM ketersediaan_obat dso WHERE dso.id_obat = a.id_obat AND dso.jumlah_ketersediaan_obat > 0 AND dso.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_obat ASC LIMIT 1) AS tanggal_kadaluarsa_obatss,b.nama_obat obats FROM ketersediaan_obat a join obat b on a.id_obat=b.id_obat group by id_obat ');
+              // $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_ketersediaan_obat) as jumlah_ketersediaan_obat,(SELECT tanggal_kadaluarsa_obat FROM ketersediaan_obat dso WHERE dso.id_obat = a.id_obat AND dso.jumlah_ketersediaan_obat > 0 AND dso.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_obat ASC LIMIT 1) AS tanggal_kadaluarsa_obatss,b.nama_obat obats FROM ketersediaan_obat a join obat b on a.id_obat=b.id_obat group by id_obat ');
+
+              $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_ketersediaan_obat) as jumlah_ketersediaan_obat,
+
+                    (SELECT sum(jumlah_ketersediaan_obat) FROM ketersediaan_obat dsos WHERE dsos.id_obat = a.id_obat AND dsos.jumlah_ketersediaan_obat > 0 AND dsos.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dsos.tanggal_kadaluarsa_obat ASC LIMIT 1) AS jumlah_ketersediaan_obats
+
+              ,(SELECT tanggal_kadaluarsa_obat FROM ketersediaan_obat dso WHERE dso.id_obat = a.id_obat AND dso.jumlah_ketersediaan_obat > 0 AND dso.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_obat ASC LIMIT 1) AS tanggal_kadaluarsa_obatss,b.nama_obat obats FROM ketersediaan_obat a join obat b on a.id_obat=b.id_obat group by id_obat ');
+
+        
        
               if ($query) {
                 // echo "<p>query berhasil<p/>";
@@ -132,9 +140,9 @@ error_reporting(E_ALL);
                     $expirationDate= $data['tanggal_kadaluarsa_obatss'];
                   }   
 
-                  if($d = $data['jumlah_ketersediaan_obat']==0 or ""){
+                  if($d = $data['jumlah_ketersediaan_obats']==0 or ""){
                     $d='0';}else{
-                      $d= $data['jumlah_ketersediaan_obat'];
+                      $d= $data['jumlah_ketersediaan_obats'];
                     }   
                 $id = $data['id_ketersediaan_obat'];
 

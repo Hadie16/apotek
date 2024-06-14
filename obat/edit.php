@@ -24,11 +24,7 @@ if (isset($_POST['submit'])) {
   $kategori_obat = $_POST['kategori_obat'];
 
 
-  // $update = mysqli_query($con, "UPDATE obat SET kode_obat='$kode_obat',gambar_obat='$gambar_obat',nama_obat='$nama_obat',sediaan_obat='$sediaan_obat',jenis_obat='$jenis_obat',kategori_obat='$kategori_obat'WHERE id_obat=$id");
-
-  // echo "<script>window.location.href = '?page=obat-show';</script>";
-
-  if (isset($_FILES['gambar_obat'])) {
+  if (!empty($_FILES['gambar_obat']['name'])) {
       $file = $_FILES['gambar_obat'];
 
   $allowedTypes = array('jpg', 'jpeg', 'png');
@@ -46,7 +42,7 @@ if (isset($_POST['submit'])) {
           $update = mysqli_query($con, "UPDATE obat SET kode_obat='$kode_obat',gambar_obat='$filename',nama_obat='$nama_obat',sediaan_obat='$sediaan_obat',jenis_obat='$jenis_obat',kategori_obat='$kategori_obat'WHERE id_obat=$id");
           
           if ($update) {
-              echo "Data inserted successfully.";
+              echo "Data updated successfully.";
 echo "<script>window.location.href = '?page=obat-show';</script>";
 
           } else {

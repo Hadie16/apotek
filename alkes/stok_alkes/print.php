@@ -33,7 +33,7 @@ $keyword = $_GET['keyword'];
       include '../connection.php';
       // $query = mysqli_query($con, 'SELECT a.*,sum(a.jumlah_stok_alkes),b.nama_alkes alkess from stok_alkes a join alkes b on a.id_alkes=b.id_alkes group by a.id_alkes');
 
-      $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_stok_alkes) as jumlah_stok_alkes,(SELECT tanggal_kadaluarsa_alkes FROM stok_alkes dso WHERE dso.id_alkes = a.id_alkes AND dso.jumlah_stok_alkes > 0 AND dso.tanggal_kadaluarsa_alkes >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_alkes ASC LIMIT 1) AS tanggal_kadaluarsa_alkesss,b.nama_alkes alkess FROM stok_alkes a join alkes b on a.id_alkes=b.id_alkes group by id_alkes ');
+      $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_stok_alkes) as jumlah_stok_alkes,(SELECT tanggal_kadaluarsa_alkes FROM stok_alkes dso WHERE dso.id_alkes = a.id_alkes AND dso.jumlah_stok_alkes > 0 AND dso.tanggal_kadaluarsa_alkes >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_alkes ASC LIMIT 1) AS tanggal_kadaluarsa_alkesss,b.nama_alkes alkess FROM stok_alkes a join alkes b on a.id_alkes=b.id_alkes where tanggal_kadaluarsa_alkes >= CURDATE() group by id_alkes ');
 
                            
 $no = 1;

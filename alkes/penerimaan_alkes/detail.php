@@ -65,7 +65,7 @@ $id = $_GET['id'];
               <!-- <th >Nama alkes</th> -->
               <th >No</th>
 
-                <th >Nama alkes</th>
+                <th >Nama Alkes</th>
                 <th >Jumlah</th>
                 <th >Satuan</th>
 
@@ -87,8 +87,8 @@ $id = $_GET['id'];
               // $query = mysqli_query($con, "SELECT * FROM detail_penerimaan_alkes  WHERE id_penerimaan_alkes=$id ");
               $query = mysqli_query($con,"SELECT a.*, c.nama_alkes
           FROM detail_penerimaan_alkes a
-          JOIN detail_pengadaan_alkes b ON a.id_detail_pengadaan_alkes = b.id_detail_pengadaan_alkes
-          JOIN alkes c ON b.id_alkes = c.id_alkes where id_penerimaan_alkes=$id");
+          -- JOIN detail_pengadaan_alkes b ON a.id_detail_pengadaan_alkes = b.id_detail_pengadaan_alkes
+          JOIN alkes c ON a.id_alkes = c.id_alkes where id_penerimaan_alkes=$id");
 //   if ($query) {
 //     echo "<p>query berhasil<p/>";
 // } else {

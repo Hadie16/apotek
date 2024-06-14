@@ -8,11 +8,11 @@
     //         window.location.href = 'page3.html'; // Redirect to the second page
     //     }
     // }
-    function redirectToPage(condition) {
+    function redirectToPageALK(condition) {
         var conds = condition;
             // Send AJAX request to fetch data based on month and year
             $.ajax({
-                url: '../penerimaan_alkes/tambahFetch.php',
+                url: '../alkes/penerimaan_alkes/tambahFetch.php',
                 type: 'POST',
                 data: { conds: conds },
                 success: function (response) {

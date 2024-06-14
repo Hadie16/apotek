@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
 //           </script>";
 //     exit;
 //   }
-$update = mysqli_query($con, "UPDATE penerimaan_alkes SET kode_penerimaan_alkes='$kode',no_faktur='$faktur',tanggal_penerimaan_alkes='$tanggal',id_upplier='$id_supplier' WHERE id_penerimaan_alkes=$id");
+$update = mysqli_query($con, "UPDATE penerimaan_alkes SET kode_penerimaan_alkes='$kode',no_faktur='$faktur',tanggal_penerimaan_alkes='$tanggal',id_supplier='$id_supplier' WHERE id_penerimaan_alkes=$id");
 
 
 // if ($update) {
@@ -55,7 +55,7 @@ $update = mysqli_query($con, "UPDATE penerimaan_alkes SET kode_penerimaan_alkes=
   <div class="col-md-8">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">Penerimaan alkes</h6>
+        <h6 class="m-0 font-weight-bold text-info">Penerimaan Alkes</h6>
       </div>
       <div class="card-body">
         <form method="POST">
@@ -77,6 +77,8 @@ $update = mysqli_query($con, "UPDATE penerimaan_alkes SET kode_penerimaan_alkes=
             <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
             <div class="col-sm-10">
             <input name="tanggal" type="date" class="form-control" id="tanggal" value="<?php echo $tanggal ?>"  required>
+         
+
 
             </div>
           </div>
@@ -89,10 +91,10 @@ $update = mysqli_query($con, "UPDATE penerimaan_alkes SET kode_penerimaan_alkes=
         <?php
        $query = mysqli_query($con, "SELECT id_supplier, nama_supplier FROM supplier");
        while ($row = mysqli_fetch_assoc($query)) {
-           $id_supplier = $row['id_supplier'];
+           $id_suppliers = $row['id_supplier'];
            $nama_supplier = $row['nama_supplier'];
 
-            if ($id_supplier == $id_supplier) {
+            if ($id_suppliers == $id_supplier) {
               echo '<option value="' . $id_suppliers . '" selected>' . $nama_supplier . '</option>';
           } else {
             echo '<option value="' . $id_suppliers . '">' . $nama_supplier . '</option>';

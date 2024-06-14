@@ -87,6 +87,9 @@ $id = $_GET['id'];
           //     die('invalid Query : ' . mysqli_error($con));
           // }
 $no=1;
+$ids=1;
+$idss=1;
+
               while ($data = mysqli_fetch_array($query)) { ?>
 
               <tr>
@@ -104,9 +107,44 @@ $no=1;
 
             
                 <td>
-                <a class="btn text-info" href="?page=stok_obat-edit&id=<?php echo $data['id_stok_obat']; ?>"><i
-                      class="fas fa-edit"></i>
-                  </a>
+                <!-- <a class="btn text-info" href="?page=stok_obat-edit&id=<?php echo $data['id_stok_obat']; ?>"><i
+                      class="fas fa-edit" ></i>
+                  </a> -->
+
+                  <a id="<?php echo $ids++ ?>" class="btn text-info" href="?page=stok_obat-edit&id=<?php echo $data['id_stok_obat']; ?>">
+    <i class="fas fa-edit"></i>
+</a>
+
+<script>
+
+  <?php $cd = date("Y-m-d");?>
+
+
+
+    // Your condition check, for example:
+    var condition = Date.parse('<?php echo $data['tanggal_kadaluarsa_obat'];?>'); // Change this to your condition
+
+    // Get the link element
+    var editLinks = document.getElementById('<?php echo $idss++ ?>');
+
+    // Check the condition
+    if (condition < Date.parse('<?php echo $cd ?>')) {
+
+      // editLinksArray.forEach(function(link) {
+        // Disable the link
+        editLinks.removeAttribute('href'); // Remove the href attribute
+        editLinks.style.pointerEvents = 'none'; // Disable pointer events
+        // editLinks.style.color = '#999'; // Optionally change editLinks color to indicate it's disabled
+        editLinks.classList.remove('text-info'); // Add a class to change color
+        editLinks.classList.add('text-secondary'); // Add a class to change color
+      // });
+    }
+
+</script>
+
+
+
+
                   <a class="btn text-danger" href="?page=stok_obat-detail_delete&id=<?php echo $data['id_stok_obat']; ?>"
                     onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="fas fa-trash"></i>
                   </a>

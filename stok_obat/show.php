@@ -86,7 +86,11 @@
 
     // $query = mysqli_query($con, 'SELECT * stok_obat group ')
 
-    $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_stok_obat) as jumlah_stok_obat,(SELECT tanggal_kadaluarsa_obat FROM stok_obat dso WHERE dso.id_obat = a.id_obat AND dso.jumlah_stok_obat > 0 AND dso.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_obat ASC LIMIT 1) AS tanggal_kadaluarsa_obatss,b.nama_obat obats FROM stok_obat a join obat b on a.id_obat=b.id_obat group by id_obat ');
+    $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_stok_obat) as jumlah_stok_obat,
+
+     (SELECT sum(jumlah_stok_obat) FROM stok_obat dsos WHERE dsos.id_obat = a.id_obat AND dsos.jumlah_stok_obat > 0 AND dsos.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dsos.tanggal_kadaluarsa_obat ASC LIMIT 1) AS jumlah_stok_obats,
+
+    (SELECT tanggal_kadaluarsa_obat FROM stok_obat dso WHERE dso.id_obat = a.id_obat AND dso.jumlah_stok_obat > 0 AND dso.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_obat ASC LIMIT 1) AS tanggal_kadaluarsa_obatss,b.nama_obat obats, MAX(a.tanggal_kadaluarsa_obat) as max FROM stok_obat a join obat b on a.id_obat=b.id_obat where tanggal_kadaluarsa_obat >= CURDATE() group by id_obat ');
 
             
 //   if ($c) {
@@ -122,11 +126,16 @@
         
               while ($data = mysqli_fetch_array($query)) { 
 
-                if($expirationDate = $data['tanggal_kadaluarsa_obatss']==""){
-                  $expirationDate='2023-01-01';}else{
+                if(($expirationDate = $data['tanggal_kadaluarsa_obatss'])==""){
+                  $expirationDate=$data['max'];}else{
                     $expirationDate= $data['tanggal_kadaluarsa_obatss'];
                   }   
                 
+                  if($d = $data['jumlah_stok_obats']==0 or ""){
+                    $d='0';}else{
+                      $d= $data['jumlah_stok_obats'];
+                    }   
+
                 $id = $data['id_stok_obat'];
 
         
@@ -136,16 +145,19 @@
               
           <td> <?php echo $no++?></td>
                 <td class="text-nowrap"><?php echo $data['obats']; ?></td>
-                <td><?php echo $data['jumlah_stok_obat']; ?></td>
+                <!-- <td><?php echo $data['jumlah_stok_obats']; ?></td> -->
+                <td><?php echo $d; ?></td>
+
                 <td><?php echo $data['satuan']; ?></td>
 
              
                 <td><?php echo number_format($data['harga_jual_obat'], 0, '.', '.'); ?></td>
 
-                <td><?php if($data['tanggal_kadaluarsa_obatss']==""){
-echo '2023-01-01';}else{
+                <td><?php echo $data['tanggal_kadaluarsa_obatss']; ?></td>
+        <!-- <td><?php if($data['tanggal_kadaluarsa_obatss']==""){
+echo $data['max'];}else{
   echo $data['tanggal_kadaluarsa_obatss'];
-} ?></td>
+} ?></td> -->
                
 
               

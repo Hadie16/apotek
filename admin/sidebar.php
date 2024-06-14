@@ -2,10 +2,7 @@
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="?page=dashboard">
  <!-- href="index.html"  -->
     <div class="sidebar-brand-icon">
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-capsule-pill" viewBox="0 0 16 16">
-  <path d="M11.02 5.364a3 3 0 0 0-4.242-4.243L1.121 6.778a3 3 0 1 0 4.243 4.243l5.657-5.657Zm-6.413-.657 2.878-2.879a2 2 0 1 1 2.829 2.829L7.435 7.536 4.607 4.707ZM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm-.5 1.042a3 3 0 0 0 0 5.917V9.042Zm1 5.917a3 3 0 0 0 0-5.917v5.917Z"/>
-</svg> -->
-<!-- <i class="fas fa-fw fa-hospital-symbol"></i> -->
+
 
 
       <img src="../assets/img/logo_mahabbah-removebg-preview.png"  width="50">
@@ -36,7 +33,7 @@
 
   <?php
   session_start();
-  if ($_SESSION['level'] == 'administrator') { ?>
+  if ($_SESSION['level'] != 'pimpinan') { ?>
     <!-- // echo ' -->
 <div class="sidebar-heading">Layanan</div>
 
@@ -103,19 +100,6 @@
 <!-- <div id="kk" class="collapse" aria-labelledby="kk" data-parent="#accordionSidebar"> -->
 
 
-  <!-- <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stok" aria-expanded="true"
-      aria-controls="collapsestokTwo">
-      <i class="fas fa-fw fa-user-tie"></i>
-      <span>Stok</span>
-    </a>
-    <div id="stok" class="collapse" aria-labelledby="stok" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="?page=stok_obat-show">Obat</a>
-        <a class="collapse-item" href="?page=stok_alkes-add">ALKES</a>
-      </div>
-    </div>
-  </li> -->
   <li class="nav-item" id="stok_obat-link">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stok" aria-expanded="true"
     aria-controls="collapsestokTwo">
@@ -252,75 +236,7 @@
    ';
   }
   ?>
-<!-- ==============log============== -->
 
-  <!-- <hr class="sidebar-divider" /> -->
-
-
-<!-- <div class="sidebar-heading">Log Etalase</div>
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#masuk_etalase" aria-expanded="true"
-      aria-controls="collapsemasuk_etalaseTwo">
-      <i class="fas fa-fw fa-history"></i>
-      <span>Masuk Etalase</span>
-    </a>
-    <div id="masuk_etalase" class="collapse" aria-labelledby="masuk_etalase" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="?page=masuk_etalase_obat-show">Obat</a>
-        <a class="collapse-item" href="?page=masuk_etalase_alkes-show">ALKES</a>
-      </div>
-    </div>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#keluar_etalase" aria-expanded="true"
-      aria-controls="collapsekeluar_etalaseTwo">
-      <i class="fas fa-fw fa-history"></i>
-      <span>Keluar Etalase</span>
-    </a>
-    <div id="keluar_etalase" class="collapse" aria-labelledby="keluar_etalase" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="?page=keluar_etalase_obat-show">Obat</a>
-        <a class="collapse-item" href="?page=keluar_etalase_alkes-show">ALKES</a>
-      </div>
-    </div>
-  </li>
-  <hr class="sidebar-divider" />
-
-  <div class="sidebar-heading">Log Gudang</div>
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#masuk_gudang" aria-expanded="true"
-      aria-controls="collapsemasuk_gudangTwo">
-      <i class="fas fa-fw fa-history"></i>
-      <span>Masuk Gudang</span>
-    </a>
-    <div id="masuk_gudang" class="collapse" aria-labelledby="masuk_gudang" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="?page=masuk_gudang_obat-show">Obat</a>
-        <a class="collapse-item" href="?page=masuk_gudang_alkes-show">ALKES</a>
-      </div>
-    </div>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#keluar_gudang" aria-expanded="true"
-      aria-controls="collapsekeluar_gudangTwo">
-      <i class="fas fa-fw fa-history"></i>
-      <span>Keluar Gudang</span>
-    </a>
-    <div id="keluar_gudang" class="collapse" aria-labelledby="keluar_gudang" data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item" href="?page=keluar_gudang_obat-show">Obat</a>
-        <a class="collapse-item" href="?page=keluar_gudang_alkes-show">ALKES</a>
-      </div>
-    </div>
-  </li> -->
-
-<!-- =====================end log=============== -->
-
-  <!-- </li> -->
-
-<!-- </div> -->
-<!-- </li> -->
-   <!-- Divider -->
    <?php
   session_start();
   if ($_SESSION['level'] == 'administrator') {

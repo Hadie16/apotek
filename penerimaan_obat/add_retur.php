@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
     die('Query Error: ' . mysqli_error($con));
 
 }else{
-  echo 1;
+  // echo 1;
 }
 
   $firstTableID = mysqli_insert_id($con);
@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
     // Execute the insert query
     $result = mysqli_query($con, $insert_query);
     if ($result) {
-      echo "<p>query berhasil<p/>";
+      // echo "<p>query berhasil<p/>";
     } else {
       die('invalid Query : ' . mysqli_error($con));
     }
@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
   VALUES('$id_obat','$box','$tjmh','$boxsatuan','$valuese','$tanggal_exp','$batch_number','$id_supplier')");
 
 if ($insert) {
-  echo "<p>query berhasil<p/>";
+  // echo "<p>query berhasil<p/>";
   echo "<script>window.location.href = '?page=penerimaan_obat-show';</script>";
 
 } else {

@@ -23,7 +23,7 @@ $no = 1;
       
       }?>
 <br>
-<h2 align="center">Laporan Data Penerimaan Alat Kesehatan</h2>
+<h2 align="center">Laporan Data Detail Penerimaan Alat Kesehatan</h2>
 <!-- <h2 align="center">Data Pemeriksaan</h2> -->
 
 

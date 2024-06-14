@@ -1,10 +1,27 @@
 <?php
 include '../template/headerPrint.php';
+include '../connection.php';
+
 $startDate = $_GET['startDate']; // Get the start date from the URL
 $endDate = $_GET['endDate'];     // Get the end date from the URL
+
+if(empty($endDate)){
+
+  $currentDateTime = date('Y-m-d');
+
+  // $endDate = $currentDateTime;
+$endDate = $con->query("SELECT MAX(tanggal_cek_kesehatan) AS max_date FROM cek_kesehatan")->fetch_assoc()["max_date"];
+
+}
+if($startDate == $endDate){
+  $showDate = $startDate;
+}else{
+  $showDate = "$startDate Sampai $endDate";
+
+}
 ?>
 <br>
-<h2 align="center">Laporan Data Cek Kesehatan</h2>
+<h2 align="center">Laporan Data Cek Kesehatan ( <?php echo $showDate ?>  )</h2>
 <div class="table-responsive mt-3">
   <table border="1" width="95%" align="center" cellpadding="8">
     <thead>
@@ -32,7 +49,7 @@ $endDate = $_GET['endDate'];     // Get the end date from the URL
 
 // $keyword = $_GET['keyword'];
 
-      include '../connection.php';
+      // include '../connection.php';
       $query = mysqli_query($con, "SELECT a.*,b.nama_pasien nama,t.nama_ttk FROM cek_kesehatan a join pasien b on a.id_pasien=b.id_pasien join ttk t on a.id_ttk=t.id_ttk where status='Selesai' and DATE(a.tanggal_cek_kesehatan) BETWEEN '$startDate' AND '$endDate'");
                            
 $no = 1;

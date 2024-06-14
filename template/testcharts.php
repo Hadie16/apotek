@@ -48,15 +48,19 @@ if ($conn->connect_error) {
 // ORDER BY month";
 
 
+
 $sql = "SELECT SUM(total_harga) AS total_price, MONTH(tanggal_penjualan_obat) AS month FROM penjualan_obat
+WHERE YEAR(tanggal_penjualan_obat) = YEAR(CURRENT_DATE())
 GROUP BY month
 ORDER BY month";
 
 $sql2 = "SELECT SUM(total_harga) AS total_price2, MONTH(tanggal_penjualan_alkes) AS month2 FROM penjualan_alkes
+WHERE YEAR(tanggal_penjualan_alkes) = YEAR(CURRENT_DATE())
 GROUP BY month2
 ORDER BY month2";
 
 $sql3 = "SELECT SUM(total_biaya) AS total_price3, MONTH(tanggal_cek_kesehatan) AS month3 FROM cek_kesehatan
+WHERE YEAR(tanggal_cek_kesehatan) = YEAR(CURRENT_DATE())
 GROUP BY month3
 ORDER BY month3";
 

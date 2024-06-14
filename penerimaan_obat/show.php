@@ -11,7 +11,7 @@
       </div>
       <!-- <div class="row"> -->
 
-      <div class="card-body">
+      <div class="card-body" data-page="PNM">
       <div class="row">
       <div class="col-sm-4">
  

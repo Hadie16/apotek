@@ -271,18 +271,18 @@ case 'retur_obat-print2':
 
 //obat
 case 'obat-show':
-  $title = 'Data obat';
+  $title = 'Data Obat';
   include '../obat/show.php';
   break;
 case 'obat-add':
-  $title = 'Input Data obat';
+  $title = 'Input Data Obat';
   include '../obat/add.php';
   break;
 case 'obat-delete':
   include '../obat/delete.php';
   break;
 case 'obat-edit':
-  $title = 'Edit Data obat';
+  $title = 'Edit Data Obat';
   include '../obat/edit.php';
   break;
 case 'obat-print':
@@ -297,18 +297,18 @@ case 'obat-print2':
 
     //stok_obat
 case 'stok_obat-show':
-  $title = 'Data Stok obat';
+  $title = 'Data Stok Obat';
   include '../stok_obat/show.php';
   break;
 case 'stok_obat-add':
-  $title = 'Input Data Stok obat';
+  $title = 'Input Data Stok Obat';
   include '../stok_obat/add.php';
   break;
 case 'stok_obat-delete':
   include '../stok_obat/delete.php';
   break;
 case 'stok_obat-edit':
-  $title = 'Edit Data Stok obat';
+  $title = 'Edit Data Stok Obat';
   include '../stok_obat/edit.php';
   break;
 case 'stok_obat-print':
@@ -333,18 +333,18 @@ case 'stok_obat-print2':
 
        //penjualan_obat
 case 'penjualan_obat-show':
-  $title = 'Data Penjualan obat';
+  $title = 'Data Penjualan Obat';
   include '../penjualan_obat/show.php';
   break;
 case 'penjualan_obat-add':
-  $title = 'Input Data Penjualan obat';
+  $title = 'Input Data Penjualan Obat';
   include '../penjualan_obat/add.php';
   break;
 case 'penjualan_obat-delete':
   include '../penjualan_obat/delete.php';
   break;
 case 'penjualan_obat-edit':
-  $title = 'Edit Data Penjualan obat ';
+  $title = 'Edit Data Penjualan Obat ';
   include '../penjualan_obat/edit.php';
   break;
 case 'penjualan_obat-print':
@@ -365,18 +365,18 @@ case 'penjualan_obat-print2':
 
      //detail_penjualan_obat
  case 'detail_penjualan_obat-show':
-  $title = 'Data Detail Penjualan obat';
+  $title = 'Data Detail Penjualan Obat';
   include '../detail_penjualan_obat/show.php';
   break;
 case 'detail_penjualan_obat-add':
-  $title = 'Input Data Detail Penjualan obat';
+  $title = 'Input Data Detail Penjualan Obat';
   include '../detail_penjualan_obat/add.php';
   break;
 case 'detail_penjualan_obat-delete':
   include '../detail_penjualan_obat/delete.php';
   break;
 case 'detail_penjualan_obat-edit':
-  $title = 'Edit Data Detail Penjualan obat';
+  $title = 'Edit Data Detail Penjualan Obat';
   include '../detail_penjualan_obat/edit.php';
   break;
 case 'detail_penjualan_obat-print':
@@ -391,18 +391,18 @@ case 'detail_penjualan_obat-print2':
 
      //pengadaan_obat
  case 'pengadaan_obat-show':
-  $title = 'Data Pengadaan obat';
+  $title = 'Data Pengadaan Obat';
   include '../pengadaan_obat/show.php';
   break;
 case 'pengadaan_obat-add':
-  $title = 'Input Data Pengadaan obat';
+  $title = 'Input Data Pengadaan Obat';
   include '../pengadaan_obat/add.php';
   break;
 case 'pengadaan_obat-delete':
   include '../pengadaan_obat/delete.php';
   break;
 case 'pengadaan_obat-edit':
-  $title = 'Edit Data Pengadaan obat';
+  $title = 'Edit Data Pengadaan Obat';
   include '../pengadaan_obat/edit.php';
   break;
 case 'pengadaan_obat-print':
@@ -418,18 +418,18 @@ case 'pengadaan_obat-print2':
 
    //detail_pengadaan_obat
  case 'detail_pengadaan_obat-show':
-  $title = 'Data Detail Pengadaan obat';
+  $title = 'Data Detail Pengadaan Obat';
   include '../detail_pengadaan_obat/show.php';
   break;
 case 'detail_pengadaan_obat-add':
-  $title = 'Input Data Detail Pengadaan obat';
+  $title = 'Input Data Detail Pengadaan Obat';
   include '../detail_pengadaan_obat/add.php';
   break;
 case 'detail_pengadaan_obat-delete':
   include '../detail_pengadaan_obat/delete.php';
   break;
 case 'detail_pengadaan_obat-edit':
-  $title = 'Edit Data Detail Pengadaan obat';
+  $title = 'Edit Data Detail Pengadaan Obat';
   include '../detail_pengadaan_obat/edit.php';
   break;
 case 'detail_pengadaan_obat-print':
@@ -483,18 +483,18 @@ case 'penerimaan_obat-detail':
 
      //ketersediaan_obat
    case 'ketersediaan_obat-show':
-    $title = 'Data Ketersediaan obat';
+    $title = 'Data Ketersediaan Obat';
     include '../ketersediaan_obat/show.php';
     break;
   case 'ketersediaan_obat-add':
-    $title = 'Input Data Ketersediaan obat';
+    $title = 'Input Data Ketersediaan Obat';
     include '../ketersediaan_obat/add.php';
     break;
   case 'ketersediaan_obat-delete':
     include '../ketersediaan_obat/delete.php';
     break;
   case 'ketersediaan_obat-edit':
-    $title = 'Edit Data Ketersediaan obat';
+    $title = 'Edit Data Ketersediaan Obat';
     include '../ketersediaan_obat/edit.php';
     break;
   case 'ketersediaan_obat-print':
@@ -513,135 +513,7 @@ case 'penerimaan_obat-detail':
         include '../ketersediaan_obat/detail_delete.php';
         break;
 
-            //detail_ketersediaan_obat
-  case 'detail_ketersediaan_obat-show':
-    $title = 'Data obat Masuk';
-    include '../detail_ketersediaan_obat/show.php';
-    break;
-  case 'detail_ketersediaan_obat-add':
-    $title = 'Input Data obat Masuk';
-    include '../detail_ketersediaan_obat/add.php';
-    break;
-  case 'detail_ketersediaan_obat-delete':
-    include '../detail_ketersediaan_obat/delete.php';
-    break;
-  case 'detail_ketersediaan_obat-edit':
-    $title = 'Edit Data obat Masuk';
-    include '../detail_ketersediaan_obat/edit.php';
-    break;
-  case 'detail_ketersediaan_obat-print':
-    include '../detail_ketersediaan_obat/print.php';
-    break;
-  case 'detail_ketersediaan_obat-print2':
-    include '../detail_ketersediaan_obat/print2.php';
-    break;
-  case 'detail_ketersediaan_obat-print2':
-    include '../detail_ketersediaan_obat/print3.php';
-    break;
-
-         //masuk_etalase_obat
-        case 'masuk_etalase_obat-show':
-          $title = 'Data obat Masuk';
-          include '../masuk_etalase_obat/show.php';
-          break;
-        case 'masuk_etalase_obat-add':
-          $title = 'Input Data obat Masuk';
-          include '../masuk_etalase_obat/add.php';
-          break;
-        case 'masuk_etalase_obat-delete':
-          include '../masuk_etalase_obat/delete.php';
-          break;
-        case 'masuk_etalase_obat-edit':
-          $title = 'Edit Data obat Masuk';
-          include '../masuk_etalase_obat/edit.php';
-          break;
-        case 'masuk_etalase_obat-print':
-          include '../masuk_etalase_obat/print.php';
-          break;
-        case 'masuk_etalase_obat-print2':
-          include '../masuk_etalase_obat/print2.php';
-          break;
-        case 'masuk_etalase_obat-print2':
-          include '../masuk_etalase_obat/print3.php';
-          break;
-
-              //masuk_gudang_obat
-        case 'masuk_gudang_obat-show':
-          $title = 'Data obat Masuk';
-          include '../masuk_gudang_obat/show.php';
-          break;
-        case 'masuk_gudang_obat-add':
-          $title = 'Input Data obat Masuk';
-          include '../masuk_gudang_obat/add.php';
-          break;
-        case 'masuk_gudang_obat-delete':
-          include '../masuk_gudang_obat/delete.php';
-          break;
-        case 'masuk_gudang_obat-edit':
-          $title = 'Edit Data obat Masuk';
-          include '../masuk_gudang_obat/edit.php';
-          break;
-        case 'masuk_gudang_obat-print':
-          include '../masuk_gudang_obat/print.php';
-          break;
-        case 'masuk_gudang_obat-print2':
-          include '../masuk_gudang_obat/print2.php';
-          break;
-        case 'masuk_gudang_obat-print2':
-          include '../masuk_gudang_obat/print3.php';
-          break;
-
-               //keluar_etalase_obat
-        case 'keluar_etalase_obat-show':
-          $title = 'Data obat Keluar';
-          include '../keluar_etalase_obat/show.php';
-          break;
-        case 'keluar_etalase_obat-add':
-          $title = 'Input Data obat Keluar';
-          include '../keluar_etalase_obat/add.php';
-          break;
-        case 'keluar_etalase_obat-delete':
-          include '../keluar_etalase_obat/delete.php';
-          break;
-        case 'keluar_etalase_obat-edit':
-          $title = 'Edit Data obat Keluar';
-          include '../keluar_etalase_obat/edit.php';
-          break;
-        case 'keluar_etalase_obat-print':
-          include '../keluar_etalase_obat/print.php';
-          break;
-        case 'keluar_etalase_obat-print2':
-          include '../keluar_etalase_obat/print2.php';
-          break;
-        case 'keluar_etalase_obat-print2':
-          include '../keluar_etalase_obat/print3.php';
-          break;
-
-                //keluar_gudang_obat
-        case 'keluar_gudang_obat-show':
-          $title = 'Data obat Keluar';
-          include '../keluar_gudang_obat/show.php';
-          break;
-        case 'keluar_gudang_obat-add':
-          $title = 'Input Data obat Keluar';
-          include '../keluar_gudang_obat/add.php';
-          break;
-        case 'keluar_gudang_obat-delete':
-          include '../keluar_gudang_obat/delete.php';
-          break;
-        case 'keluar_gudang_obat-edit':
-          $title = 'Edit Data obat Keluar';
-          include '../keluar_gudang_obat/edit.php';
-          break;
-        case 'keluar_gudang_obat-print':
-          include '../keluar_gudang_obat/print.php';
-          break;
-        case 'keluar_gudang_obat-print2':
-          include '../keluar_gudang_obat/print2.php';
-          break;
-        case 'keluar_gudang_obat-print2':
-          include '../keluar_gudang_obat/print3.php';
-          break;
+         
 
           //==========================alkes=================
 
@@ -674,18 +546,18 @@ case 'retur_alkes-print2':
 
 //alkes
 case 'alkes-show':
-  $title = 'Data alkes';
+  $title = 'Data Alkes';
   include '../alkes/alkes/show.php';
   break;
 case 'alkes-add':
-  $title = 'Input Data alkes';
+  $title = 'Input Data Alkes';
   include '../alkes/alkes/add.php';
   break;
 case 'alkes-delete':
   include '../alkes/alkes/delete.php';
   break;
 case 'alkes-edit':
-  $title = 'Edit Data alkes';
+  $title = 'Edit Data Alkes';
   include '../alkes/alkes/edit.php';
   break;
 case 'alkes-print':
@@ -700,18 +572,18 @@ case 'alkes-print2':
 
     //stok_alkes
 case 'stok_alkes-show':
-  $title = 'Data Stok alkes';
+  $title = 'Data Stok Alkes';
   include '../alkes/stok_alkes/show.php';
   break;
 case 'stok_alkes-add':
-  $title = 'Input Data Stok alkes';
+  $title = 'Input Data Stok Alkes';
   include '../alkes/stok_alkes/add.php';
   break;
 case 'stok_alkes-delete':
   include '../alkes/stok_alkes/delete.php';
   break;
 case 'stok_alkes-edit':
-  $title = 'Edit Data Stok alkes';
+  $title = 'Edit Data Stok Alkes';
   include '../alkes/stok_alkes/edit.php';
   break;
 case 'stok_alkes-print':
@@ -732,18 +604,18 @@ case 'stok_alkes-print2':
 
        //penjualan_alkes
 case 'penjualan_alkes-show':
-  $title = 'Data Penjualan alkes';
+  $title = 'Data Penjualan Alkes';
   include '../alkes/penjualan_alkes/show.php';
   break;
 case 'penjualan_alkes-add':
-  $title = 'Input Data Penjualan alkes';
+  $title = 'Input Data Penjualan Alkes';
   include '../alkes/penjualan_alkes/add.php';
   break;
 case 'penjualan_alkes-delete':
   include '../alkes/penjualan_alkes/delete.php';
   break;
 case 'penjualan_alkes-edit':
-  $title = 'Edit Data Penjualan alkes ';
+  $title = 'Edit Data Penjualan Alkes ';
   include '../alkes/penjualan_alkes/edit.php';
   break;
 case 'penjualan_alkes-print':
@@ -764,18 +636,18 @@ case 'penjualan_alkes-print2':
 
      //detail_penjualan_alkes
  case 'detail_penjualan_alkes-show':
-  $title = 'Data Detail Penjualan alkes';
+  $title = 'Data Detail Penjualan Alkes';
   include '../alkes/detail_penjualan_alkes/show.php';
   break;
 case 'detail_penjualan_alkes-add':
-  $title = 'Input Data Detail Penjualan alkes';
+  $title = 'Input Data Detail Penjualan Alkes';
   include '../alkes/detail_penjualan_alkes/add.php';
   break;
 case 'detail_penjualan_alkes-delete':
   include '../alkes/detail_penjualan_alkes/delete.php';
   break;
 case 'detail_penjualan_alkes-edit':
-  $title = 'Edit Data Detail Penjualan alkes';
+  $title = 'Edit Data Detail Penjualan Alkes';
   include '../alkes/detail_penjualan_alkes/edit.php';
   break;
 case 'detail_penjualan_alkes-print':
@@ -790,18 +662,18 @@ case 'detail_penjualan_alkes-print2':
 
      //pengadaan_alkes
  case 'pengadaan_alkes-show':
-  $title = 'Data Pengadaan alkes';
+  $title = 'Data Pengadaan Alkes';
   include '../alkes/pengadaan_alkes/show.php';
   break;
 case 'pengadaan_alkes-add':
-  $title = 'Input Data Pengadaan alkes';
+  $title = 'Input Data Pengadaan Alkes';
   include '../alkes/pengadaan_alkes/add.php';
   break;
 case 'pengadaan_alkes-delete':
   include '../alkes/pengadaan_alkes/delete.php';
   break;
 case 'pengadaan_alkes-edit':
-  $title = 'Edit Data Pengadaan alkes';
+  $title = 'Edit Data Pengadaan Alkes';
   include '../alkes/pengadaan_alkes/edit.php';
   break;
 case 'pengadaan_alkes-print':
@@ -817,18 +689,18 @@ case 'pengadaan_alkes-print2':
 
    //detail_pengadaan_alkes
  case 'detail_pengadaan_alkes-show':
-  $title = 'Data Detail Pengadaan alkes';
+  $title = 'Data Detail Pengadaan Alkes';
   include '../alkes/detail_pengadaan_alkes/show.php';
   break;
 case 'detail_pengadaan_alkes-add':
-  $title = 'Input Data Detail Pengadaan alkes';
+  $title = 'Input Data Detail Pengadaan Alkes';
   include '../alkes/detail_pengadaan_alkes/add.php';
   break;
 case 'detail_pengadaan_alkes-delete':
   include '../alkes/detail_pengadaan_alkes/delete.php';
   break;
 case 'detail_pengadaan_alkes-edit':
-  $title = 'Edit Data Detail Pengadaan alkes';
+  $title = 'Edit Data Detail Pengadaan Alkes';
   include '../alkes/detail_pengadaan_alkes/edit.php';
   break;
 case 'detail_pengadaan_alkes-print':
@@ -843,18 +715,22 @@ case 'pengadaan_alkes-detail':
 
       //penerimaan_alkes
  case 'penerimaan_alkes-show':
-  $title = 'Data Penerimaan alkes';
+  $title = 'Data Penerimaan Alkes';
   include '../alkes/penerimaan_alkes/show.php';
   break;
 case 'penerimaan_alkes-add':
-  $title = 'Input Data Penerimaan alkes';
+  $title = 'Input Data Penerimaan Alkes';
   include '../alkes/penerimaan_alkes/add.php';
   break;
+  case 'penerimaan_alkes-add_retur':
+    $title = 'Input Data Penerimaan Alkes Retur';
+    include '../alkes/penerimaan_alkes/add_retur.php';
+    break;
 case 'penerimaan_alkes-delete':
   include '../alkes/penerimaan_alkes/delete.php';
   break;
 case 'penerimaan_alkes-edit':
-  $title = 'Edit Data Penerimaan alkes';
+  $title = 'Edit Data Penerimaan Alkes';
   include '../alkes/penerimaan_alkes/edit.php';
   break;
 case 'penerimaan_alkes-print':
@@ -875,18 +751,18 @@ case 'penerimaan_alkes-detail':
 
      //ketersediaan_alkes
    case 'ketersediaan_alkes-show':
-    $title = 'Data Ketersediaan alkes';
+    $title = 'Data Ketersediaan Alkes';
     include '../alkes/ketersediaan_alkes/show.php';
     break;
   case 'ketersediaan_alkes-add':
-    $title = 'Input Data Ketersediaan alkes';
+    $title = 'Input Data Ketersediaan Alkes';
     include '../alkes/ketersediaan_alkes/add.php';
     break;
   case 'ketersediaan_alkes-delete':
     include '../alkes/ketersediaan_alkes/delete.php';
     break;
   case 'ketersediaan_alkes-edit':
-    $title = 'Edit Data Ketersediaan alkes';
+    $title = 'Edit Data Ketersediaan Alkes';
     include '../alkes/ketersediaan_alkes/edit.php';
     break;
   case 'ketersediaan_alkes-print':
@@ -905,135 +781,7 @@ case 'penerimaan_alkes-detail':
         include '../alkes/ketersediaan_alkes/detail_delete.php';
         break;
 
-            //detail_ketersediaan_alkes
-  case 'detail_ketersediaan_alkes-show':
-    $title = 'Data alkes Masuk';
-    include '../alkes/detail_ketersediaan_alkes/show.php';
-    break;
-  case 'detail_ketersediaan_alkes-add':
-    $title = 'Input Data alkes Masuk';
-    include '../alkes/detail_ketersediaan_alkes/add.php';
-    break;
-  case 'detail_ketersediaan_alkes-delete':
-    include '../alkes/detail_ketersediaan_alkes/delete.php';
-    break;
-  case 'detail_ketersediaan_alkes-edit':
-    $title = 'Edit Data alkes Masuk';
-    include '../alkes/detail_ketersediaan_alkes/edit.php';
-    break;
-  case 'detail_ketersediaan_alkes-print':
-    include '../alkes/detail_ketersediaan_alkes/print.php';
-    break;
-  case 'detail_ketersediaan_alkes-print2':
-    include '../alkes/detail_ketersediaan_alkes/print2.php';
-    break;
-  case 'detail_ketersediaan_alkes-print2':
-    include '../alkes/detail_ketersediaan_alkes/print3.php';
-    break;
-
-         //masuk_etalase_alkes
-        case 'masuk_etalase_alkes-show':
-          $title = 'Data alkes Masuk';
-          include '../alkes/masuk_etalase_alkes/show.php';
-          break;
-        case 'masuk_etalase_alkes-add':
-          $title = 'Input Data alkes Masuk';
-          include '../alkes/masuk_etalase_alkes/add.php';
-          break;
-        case 'masuk_etalase_alkes-delete':
-          include '../alkes/masuk_etalase_alkes/delete.php';
-          break;
-        case 'masuk_etalase_alkes-edit':
-          $title = 'Edit Data alkes Masuk';
-          include '../alkes/masuk_etalase_alkes/edit.php';
-          break;
-        case 'masuk_etalase_alkes-print':
-          include '../alkes/masuk_etalase_alkes/print.php';
-          break;
-        case 'masuk_etalase_alkes-print2':
-          include '../alkes/masuk_etalase_alkes/print2.php';
-          break;
-        case 'masuk_etalase_alkes-print2':
-          include '../alkes/masuk_etalase_alkes/print3.php';
-          break;
-
-              //masuk_gudang_alkes
-        case 'masuk_gudang_alkes-show':
-          $title = 'Data alkes Masuk';
-          include '../alkes/masuk_gudang_alkes/show.php';
-          break;
-        case 'masuk_gudang_alkes-add':
-          $title = 'Input Data alkes Masuk';
-          include '../alkes/masuk_gudang_alkes/add.php';
-          break;
-        case 'masuk_gudang_alkes-delete':
-          include '../alkes/masuk_gudang_alkes/delete.php';
-          break;
-        case 'masuk_gudang_alkes-edit':
-          $title = 'Edit Data alkes Masuk';
-          include '../alkes/masuk_gudang_alkes/edit.php';
-          break;
-        case 'masuk_gudang_alkes-print':
-          include '../alkes/masuk_gudang_alkes/print.php';
-          break;
-        case 'masuk_gudang_alkes-print2':
-          include '../alkes/masuk_gudang_alkes/print2.php';
-          break;
-        case 'masuk_gudang_alkes-print2':
-          include '../alkes/masuk_gudang_alkes/print3.php';
-          break;
-
-               //keluar_etalase_alkes
-        case 'keluar_etalase_alkes-show':
-          $title = 'Data alkes Keluar';
-          include '../alkes/keluar_etalase_alkes/show.php';
-          break;
-        case 'keluar_etalase_alkes-add':
-          $title = 'Input Data alkes Keluar';
-          include '../alkes/keluar_etalase_alkes/add.php';
-          break;
-        case 'keluar_etalase_alkes-delete':
-          include '../alkes/keluar_etalase_alkes/delete.php';
-          break;
-        case 'keluar_etalase_alkes-edit':
-          $title = 'Edit Data alkes Keluar';
-          include '../alkes/keluar_etalase_alkes/edit.php';
-          break;
-        case 'keluar_etalase_alkes-print':
-          include '../alkes/keluar_etalase_alkes/print.php';
-          break;
-        case 'keluar_etalase_alkes-print2':
-          include '../alkes/keluar_etalase_alkes/print2.php';
-          break;
-        case 'keluar_etalase_alkes-print2':
-          include '../alkes/keluar_etalase_alkes/print3.php';
-          break;
-
-                //keluar_gudang_alkes
-        case 'keluar_gudang_alkes-show':
-          $title = 'Data alkes Keluar';
-          include '../alkes/keluar_gudang_alkes/show.php';
-          break;
-        case 'keluar_gudang_alkes-add':
-          $title = 'Input Data alkes Keluar';
-          include '../alkes/keluar_gudang_alkes/add.php';
-          break;
-        case 'keluar_gudang_alkes-delete':
-          include '../alkes/keluar_gudang_alkes/delete.php';
-          break;
-        case 'keluar_gudang_alkes-edit':
-          $title = 'Edit Data alkes Keluar';
-          include '../alkes/keluar_gudang_alkes/edit.php';
-          break;
-        case 'keluar_gudang_alkes-print':
-          include '../alkes/keluar_gudang_alkes/print.php';
-          break;
-        case 'keluar_gudang_alkes-print2':
-          include '../alkes/keluar_gudang_alkes/print2.php';
-          break;
-        case 'keluar_gudang_alkes-print2':
-          include '../alkes/keluar_gudang_alkes/print3.php';
-          break;
+        
 
 
 

@@ -69,24 +69,28 @@ $currentYear = date('Y');
         <div  style="width:80px">
 
         <select id="year" name="year" class="custom-select custom-select-sm">
-        <?php
-       $query = mysqli_query($con, "SELECT *,year(po.tanggal_penjualan_obat) as cy,sum(dpo.jumlah_detail_penjualan_obat) as sj from
-       detail_penjualan_obat as dpo join penjualan_obat as po on dpo.id_penjualan_obat=po.id_penjualan_obat 
-        join ketersediaan_obat as ko on dpo.id_obat=ko.id_obat join obat as o on dpo.id_obat=o.id_obat
-       ");
-       while ($row = mysqli_fetch_assoc($query)) {
-           $cy = $row['cy'];
-          //  $nama_ttk = $row['nama_ttk'];
+    <?php
+    // Add an option for the current year
+    $currentYear = date('Y');
+    echo '<option value="' . $currentYear . '" selected>' . $currentYear . '</option>';
 
-            if ($cy == $currentYear) {
-              echo '<option value="' . $cy . '" selected>' . $cy . '</option>';
-          } else {
+    // Fetch data from the database for other years
+    $query = mysqli_query($con, "SELECT *,YEAR(po.tanggal_penjualan_obat) AS cy, SUM(dpo.jumlah_detail_penjualan_obat) AS sj 
+                                  FROM detail_penjualan_obat AS dpo 
+                                  JOIN penjualan_obat AS po ON dpo.id_penjualan_obat = po.id_penjualan_obat 
+                                  JOIN ketersediaan_obat AS ko ON dpo.id_obat = ko.id_obat 
+                                  JOIN obat AS o ON dpo.id_obat = o.id_obat");
+
+    // Generate options for years retrieved from the database
+    while ($row = mysqli_fetch_assoc($query)) {
+        $cy = $row['cy'];
+        if ($cy != $currentYear) { // Skip current year if it's already added
             echo '<option value="' . $cy . '">' . $cy . '</option>';
         }
-      }
+    }
+    ?>
+</select>
 
-        ?>
-        </select>
     </div>
  
 

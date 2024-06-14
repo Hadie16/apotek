@@ -1,7 +1,7 @@
 <?php
 include '../template/headerPrint.php';
 ?>
-<h2 align="center">Laporan Data Tenaga Teknik Kefarmasian</h2>
+<h2 align="center">Laporan Data Tenaga Teknis Kefarmasian</h2>
 <div class="table-responsive mt-3">
   <table border="1" width="95%" align="center" cellpadding="8">
     <thead>

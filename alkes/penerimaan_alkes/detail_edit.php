@@ -84,7 +84,7 @@ if ($update1) {
     
             <!-- <label for="id_alkes" >Nama alkes</label> -->
             <div class="col-sm-6">
-            <label for="id_alkes" >Nama alkes</label>
+            <label for="id_alkes" >Nama Alkes</label>
 
             <select name="id_alkes" id="id_alkes" class="form-control" required>
   <option value="">- Pilih -</option>

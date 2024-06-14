@@ -10,6 +10,13 @@ $id = $_GET['id'];
 
 
 if (isset($_POST['submit'])) {
+
+// $kuery= "SELECT * FROM detail_retur_obat WHERE id_detail_retur_obat = " . $id;
+
+//   $result = $con->query($kuery);
+
+
+  // =======================================================
   // $selectP = $_POST['selectP'];
   //retur_obat
   $kode_retur_obat = $_POST['kode_retur_obat'];
@@ -31,7 +38,7 @@ if (isset($_POST['submit'])) {
     die('Query Error: ' . mysqli_error($con));
 
 }else{
-  echo 1;
+  // echo 1;
 }
 
   // $firstTableID = mysqli_insert_id($con);
@@ -42,6 +49,8 @@ if (isset($_POST['submit'])) {
   // $id_obat_array = $_POST['id_obat'];
   $jumlah_array = $_POST['jumlah'];
   $satuan_array = $_POST['satuan'];
+  $harga_beli_obat_array = $_POST['harga_beli_obat'];
+
   $batch_number_array = $_POST['batch_number'];
   $tanggal_exp_array = $_POST['tanggal_exp'];
   $tjmh_array = $_POST['tjmh'];
@@ -66,27 +75,80 @@ if (isset($_POST['submit'])) {
 // }
 
 // Step 2: Retrieve data from the database
-$sqlRo = "SELECT id_detail_retur_obat FROM detail_retur_obat";
+$sqlRo = "SELECT id_detail_retur_obat,batch_number FROM detail_retur_obat where id_retur_obat =". $id;
 $resultRo = $con->query($sqlRo);
 
 if ($resultRo->num_rows > 0) {
     $dbValues = array();
+    $dbValuesBN = array();
+
+    $dbValuesC = array();
+
+
     while ($row = $resultRo->fetch_assoc()) {
-        $dbValues[] = $row['id_detail_retur_obat'];
+        $dbValues[] = $row['id_detail_retur_obat'];  
+        $dbValuesBN[] = $row['batch_number'];
+
+          $combinedValue = $row['id_detail_retur_obat'] . "-" . $row['batch_number'];
+        $dbValuesC[] = $combinedValue;
     }
 } else {
     $dbValues = array();
+    $dbValuesBN = array();
+
+    $dbValuesC = array();
+
 }
+// === not part of original steps==========
+// =========================cara pertama=========================================
+
+// $matchingNumbers = array_intersect($dbValues, $id_detailRO_array);
+// $nonMatchingNumbersBN = array_diff($dbValuesBN, $batch_number_array);
+
+// if($matchingNumbers == $id_detailRO_array && $nonMatchingNumbersBN !== $batch_number_array){}
+
+// =========================cara kedua=========================================
+// $combinedSubmit = $id_detailRO_array . "-" . $batch_number_array;
+// $dbValuesS[] =$combinedSubmit;
+
+
+// $nonMatchingNumbers = array_diff($dbValuesC, $dbValuesS);
+
+// =========================cara ketiga=========================================
+
+// Assuming $id_detailRO_array and $batch_number_array are arrays obtained from form submission
+// $combinedSubmit = array();
+
+// Assuming both arrays have the same length
+// for ($i = 0; $i < count($id_detailRO_array); $i++) {
+//     $combinedSubmit[] = $id_detailRO_array[$i] . "-" . $batch_number_array[$i];
+// }
+
+// $dbValuesS = $combinedSubmit;
+
+// $nonMatchingNumbers = array_diff($dbValuesC, $dbValuesS);
+
+
+// === not part of original steps==========
+
 
 // Step 3: Compare the values
 $nonMatchingNumbers = array_diff($dbValues, $id_detailRO_array);
+$nonMatchingNumbersBN = array_diff($dbValuesBN, $batch_number_array);
+// echo var_dump($nonMatchingNumbersBN);
 
 // Step 4: Delete values in the database based on non-matching numbers
-foreach ($nonMatchingNumbers as $nonMatchingNumber) {
+foreach ($nonMatchingNumbersBN as $nonMatchingNumber) {
+
+      // list($id_detailROs, $batch_numbers) = explode("-", $combinedValue);
+
   // Select id_obat and batch_number from detail_retur_obat
-  $sqlRo2 = "SELECT id_obat, jumlah, batch_number FROM detail_retur_obat WHERE id_detail_retur_obat = '" . $nonMatchingNumber . "' and id_retur_obat = " . $id;
+  $sqlRo2 = "SELECT id_obat, jumlah, batch_number FROM detail_retur_obat WHERE batch_number = '" . $nonMatchingNumber . "' and id_retur_obat = " . $id;
 
   $result = $con->query($sqlRo2);
+
+  // $num_rows = mysqli_num_rows($result);
+  // echo "Number of rows: " . $num_rows;
 
   if ($result->num_rows > 0) {
       // Fetch the data from the result
@@ -129,14 +191,35 @@ foreach ($nonMatchingNumbers as $nonMatchingNumber) {
                 // == update ketersediaan == mengembalikan angka seperti semula == tidak jadi retur
        $update = mysqli_query($con, "UPDATE ketersediaan_obat SET box='$jumlah_stok_box_result_up', jumlah_ketersediaan_obat='$jumlah_stok_sisa_result_up' WHERE batch_number='$otherBatchNumber'");
        // echo "ini dia angkanya".$nonMatchingNumber;
+      //  echo var_dump($update . "  --1");
           }
       } else {
           // Handle the case where no matching records were found in other_table
       }
 
+foreach ($nonMatchingNumbers as $nonMatchingNumberID) {
+      
       // Delete the record from detail_retur_obat
-      $sqlRo = "DELETE FROM detail_retur_obat WHERE id_detail_retur_obat = '" . $nonMatchingNumber . "'";
-      $con->query($sqlRo);
+      // if($id_detail_retur_obat !== $nonMatchingNumberID){
+
+ $sqlRos = "SELECT batch_number FROM detail_retur_obat WHERE id_detail_retur_obat = '" . $nonMatchingNumberID . "' and id_retur_obat = ". $id;
+
+  $resultD = $con->query($sqlRos);
+
+  if ($resultD->num_rows > 0) {
+    $sqlRo = "DELETE FROM detail_retur_obat WHERE id_detail_retur_obat = '" . $nonMatchingNumberID . "' and id_retur_obat = ". $id;
+
+    $con->query($sqlRo);
+      // if ($con->query($sqlRo) === TRUE) {
+        echo "Record with ID " . $nonMatchingNumberID . " successfully deleted.<br>";
+    } else {
+        // echo "Error deleting record: " . $con->error . "<br>";
+        
+    }
+      // }else{
+
+      // }
+    }
   } else {
       // Handle the case where no matching record was found in detail_retur_obat
   }
@@ -157,6 +240,8 @@ foreach ($nonMatchingNumbers as $nonMatchingNumber) {
     $jumlah = $jumlah_array[$i];
 
     $satuan = $satuan_array[$i];
+    $harga_beli_obat = $harga_beli_obat_array[$i];
+
     $batch_number = $batch_number_array[$i];
     $tanggal_exp = $tanggal_exp_array[$i];
  
@@ -178,19 +263,19 @@ foreach ($nonMatchingNumbers as $nonMatchingNumber) {
      // Execute the insert query
      $result = mysqli_query($con, $insert_query);
      if ($result) {
-       echo "<p>query update RO berhasil<p/>";
+      //  echo "<p>query update RO berhasil<p/>";
      } else {
        die('invalid Query : ' . mysqli_error($con));
      }
   }else{
     // Perform the insert query using the current row values
-    $insert_query = "INSERT INTO detail_retur_obat (id_retur_obat,id_obat,jumlah,satuan,batch_number,tanggal_kadaluarsa) 
-                   VALUES ('$id','$id_detailPO','$jumlah','$satuan','$batch_number','$tanggal_exp')";
+    $insert_query = "INSERT INTO detail_retur_obat (id_retur_obat,id_obat,jumlah,satuan,batch_number,tanggal_kadaluarsa,value) 
+                   VALUES ('$id','$id_detailPO','$jumlah','$satuan','$batch_number','$tanggal_exp','$harga_beli_obat')";
                       // Execute the insert query
-                      echo var_dump($insert_query);
+                      // echo var_dump($insert_query);
     $result = mysqli_query($con, $insert_query);
     if ($result) {
-      echo "<p>query insert RO berhasil<p/>";
+      // echo "<p>query insert RO berhasil<p/>";
       
     } else {
       
@@ -212,7 +297,7 @@ while ($row = mysqli_fetch_assoc($select)) {
   $jumlah_ko = $row['jumlah_ketersediaan_obat'];
 };
 if ($select) {
-  echo "<p>query select berhasil<p/>";
+  // echo "<p>query select berhasil<p/>";
 } else {
   die('invalid Query : ' . mysqli_error($con));
 }
@@ -243,9 +328,12 @@ if($box == 0){
 
     $update = mysqli_query($con, "UPDATE ketersediaan_obat SET box='$jumlah_stok_box_result', jumlah_ketersediaan_obat='$jumlah_stok_sisa_result' WHERE id_obat=$id_detailPO and batch_number='$batch_number'");
 
+    // echo var_dump($update . "  --2");
+
+
 if ($update) {
-  echo "<p>query berhasil<p/>";
-  // echo "<script>window.location.href = '?page=retur_obat-show';</script>";
+  // echo "<p>query berhasil<p/>";
+  echo "<script>window.location.href = '?page=retur_obat-show';</script>";
 
 } else {
   die('invalid Query : ' . mysqli_error($con));
@@ -446,6 +534,9 @@ echo '<p class="text-center mb-0">-</p>';
 // hehe
 echo '<input type="hidden" class="form-control jumlah_stok_sisa_hitung" name="tjmh[]">';
 echo '<input type="text" class="form-control jumlah_stok_sisa border-0 text-secondary" name="jumlah_stok_sisa[]" readonly>';
+
+echo '<input type="hidden" class="form-control harga_beli_obat" name="harga_beli_obat[]">';
+
 echo '</td>';
 echo '<td width="10%"><input type="text" class="form-control unit-price-input satuan"  id="satuan" name="satuan[]" placeholder="Satuan" readonly required>';
 echo '<p class="text-center mb-0">-</p>';
@@ -500,5 +591,5 @@ echo '</tr>';
     </div>
   </div>
 </div>
-</div>
-</div>
+<!-- </div>
+</div> -->

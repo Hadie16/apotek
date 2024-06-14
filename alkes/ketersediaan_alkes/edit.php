@@ -60,15 +60,15 @@ if ($update) {
   <div class="col-md-8">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">Ketersediaan alkes</h6>
+        <h6 class="m-0 font-weight-bold text-info">Ketersediaan Alkes</h6>
       </div>
       <div class="card-body">
         <form method="POST">
          
           <div class="row mb-3">
-            <label for="id_alkes" class="col-sm-2 col-form-label">Nama alkes</label>
+            <label for="id_alkes" class="col-sm-2 col-form-label">Nama Alkes</label>
             <div class="col-sm-10">
-            <select name="id_alkes" class="form-control" readonly>
+            <select name="id_alkesView" class="form-control" readonly>
         <option value="">- Pilih -</option>
         <?php
        $query = mysqli_query($con, "SELECT id_alkes, nama_alkes FROM alkes");
@@ -89,8 +89,11 @@ if ($update) {
           </div>
 
           <div class="row mb-3">
+          <input type="hidden" class="form-control" id="" name="id_alkes" value="<?php echo $id_alkes?>" required>
+
             <label for="jumlah_ketersediaan_alkes" class="col-sm-2 col-form-label">Jumlah</label>
             <div class="col-sm-10">
+
               <input type="number" class="form-control" id="jumlah_ketersediaan_alkes" name="jumlah_ketersediaan_alkes" value="<?php echo $jumlah?>" required>
             </div>
           </div>

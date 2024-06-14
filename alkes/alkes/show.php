@@ -6,7 +6,7 @@
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">alkes</h6>
+        <h6 class="m-0 font-weight-bold text-info">Alkes</h6>
 
       </div>
       <div class="card-body">
@@ -17,17 +17,7 @@
         <a href="../alkes/alkes/print2.php" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print"></i>
           Cetak</a>
         <hr>
-<!-- <script>window.addEventListener('scroll', function() {
-  var navbar = document.querySelector('.navbar');
-  var threshold = 100; // Set your desired scroll threshold here
 
-  if (window.scrollY > threshold) {
-    navbar.classList.add('sticky');
-  } else {
-    navbar.classList.remove('sticky');
-  }
-});
-</script> -->
 
 
 <!-- chat gpt -->
@@ -36,10 +26,11 @@
     <thead style="position: sticky; top: 0;"> -->
     <!-- ori -->
         <div class="table-responsive mt-3" >
-          <table class="table table-bordered table-hover" id="viewalkes" style="width: 100%;">
+          <table class="table table-bordered table-hover" id="viewAlkes" style="width: 100%;">
             <thead class="bg-secondary text-white" >
               <!-- <thead> -->
               <tr align="center">
+              <th >No</th>
                 <th >Kode</th>
                 <th >Gambar</th>
                 <th > Nama</th>
@@ -52,10 +43,13 @@
             <tbody>
               <?php
               include '../connection.php';
+              $no = 1;
               $query = mysqli_query($con, 'SELECT * FROM alkes');
               while ($data = mysqli_fetch_array($query)) { ?>
 
               <tr>
+              <td><?php echo $no++ ?></td>
+
                 <td><?php echo $data['kode_alkes']; ?></td>
                 <td ><img src="../uploads/<?php echo $data['gambar_alkes']; ?>" width="200px" alt="alkes Image"></td>
                 <td><?php echo $data['nama_alkes']; ?></td>

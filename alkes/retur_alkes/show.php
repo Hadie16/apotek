@@ -33,7 +33,7 @@
             <div class="col-5" style="display: none;" id="myDiv1">
             <!-- <label for="harga_jual_alkes" class="col-form-label">From</label> -->
                <input type="date" id="startDateRET" name="min" class="form-control" >
-               <input type="hidden" data-page="RET" >
+               <input type="hidden" data-page="RETALK" >
   </div>
   <div class="col-1" style="display: none;" id="myDiv4">
   <label for="endDateRET" class="col-form-label">To</label>
@@ -43,7 +43,7 @@
       <input type="date" id="endDateRET" name="max" class="form-control">
   </div>
   <div class="col-1" style="display: none;" id="myDiv3">
-  <button id="filterButtonRET" class="btn btn-warning" ><i class="fas fa-print"></i></button>
+  <button id="filterButtonRETALK" class="btn btn-warning" ><i class="fas fa-print"></i></button>
   </div>       
   </div>
         <hr>

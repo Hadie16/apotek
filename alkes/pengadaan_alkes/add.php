@@ -21,7 +21,7 @@ $jenis_produk_array = $_POST['id_alkes'];
   VALUES('$kode_pengadaan_alkes','$jenis_produk','$tanggal_pengadaan_alkes','$id_supplier','Dipesan')");
 
 if ($insert) {
-  echo "<p>query berhasil<p/>";
+  // echo "<p>query berhasil<p/>";
 } else {
   die('invalid Query : ' . mysqli_error($con));
 }
@@ -58,7 +58,7 @@ for ($i = 0; $i < count($id_alkes_array); $i++) {
   $result = mysqli_query($con, $insert_query);
 
   if ($result) {
-    echo "<p>query berhasil<p/>";
+    // echo "<p>query berhasil<p/>";
     echo "<script>window.location.href = '?page=pengadaan_alkes-show';</script>";
 
 } else {

@@ -2,9 +2,24 @@
 include '../template/headerPrint.php';
 $startDate = $_GET['startDate']; // Get the start date from the URL
 $endDate = $_GET['endDate'];     // Get the end date from the URL
+
+if(empty($endDate)){
+
+  $currentDateTime = date('Y-m-d');
+
+  $endDate = $currentDateTime;
+}
+if($startDate == $endDate){
+  $showDate = $startDate;
+}else{
+  $showDate = "$startDate Sampai $endDate";
+
+}
+
+
 ?>
 <br>
-<h2 align="center">Laporan Data Detail Penerimaan Obat</h2>
+<h2 align="center">Laporan Data Penerimaan Obat ( <?php echo $showDate ?> )</h2>
 <div class="table-responsive mt-3">
   <table border="1" width="95%" align="center" cellpadding="8">
     <thead>

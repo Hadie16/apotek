@@ -7,7 +7,7 @@ $year1 = $_GET['year'];
 // $currentMonth = date('F');
 // $date = date("F Y"); // get current date in desired format
 // $date="";
-if($month !== "0"){
+if($month !== 0){
   $month = $month1;
   $year = $year1;
   $monthNames = array(
@@ -20,7 +20,9 @@ if($month !== "0"){
     $monthName = $monthNames[$month - 1];
     $date = $monthName . ' ' . $year;
   } else {
-    $date = "Invalid month value";
+    // $date = "Invalid month value";
+  $date =$year;
+
   }
 }else{
   $date =$year;

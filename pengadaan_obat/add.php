@@ -21,7 +21,7 @@ $jenis_produk_array = $_POST['id_obat'];
   VALUES('$kode_pengadaan_obat','$jenis_produk','$tanggal_pengadaan_obat','$id_supplier','Dipesan')");
 
 if ($insert) {
-  echo "<p>query berhasil<p/>";
+  // echo "<p>query berhasil<p/>";
 } else {
   die('invalid Query : ' . mysqli_error($con));
 }
@@ -58,7 +58,7 @@ for ($i = 0; $i < count($id_obat_array); $i++) {
   $result = mysqli_query($con, $insert_query);
 
   if ($result) {
-    echo "<p>query berhasil<p/>";
+    // echo "<p>query berhasil<p/>";
     echo "<script>window.location.href = '?page=pengadaan_obat-show';</script>";
 
 } else {
@@ -170,6 +170,7 @@ for ($i = 0; $i < count($id_obat_array); $i++) {
                         </td>
                           <td><input type="number" required="required" class="form-control" name="jumlah[]" placeholder="Enter Qty">
       </td>
+ 
 
                           <!-- <td><input type="text" class="form-control unit-price-input harga_jual_obat" id="harga_jual_obat" name="harga[]" placeholder="Unit Price" required> </td> -->
                           <!-- <td>

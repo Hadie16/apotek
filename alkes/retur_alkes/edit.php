@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
     die('Query Error: ' . mysqli_error($con));
 
 }else{
-  echo 1;
+  // echo 1;
 }
 
   // $firstTableID = mysqli_insert_id($con);
@@ -42,6 +42,8 @@ if (isset($_POST['submit'])) {
   // $id_alkes_array = $_POST['id_alkes'];
   $jumlah_array = $_POST['jumlah'];
   $satuan_array = $_POST['satuan'];
+  $harga_beli_alkes_array = $_POST['harga_beli_alkes'];
+
   $batch_number_array = $_POST['batch_number'];
   $tanggal_exp_array = $_POST['tanggal_exp'];
   $tjmh_array = $_POST['tjmh'];
@@ -66,25 +68,37 @@ if (isset($_POST['submit'])) {
 // }
 
 // Step 2: Retrieve data from the database
-$sqlRo = "SELECT id_detail_retur_alkes FROM detail_retur_alkes";
+$sqlRo = "SELECT id_detail_retur_alkes, batch_number FROM detail_retur_alkes where id_retur_alkes =". $id;
 $resultRo = $con->query($sqlRo);
 
 if ($resultRo->num_rows > 0) {
     $dbValues = array();
+    $dbValuesBN = array();
+
+    $dbValuesC = array();
     while ($row = $resultRo->fetch_assoc()) {
         $dbValues[] = $row['id_detail_retur_alkes'];
+        $dbValuesBN[] = $row['batch_number'];
+
+        $combinedValue = $row['id_detail_retur_alkes'] . "-" . $row['batch_number'];
+      $dbValuesC[] = $combinedValue;
     }
 } else {
     $dbValues = array();
+    $dbValuesBN = array();
+
+    $dbValuesC = array();
 }
 
 // Step 3: Compare the values
 $nonMatchingNumbers = array_diff($dbValues, $id_detailRO_array);
+$nonMatchingNumbersBN = array_diff($dbValuesBN, $batch_number_array);
+
 
 // Step 4: Delete values in the database based on non-matching numbers
-foreach ($nonMatchingNumbers as $nonMatchingNumber) {
+foreach ($nonMatchingNumbersBN as $nonMatchingNumber) {
   // Select id_alkes and batch_number from detail_retur_alkes
-  $sqlRo2 = "SELECT id_alkes, jumlah, batch_number FROM detail_retur_alkes WHERE id_detail_retur_alkes = '" . $nonMatchingNumber . "' and id_retur_alkes = " . $id;
+  $sqlRo2 = "SELECT id_alkes, jumlah, batch_number FROM detail_retur_alkes WHERE batch_number = '" . $nonMatchingNumber . "' and id_retur_alkes = " . $id;
 
   $result = $con->query($sqlRo2);
 
@@ -134,9 +148,24 @@ foreach ($nonMatchingNumbers as $nonMatchingNumber) {
           // Handle the case where no matching records were found in other_table
       }
 
-      // Delete the record from detail_retur_alkes
-      $sqlRo = "DELETE FROM detail_retur_alkes WHERE id_detail_retur_alkes = '" . $nonMatchingNumber . "'";
-      $con->query($sqlRo);
+foreach ($nonMatchingNumbers as $nonMatchingNumberID) {
+
+  $sqlRos = "SELECT batch_number FROM detail_retur_alkes WHERE id_detail_retur_alkes = '" . $nonMatchingNumberID . "' and id_retur_alkes = ". $id;
+
+  $resultD = $con->query($sqlRos);
+
+  if ($resultD->num_rows > 0) {
+    $sqlRo = "DELETE FROM detail_retur_alkes WHERE id_detail_retur_alkes = '" . $nonMatchingNumberID . "' and id_retur_alkes = ". $id;
+
+    $con->query($sqlRo);
+      // if ($con->query($sqlRo) === TRUE) {
+        echo "Record with ID " . $nonMatchingNumberID . " successfully deleted.<br>";
+    } else {
+        // echo "Error deleting record: " . $con->error . "<br>";
+        
+    }
+
+    }
   } else {
       // Handle the case where no matching record was found in detail_retur_alkes
   }
@@ -157,6 +186,8 @@ foreach ($nonMatchingNumbers as $nonMatchingNumber) {
     $jumlah = $jumlah_array[$i];
 
     $satuan = $satuan_array[$i];
+    $harga_beli_alkes = $harga_beli_alkes_array[$i];
+
     $batch_number = $batch_number_array[$i];
     $tanggal_exp = $tanggal_exp_array[$i];
  
@@ -177,19 +208,19 @@ foreach ($nonMatchingNumbers as $nonMatchingNumber) {
      // Execute the insert query
      $result = mysqli_query($con, $insert_query);
      if ($result) {
-       echo "<p>query update RO berhasil<p/>";
+      //  echo "<p>query update RO berhasil<p/>";
      } else {
        die('invalid Query : ' . mysqli_error($con));
      }
   }else{
     // Perform the insert query using the current row values
-    $insert_query = "INSERT INTO detail_retur_alkes (id_retur_alkes,id_alkes,jumlah,satuan,batch_number,tanggal_kadaluarsa) 
-                   VALUES ('$id','$id_detailPO','$jumlah','$satuan','$batch_number','$tanggal_exp')";
+    $insert_query = "INSERT INTO detail_retur_alkes (id_retur_alkes,id_alkes,jumlah,satuan,batch_number,tanggal_kadaluarsa,value) 
+                   VALUES ('$id','$id_detailPO','$jumlah','$satuan','$batch_number','$tanggal_exp','$harga_beli_alkes')";
                       // Execute the insert query
-                      echo var_dump($insert_query);
+                      // echo var_dump($insert_query);
     $result = mysqli_query($con, $insert_query);
     if ($result) {
-      echo "<p>query insert RO berhasil<p/>";
+      // echo "<p>query insert RO berhasil<p/>";
       
     } else {
       
@@ -211,7 +242,7 @@ while ($row = mysqli_fetch_assoc($select)) {
   $jumlah_ko = $row['jumlah_ketersediaan_alkes'];
 };
 if ($select) {
-  echo "<p>query select berhasil<p/>";
+  // echo "<p>query select berhasil<p/>";
 } else {
   die('invalid Query : ' . mysqli_error($con));
 }
@@ -243,8 +274,8 @@ if($box == 0){
     $update = mysqli_query($con, "UPDATE ketersediaan_alkes SET box='$jumlah_stok_box_result', jumlah_ketersediaan_alkes='$jumlah_stok_sisa_result' WHERE id_alkes=$id_detailPO and batch_number='$batch_number'");
 
 if ($update) {
-  echo "<p>query berhasil<p/>";
-  // echo "<script>window.location.href = '?page=retur_alkes-show';</script>";
+  // echo "<p>query berhasil<p/>";
+  echo "<script>window.location.href = '?page=retur_alkes-show';</script>";
 
 } else {
   die('invalid Query : ' . mysqli_error($con));
@@ -293,7 +324,7 @@ if (!$result) {
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">Retur alkes</h6>
+        <h6 class="m-0 font-weight-bold text-info">Retur Alkes</h6>
 
       </div>
       <div class="card-body">
@@ -447,6 +478,8 @@ echo '<input type="hidden" class="form-control jumlah_stok_sisa_hitung" name="tj
 echo '<input type="text" class="form-control jumlah_stok_sisa border-0 text-secondary" name="jumlah_stok_sisa[]" readonly>';
 echo '</td>';
 echo '<td width="10%"><input type="text" class="form-control unit-price-input satuanALK"  id="satuan" name="satuan[]" placeholder="Satuan" readonly required>';
+echo'<input type="hidden" class="form-control harga_beli_alkes" name="harga_beli_alkes[]">';
+
 echo '<p class="text-center mb-0">-</p>';
 echo '<input type="text" class="form-control satuanALK border-0 text-secondary" name="jumlah_stok_sisa[]" readonly>';
 echo '</td>';
@@ -499,5 +532,5 @@ echo '</tr>';
     </div>
   </div>
 </div>
-</div>
-</div>
+<!-- </div>
+</div> -->

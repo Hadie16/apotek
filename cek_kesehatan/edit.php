@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
   <div class="col-md-8">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Cek Kesehatan - Edit Nilai</h6>
+        <h6 class="m-0 font-weight-bold text-info">Cek Kesehatan - Edit Nilai</h6>
       </div>
       <div class="card-body">
         <form method="POST">
@@ -158,7 +158,7 @@ if($n3==3.14){
             <div class="col offset-sm-2">
               <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-save"></i>
                 Simpan</button>
-              <a href="?page=cek_kesehatan-show" class="btn btn-danger"><i class="fas fa-chevron-left"></i>
+              <a href="?page=cek_kesehatan-detail&id=<?php echo $id ?>" class="btn btn-danger"><i class="fas fa-chevron-left"></i>
                 Kembali</a>
             </div>
           </div>

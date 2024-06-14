@@ -14,24 +14,30 @@ table {
   <table border="1" width="100%" align="center" cellpadding="8">
     <thead>
       <tr>
+      <th width="5%">No</th>
+
         <th width="10%">Kode</th>
-        <th width="25%">Gambar</th>
-        <th width="5%">Nama</th>
+        <th width="20%">Gambar</th>
+        <th width="30%">Nama</th>
         <th width="5%">Sediaan</th>
 
         <th width="5%">Jenis</th>
-        <th width="35%">Kategori</th>
+        <th width="25%">Kategori</th>
     
       </tr>
     </thead>
 
     <tbody>
       <?php
+      $no = 1;
+
       include '../connection.php';
       $query = mysqli_query($con, 'SELECT * FROM obat');
       while ($data = mysqli_fetch_array($query)) { ?>
 
       <tr>
+      <td  align="center"> <?php echo $no++ ?></td>
+
         <td align="center"><?php echo $data['kode_obat']; ?></td>
         <td ><img src="../uploads/<?php echo $data['gambar_obat']; ?>" width="200px" alt="Obat Image"></td>
 

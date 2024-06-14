@@ -12,7 +12,7 @@ $id = $_GET['id'];
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">Detail pengadaan alkes</h6>
+        <h6 class="m-0 font-weight-bold text-info">Detail Pengadaan Alkes</h6>
         <?php
         // $query = mysqli_query($con,  "SELECT a.*,b.kode_penjualan_alkes kode,b.tanggal_penjualan_alkes tanggal FROM detail_penjualan_alkes a join penjualan_alkes b on a.id_penjualan_alkes=b.id_penjualan_alkes  WHERE a.id_penjualan_alkes=$id ");
            $query = mysqli_query($con,  "SELECT * FROM pengadaan_alkes WHERE id_pengadaan_alkes=$id");
@@ -62,7 +62,7 @@ $id = $_GET['id'];
               <tr align="center">
               <th >No</th>
 
-                <th >Nama alkes</th>
+                <th >Nama Alkes</th>
                 <th >Jumlah</th>
                 <th >Satuan</th>
           

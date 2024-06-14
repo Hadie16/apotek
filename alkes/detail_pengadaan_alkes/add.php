@@ -31,12 +31,12 @@ if ($insert) {
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">Detail Pengadaan alkes</h6>
+        <h6 class="m-0 font-weight-bold text-info">Detail Pengadaan Alkes</h6>
       </div>
       <div class="card-body">
         <form method="POST">
           <div class="row mb-3">
-            <label for="id_pengadaan_alkes" class="col-sm-2 col-form-label">ID Pengadaan alkes</label>
+            <label for="id_pengadaan_alkes" class="col-sm-2 col-form-label">ID Pengadaan Alkes</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="id_pengadaan_alkes" name="id_pengadaan_alkes" value="<?php echo $id_pengadaan_alkes?>" readonly>
             </div>

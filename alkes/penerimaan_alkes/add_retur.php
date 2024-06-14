@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 $varP = $_GET['id1'];
 // $kodeP = $_GET['id2'];
-$queryLog = "SELECT * FROM pengadaan_obat WHERE id_pengadaan_obat = $varP";
+$queryLog = "SELECT * FROM retur_alkes WHERE id_retur_alkes = $varP";
 $resultLog = mysqli_query($con, $queryLog);
 $rowLog = mysqli_fetch_assoc($resultLog);
 $id_supplier=$rowLog['id_supplier'];
@@ -16,61 +16,62 @@ $id_supplier=$rowLog['id_supplier'];
 
 if (isset($_POST['submit'])) {
   // $selectP = $_POST['selectP'];
-  //penerimaan_obat
-  $kode_penerimaan_obat = $_POST['kode_penerimaan_obat'];
-  $tanggal_penerimaan_obat = $_POST['tanggal_penerimaan_obat'];
-  $total_harga = $_POST['total_harga'];
+  //penerimaan_alkes
+  $kode_penerimaan_alkes = $_POST['kode_penerimaan_alkes'];
+  $tanggal_penerimaan_alkes = $_POST['tanggal_penerimaan_alkes'];
+  // $total_harga = 0;
   $no_faktur = $_POST['no_faktur'];
 
   // $id_ttk = $_POST['id_ttk'];
   // $id_ttk = '2';
 
 
-  $insert = mysqli_query($con, "INSERT INTO penerimaan_obat(kode_penerimaan_obat,no_faktur,tanggal_penerimaan_obat,total_harga,id_supplier) 
-  VALUES('$kode_penerimaan_obat','$no_faktur','$tanggal_penerimaan_obat','$total_harga','$id_supplier')");
+  $insert = mysqli_query($con, "INSERT INTO penerimaan_alkes(kode_penerimaan_alkes,no_faktur,tanggal_penerimaan_alkes,total_harga,id_supplier) 
+  VALUES('$kode_penerimaan_alkes','$no_faktur','$tanggal_penerimaan_alkes',0,'$id_supplier')");
   if (!$insert) {
     die('Query Error: ' . mysqli_error($con));
 
 }else{
-  // echo 1;
+  echo 1;
 }
 
   $firstTableID = mysqli_insert_id($con);
 
-  // ============== ==== ===  update status pengadaan
- $updatePO = mysqli_query($con, "UPDATE pengadaan_obat SET status='Diterima' WHERE id_pengadaan_obat=$varP");
+  // ============== ==== ===  update status retur
+ $updatePO = mysqli_query($con, "UPDATE retur_alkes SET status='Selesai' WHERE id_retur_alkes=$varP");
 
 
-  //kode_penerimaan_obat tambahan
+  //kode_penerimaan_alkes tambahan
   // Retrieve the posted data
   $id_detailPO_array = $_POST['id_detailPO']; 
-   $id_obat_array = $_POST['id_obat'];
+   $id_alkes_array = $_POST['id_alkes'];
   $jumlah_array = $_POST['jumlah'];
   $satuan_array = $_POST['satuan'];
   $tanggal_exp_array = $_POST['tanggal_exp'];
   $batch_number_array = $_POST['batch_number'];
 
-  $harga_array = $_POST['harga'];
-  $sub_total_array = $_POST['sub_total'];
+  // $harga_array = 0;
+  // $sub_total_array = 0;
+
+  $valuese_array = $_POST['valuese'];
+
 
 
   //box
   $boxsatuan_array = []; // Providing a default value
   $tjmh_array = [];
-  $hargaKet_array = [];
   $box_array = [];
+
 
   if ($_POST['boxjumlah']!==['']) {
       $boxsatuan_array = $_POST['boxsatuan'];
       $tjmh_array = $_POST['tjmh'];
-      $hargaKet_array = $_POST['hargaKet'];
       $box_array =  $_POST['jumlah'];
 
   }else{
     $boxsatuan_array = $_POST['satuan'];
     $tjmh_array = $_POST['jumlah'];
-    $hargaKet_array = $_POST['harga'];
-    $box_array = 0;
+    $box_array = [0];
 
   }
  
@@ -78,7 +79,7 @@ if (isset($_POST['submit'])) {
   for ($i = 0; $i < count($id_detailPO_array); $i++) {
     // Get the values for the current row
     $id_detailPO = $id_detailPO_array[$i];   
-     $id_obat = $id_obat_array[$i];
+     $id_alkes = $id_alkes_array[$i];
     $jumlah = $jumlah_array[$i];
 
     $satuan = $satuan_array[$i];
@@ -86,14 +87,17 @@ if (isset($_POST['submit'])) {
     $batch_number = $batch_number_array[$i];
 
 
-    $harga = $harga_array[$i];
-    $sub_total = $sub_total_array[$i];
+    // $harga = $harga_array[$i];
+    // $sub_total = $sub_total_array[$i];
 
    $boxsatuan= $boxsatuan_array[$i];
      $tjmh= $tjmh_array[$i];
   
-     $hargaKet= $hargaKet_array[$i];
+    //  $hargaKet= $hargaKet_array[$i];
      $box = $box_array[$i];
+
+     $valuese = $valuese_array[$i];
+
 
 
     //stok
@@ -101,8 +105,8 @@ if (isset($_POST['submit'])) {
 
 
     // Perform the insert query using the current row values
-    $insert_query = "INSERT INTO detail_penerimaan_obat (id_penerimaan_obat,id_obat, jumlah_detail_penerimaan_obat,satuan,tanggal_kadaluarsa,batch_number,harga_detail_penerimaan_obat,sub_total) 
-                   VALUES (' $firstTableID','$id_obat','$jumlah','$satuan','$tanggal_exp','$batch_number','$harga','$sub_total')";
+    $insert_query = "INSERT INTO detail_penerimaan_alkes (id_penerimaan_alkes,id_alkes, jumlah_detail_penerimaan_alkes,satuan,tanggal_kadaluarsa,batch_number,harga_detail_penerimaan_alkes,sub_total) 
+                   VALUES (' $firstTableID','$id_alkes','$jumlah','$satuan','$tanggal_exp','$batch_number',0,0)";
 
     // Execute the insert query
     $result = mysqli_query($con, $insert_query);
@@ -116,12 +120,12 @@ if (isset($_POST['submit'])) {
 
 
 
-  $insert = mysqli_query($con, "INSERT INTO ketersediaan_obat(id_obat,box,jumlah_ketersediaan_obat,satuan,harga_beli_obat,tanggal_kadaluarsa_obat,batch_number,id_supplier) 
-  VALUES('$id_obat','$box','$tjmh','$boxsatuan','$hargaKet','$tanggal_exp','$batch_number','$id_supplier')");
+  $insert = mysqli_query($con, "INSERT INTO ketersediaan_alkes(id_alkes,box,jumlah_ketersediaan_alkes,satuan,harga_beli_alkes,tanggal_kadaluarsa_alkes,batch_number,id_supplier) 
+  VALUES('$id_alkes','$box','$tjmh','$boxsatuan','$valuese','$tanggal_exp','$batch_number','$id_supplier')");
 
 if ($insert) {
   // echo "<p>query berhasil<p/>";
-  echo "<script>window.location.href = '?page=penerimaan_obat-show';</script>";
+  echo "<script>window.location.href = '?page=penerimaan_alkes-show';</script>";
 
 } else {
   die('invalid Query : ' . mysqli_error($con));
@@ -139,7 +143,7 @@ if ($insert) {
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">Penerimaan Obat</h6>
+        <h6 class="m-0 font-weight-bold text-info">Penerimaan alkes</h6>
 
       </div>
       <div class="card-body">
@@ -152,40 +156,52 @@ if ($insert) {
     <p style="color: #333;">Apotek Mahabbah</p>
   </div>
             <div class="col-sm-5 offset-sm-2">
-              <label for="nim" class="col-sm-2 col-form-label">Kode</label>
+              <label for="kode" class="col-sm-2 col-form-label">Kode</label>
 
               <?php
     // Get the current year
     $year = date('Y');
 
-    $query = mysqli_query($con, "SELECT kode_penerimaan_obat FROM penerimaan_obat ORDER BY kode_penerimaan_obat DESC LIMIT 1");
+    $query = mysqli_query($con, "SELECT kode_penerimaan_alkes FROM penerimaan_alkes ORDER BY kode_penerimaan_alkes DESC LIMIT 1");
     
     if (mysqli_num_rows($query) > 0) {
       $row = mysqli_fetch_assoc($query);
-      $lastKodeNumber = $row['kode_penerimaan_obat'];
+      $lastKodeNumber = $row['kode_penerimaan_alkes'];
       $lastKodeNumber = intval(substr($lastKodeNumber, 9)); // Extract the numeric part only
       $newKodeNumber = $lastKodeNumber + 1;
     } else {
       $newKodeNumber = 1;
     }
     
-    $KodeNumber = 'PNM-' . $year . '-' . str_pad($newKodeNumber, 4, '0', STR_PAD_LEFT);
+    $KodeNumber = 'PNMS-' . $year . '-' . str_pad($newKodeNumber, 4, '0', STR_PAD_LEFT);
           ?>
-              <input type="text" name="kode_penerimaan_obat" required="required" class="form-control" value="<?php echo $KodeNumber?>" readonly>
+              <input id="kode" type="text" name="kode_penerimaan_alkes" required="required" class="form-control" value="<?php echo $KodeNumber?>" readonly>
         
 
 
-              <label for="nim" class="col-sm-4 col-form-label">Tanggal Terima</label>
+              <label for="tgl" class="col-sm-4 col-form-label">Tanggal Terima</label>
               <!-- <div class="col-sm-5"> -->
               <!-- <input name="nim" type="text" class="form-control" id="nim" value="Cash" readonly required> -->
-              <input type="text" class="form-control" name="tanggal_penerimaan_obat" value="<?php echo date('Y-m-d'); ?>" readonly>
+              <input id="tgl" type="text" class="form-control" name="tanggal_penerimaan_alkes" value="<?php echo date('Y-m-d'); ?>" readonly>
 
               <!-- <form method="POST"> -->
 
-                <label for="nim" class="col-sm-8 col-form-label">No Faktur</label>
-                <input type="hidden" class="form-control" name="id_pengadaan_obat" value="<?php echo $varP; ?>" readonly>
+              <?php
 
-                <input type="text" class="form-control" name="no_faktur"  placeholder="Nomer Faktur" required>
+$query = mysqli_query($con, "SELECT * FROM retur_alkes WHERE id_retur_alkes=$varP");
+
+while ($row = mysqli_fetch_assoc($query)) {
+
+  $faktur = $row['no_faktur'];
+  // $supplier = $row['suppliers'];
+
+}
+
+?>
+                <label for="faktur" class="col-sm-8 col-form-label">No Faktur</label>
+                <input type="hidden" class="form-control" name="id_retur_alkes" value="<?php echo $varP; ?>" readonly>
+
+                <input id="faktur" type="text" class="form-control" name="no_faktur"  placeholder="Nomer Faktur" value="<?php echo $faktur ?>" required>
 
                 <!-- <button type="submit" class="btn btn-primary" name="submit2"><i class="fas fa-plane"></i>
                   Go</button> -->
@@ -220,19 +236,21 @@ if ($insert) {
                 <tr>
                   <td>1</td>
                   <td width="15%">
-                    <select name="id_detailPO[]" id="" class="form-control select-options select-option2" required>
+                    <!-- <select name="id_detailPO[]" id="" class="form-control select-options select-option2" required> -->
+                    <select name="id_detailPO[]" id="" class="form-control select-optionALK" required>
+
                       <option value="">- Pilih -</option>
                       <?php
 
-                      $query = mysqli_query($con, "SELECT a.*,b.nama_obat nama FROM detail_pengadaan_obat a join obat b on a.id_obat=b.id_obat where id_pengadaan_obat=$varP");
+                      $query = mysqli_query($con, "SELECT a.*,b.nama_alkes nama FROM detail_retur_alkes a join alkes b on a.id_alkes=b.id_alkes where id_retur_alkes=$varP");
         
                       while ($row = mysqli_fetch_assoc($query)) {
-                        // $id_obat1 = $row['id_obat'];
-                        $id_D = $row['id_detail_pengadaan_obat'] . "pesan";
+                        // $id_alkes1 = $row['id_alkes'];
+                        $id_D = $row['id_detail_retur_alkes'] . "retur";
                         $nama = $row['nama'];
 
 
-                        // $kode_penerimaan_obat = $row['kode_penerimaan_obat'];
+                        // $kode_penerimaan_alkes = $row['kode_penerimaan_alkes'];
                         // $idd = 2;
                         echo '<option value="' . $id_D . '" >' . $nama . '</option>';
                       }
@@ -240,14 +258,14 @@ if ($insert) {
                       ?>
                     </select>
 
-                      <input type="hidden" name="id_obat[]" id="result_id_obat">
+                      <input type="hidden" name="id_alkes[]" id="result_id_alkes">
                     <p class="text-center mb-0">-</p>
 
                     <label id="lb" style="display: none;" class="col-form-label lb">Isi Per Box</label>
 
                     </td>
 
-    <!-- <p align="center" class="stock-left jumlah_stok_obat" >kk</p>                         -->
+    <!-- <p align="center" class="stock-left jumlah_stok_alkes" >kk</p>                         -->
                     <!-- <input type="text" required="" class="form-control-plaintext qty-inputs jumlah border-0 text-center text-secondary" name="jumlahDisplay[]" placeholder="" readonly> -->
                   <td width="9%"><input type="number" required="required" class="form-control qty-inputs jumlah" name="jumlah[]" placeholder="Qty">
                 
@@ -255,6 +273,10 @@ if ($insert) {
                     <input id="boxjumlah" style="display: none;" type="number" class="form-control boxjumlah" name="boxjumlah[]" placeholder="Isi">
 
                     <input id="tjmh" type="hidden" class="form-control tjmh" name="tjmh[]">
+                    
+
+                    <input id="valuese" type="number" class="form-control valuese" name="valuese[]">
+
                     <input id="hargaKet" type="hidden" class="form-control hargaKet" name="hargaKet[]">
 
 
@@ -269,11 +291,11 @@ if ($insert) {
                   <select id="boxsatuan" style="display: none;" class="form-control boxsatuan" name="boxsatuan[]">
   <option value="">*</option>
 
-  <option value="Strip">Strip</option>
-  <option value="Sachet">Sachet</option>
-  <option value="Botol">Botol</option>
   <option value="Pcs">Pcs</option>
-                            <option value="Tube" >Tube</option>
+  <option value="Unit">Unit</option>
+  <option value="Pack">Pack</option>
+  <option value="Roll">Roll</option>
+<option value="Box" >Box</option>
 </select>
 
 
@@ -285,7 +307,7 @@ if ($insert) {
 
 <td ><input type="date" class="form-control" name="tanggal_exp[]"  required></td>
 <td><input type="text" class="form-control unit-price-input batch_number" id="batch_number" name="batch_number[]" placeholder="BN" required> </td>
-                  <td><input type="text" class="form-control unit-price-inputs" id="harga" name="harga[]" placeholder="Harga" required> </td>
+                  <td><input type="text" class="form-control unit-price-inputs" id="harga" name="harga[]" placeholder="Harga" value="0" required> </td>
                   <!-- <td>
                           <select class="form-control">
                             <option>Discount Type</option>
@@ -320,29 +342,26 @@ if ($insert) {
           <hr>
 
           <div class="col-sm-10 ">
-
+        
             <h1 align="center">Total Harga</h1>
             <!-- <div class="row mb-3"> -->
-            <!-- <label for="jumlah_ketersediaan_obat" class="col-sm-2 col-form-label">Jumlah</label> -->
+            <!-- <label for="jumlah_ketersediaan_alkes" class="col-sm-2 col-form-label">Jumlah</label> -->
             <!-- <div class="col-sm-5"> -->
             <div align="center">
-              <input type="text" align="center" id="grandTotals" class="form-control" style="display: inline-block; width: 300px; height: 50px; font-size: 24px;" name="total_harga" readonly>
+              <input type="text" align="center" id="grandTotals" class="form-control" style="display: inline-block; width: 300px; height: 50px; font-size: 24px;" name="total_harga" value="0" readonly>
             </div>
 
             <br>
 
-            <!-- <input type="number" class="form-control" id="jumlah_ketersediaan_obat" name="jumlah_ketersediaan_obat"> -->
+            <!-- <input type="number" class="form-control" id="jumlah_ketersediaan_alkes" name="jumlah_ketersediaan_alkes"> -->
             <!-- </div> -->
             <!-- </div> -->
-
-
-
 
             <div class="row">
 
               <div align="center" class="col">
                 <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-save"></i>Simpan</button>
-                <a href="?page=penerimaan_obat-show" class="btn btn-danger"><i class="fas fa-chevron-left"></i>
+                <a href="?page=penerimaan_alkes-show" class="btn btn-danger"><i class="fas fa-chevron-left"></i>
                   Kembali</a>
               </div>
 

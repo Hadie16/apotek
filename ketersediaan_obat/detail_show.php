@@ -27,33 +27,12 @@ $id = $_GET['id'];
 
       </div>
       <div class="card-body">
-        <!-- <a href="?page=detail_penjualan_obat-add" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> Tambah Data</a> -->
-        <!-- <a href="../detail_penjualan_obat/print.php" class="btn btn-sm btn-info" target="_blank"><i class="fas fa-print"></i>
-          Cetak
-          FPDF</a> -->
-        <!-- <a href="../detail_penjualan_obat/print2.php" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print"></i>
-          Cetak</a> -->
+
 
           <a href="?page=ketersediaan_obat-show" class="btn btn-sm btn-danger"><i class="fas fa-chevron-left"></i>
           Kembali</a>
         <hr>
-<!-- <script>window.addEventListener('scroll', function() {
-  var navbar = document.querySelector('.navbar');
-  var threshold = 100; // Set your desired scroll threshold here
 
-  if (window.scrollY > threshold) {
-    navbar.classList.add('sticky');
-  } else {
-    navbar.classList.remove('sticky');
-  }
-});
-</script> -->
-
-
-<!-- chat gpt -->
-<!-- <div class="table-responsive mt-3" style="height: 400px; overflow-y: scroll;">
-  <table class="table table-bordered table-hover" id="viewdetail_penjualan_obat" style="width: 100%;">
-    <thead style="position: sticky; top: 0;"> -->
     <!-- ori -->
         <div class="table-responsive mt-3" >
           <table class="table table-bordered table-hover" id="viewDKO" style="width: 100%;">

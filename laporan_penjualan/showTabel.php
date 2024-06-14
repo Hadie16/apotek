@@ -93,7 +93,7 @@ $currentYear = date('Y');
         <?php
        $query = mysqli_query($con, "SELECT *,year(po.tanggal_penjualan_obat) as cy,sum(dpo.jumlah_detail_penjualan_obat) as sj from
        detail_penjualan_obat as dpo join penjualan_obat as po on dpo.id_penjualan_obat=po.id_penjualan_obat 
-        join ketersediaan_obat as ko on dpo.id_obat=ko.id_obat join obat as o on dpo.id_obat=o.id_obat
+        join ketersediaan_obat as ko on dpo.id_obat=ko.id_obat join obat as o on dpo.id_obat=o.id_obat group by cy
        ");
        while ($row = mysqli_fetch_assoc($query)) {
            $cy = $row['cy'];
@@ -249,7 +249,7 @@ $currentYear2 = date('Y');
         <?php
        $query = mysqli_query($con, "SELECT *,year(po.tanggal_penjualan_alkes) as cy,sum(dpo.jumlah_detail_penjualan_alkes) as sj from
        detail_penjualan_alkes as dpo join penjualan_alkes as po on dpo.id_penjualan_alkes=po.id_penjualan_alkes 
-        join ketersediaan_alkes as ko on dpo.id_alkes=ko.id_alkes join alkes as o on dpo.id_alkes=o.id_alkes
+        join ketersediaan_alkes as ko on dpo.id_alkes=ko.id_alkes join alkes as o on dpo.id_alkes=o.id_alkes group by cy
        ");
        while ($row = mysqli_fetch_assoc($query)) {
            $cy = $row['cy'];

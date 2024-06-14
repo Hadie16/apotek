@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 02, 2023 at 12:16 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jun 11, 2024 at 04:18 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,20 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `alkes` (
   `id_alkes` int(11) NOT NULL,
   `kode_alkes` varchar(255) NOT NULL,
-  `nama_alkes` varchar(255) NOT NULL,
-  `gambar_alkes` varchar(255) NOT NULL
+  `gambar_alkes` varchar(255) NOT NULL,
+  `nama_alkes` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `alkes`
 --
 
-INSERT INTO `alkes` (`id_alkes`, `kode_alkes`, `nama_alkes`, `gambar_alkes`) VALUES
-(2, 'ALK-2023-0001', 'Masker Non-Medis Disposable 3 Ply 50 Pieces', '64d3a9cf8061c.png'),
-(3, 'ALK-2023-0002', 'Safety Thermometer Digital MC-201', '64d3aa556a318.png'),
-(4, 'ALK-2023-0003', 'Safe Glove Latex Examination Gloves Powdered Size S 100 Pieces', '64d3aae676ac8.png'),
-(5, 'ALK-2023-0004', 'Hansaplast Kain Elastis Mix 10 Lembar', '64d9a764ce3a2.png'),
-(6, 'ALK-2023-0005', 'Betadine Skin Cleanser Antiseptic 100 ml', '64d9a817a2019.png');
+INSERT INTO `alkes` (`id_alkes`, `kode_alkes`, `gambar_alkes`, `nama_alkes`) VALUES
+(2, 'ALK-2023-0001', '64d3a9cf8061c.png', 'Masker Non-Medis Disposable 3 Ply 50 Pieces'),
+(3, 'ALK-2023-0002', '64d3aa556a318.png', 'Safety Thermometer Digital MC-201'),
+(4, 'ALK-2023-0003', '64d3aae676ac8.png', 'Safe Glove Latex Examination Gloves Powdered Size S 100 Pieces'),
+(5, 'ALK-2023-0004', '64d9a764ce3a2.png', 'Hansaplast Kain Elastis Mix 10 Lembar'),
+(6, 'ALK-2023-0005', '64d9a817a2019.png', 'Betadine Skin Cleanser Antiseptic 100 ml');
 
 -- --------------------------------------------------------
 
@@ -117,7 +117,6 @@ INSERT INTO `detail_cek_kesehatan` (`id_detail_cek_kesehatan`, `id_cek_kesehatan
 CREATE TABLE `detail_penerimaan_alkes` (
   `id_detail_penerimaan_alkes` int(11) NOT NULL,
   `id_penerimaan_alkes` int(11) NOT NULL,
-  `id_detail_pengadaan_alkes` int(11) NOT NULL,
   `id_alkes` int(11) NOT NULL,
   `jumlah_detail_penerimaan_alkes` int(255) NOT NULL,
   `satuan` varchar(20) NOT NULL,
@@ -131,12 +130,14 @@ CREATE TABLE `detail_penerimaan_alkes` (
 -- Dumping data for table `detail_penerimaan_alkes`
 --
 
-INSERT INTO `detail_penerimaan_alkes` (`id_detail_penerimaan_alkes`, `id_penerimaan_alkes`, `id_detail_pengadaan_alkes`, `id_alkes`, `jumlah_detail_penerimaan_alkes`, `satuan`, `tanggal_kadaluarsa`, `batch_number`, `harga_detail_penerimaan_alkes`, `sub_total`) VALUES
-(8, 9, 7, 2, 50, 'Box', '2025-01-01', 'EQ20231', 50000, 2500000),
-(9, 10, 8, 4, 50, 'Box', '2025-01-01', 'EQ20232', 50000, 2500000),
-(10, 11, 9, 5, 30, 'Pack', '2025-01-01', 'EQ20233', 5000, 150000),
-(11, 12, 10, 6, 40, 'Botol', '2025-01-01', 'EQ20239', 40000, 1600000),
-(12, 13, 11, 3, 20, 'Unit', '2030-01-01', 'EQ202333', 25000, 500000);
+INSERT INTO `detail_penerimaan_alkes` (`id_detail_penerimaan_alkes`, `id_penerimaan_alkes`, `id_alkes`, `jumlah_detail_penerimaan_alkes`, `satuan`, `tanggal_kadaluarsa`, `batch_number`, `harga_detail_penerimaan_alkes`, `sub_total`) VALUES
+(8, 9, 2, 50, 'Box', '2025-01-01', 'EQ20231', 50000, 2500000),
+(9, 10, 4, 50, 'Box', '2025-01-01', 'EQ20232', 50000, 2500000),
+(10, 11, 5, 30, 'Pack', '2025-01-01', 'EQ20233', 5000, 150000),
+(11, 12, 6, 40, 'Botol', '2025-01-01', 'EQ20239', 40000, 1600000),
+(12, 13, 3, 20, 'Unit', '2030-01-01', 'EQ202333', 25000, 500000),
+(13, 17, 2, 1, 'Box', '2024-05-10', 'h', 0, 0),
+(14, 18, 3, 1, 'Unit', '2024-05-10', 'k', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -196,8 +197,10 @@ INSERT INTO `detail_penerimaan_obat` (`id_detail_penerimaan_obat`, `id_penerimaa
 (33, 42, 7, 5, 'Box', '2023-11-03', 'fffse', 1000, 5000),
 (34, 43, 11, 20, 'Sachet', '2025-10-10', '222gg', 0, 0),
 (35, 44, 11, 20, 'Sachet', '2025-10-10', '222gg', 0, 0),
-(36, 45, 9, 2, 'Strip', '2023-11-03', '121wssx', 0, 0),
-(37, 46, 7, 2, 'box', '2023-12-08', 'weww', 0, 0);
+(37, 46, 7, 2, 'box', '2023-12-08', 'weww', 0, 0),
+(38, 47, 9, 1, 'Strip', '2024-04-03', 'h', 0, 0),
+(39, 48, 9, 1, 'Strip', '2024-05-07', 'h', 0, 0),
+(40, 49, 7, 2, 'box', '2024-06-27', 'j', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -244,28 +247,13 @@ CREATE TABLE `detail_pengadaan_obat` (
 --
 
 INSERT INTO `detail_pengadaan_obat` (`id_detail_pengadaan_obat`, `id_pengadaan_obat`, `id_obat`, `jumlah`, `satuan`) VALUES
-(3, 3, 9, 200, 'Pcs'),
-(4, 4, 10, 400, 'Pcs'),
-(5, 5, 8, 100, 'Pcs'),
-(6, 6, 7, 200, 'Box'),
-(7, 6, 9, 100, 'Box'),
-(8, 7, 10, 10, 'Box'),
-(9, 7, 8, 20, 'Pcs'),
-(10, 8, 7, 20, 'Box'),
-(11, 9, 9, 30, 'Pcs'),
-(12, 10, 8, 20, 'Box'),
-(13, 11, 7, 33, 'Pcs'),
-(14, 12, 7, 10, 'Box'),
-(15, 13, 7, 10, 'Box'),
-(17, 15, 7, 10, 'Box'),
-(18, 16, 7, 10, 'Box'),
-(19, 17, 7, 111, 'Botol'),
 (20, 18, 7, 30, 'Box'),
 (21, 19, 8, 30, 'Box'),
 (22, 20, 11, 30, 'Box'),
 (23, 21, 9, 30, 'Box'),
 (24, 22, 10, 30, 'Box'),
-(25, 23, 7, 5, 'Box');
+(25, 23, 7, 5, 'Box'),
+(26, 24, 7, 10, 'Box');
 
 -- --------------------------------------------------------
 
@@ -294,7 +282,11 @@ INSERT INTO `detail_penjualan_alkes` (`id_detail_penjualan_alkes`, `id_penjualan
 (3, 3, 4, 4, 8, 'Box', 55000, 440000),
 (4, 4, 5, 5, 2, 'Pack', 6000, 12000),
 (5, 5, 6, 6, 4, 'Botol', 43000, 172000),
-(6, 6, 2, 2, 10, 'Box', 55000, 550000);
+(6, 6, 2, 2, 10, 'Box', 55000, 550000),
+(7, 7, 2, 2, 11, 'Box', 55000, 605000),
+(8, 8, 2, 2, 4, 'Box', 55000, 220000),
+(9, 9, 2, 2, 3, 'Box', 55000, 165000),
+(10, 10, 6, 6, 1, 'Botol', 43000, 43000);
 
 -- --------------------------------------------------------
 
@@ -323,7 +315,32 @@ INSERT INTO `detail_penjualan_obat` (`id_detail_penjualan_obat`, `id_penjualan_o
 (4, 4, 4, 9, 7, 'Strip', 5000, 35000),
 (5, 5, 5, 10, 8, 'Strip', 6000, 48000),
 (6, 6, 6, 11, 12, 'Sachet', 2500, 30000),
-(7, 7, 2, 7, 10, 'Strip', 6000, 60000);
+(7, 7, 2, 7, 10, 'Strip', 6000, 60000),
+(8, 8, 7, 11, 1, 'Sachet', 2000, 2000),
+(9, 9, 7, 11, 1, 'Sachet', 2000, 2000),
+(10, 10, 8, 11, 1, 'Sachet', 2000, 2000),
+(11, 11, 9, 11, 2, 'Sachet', 2000, 4000),
+(12, 12, 9, 11, 1, 'Sachet', 2000, 2000),
+(13, 13, 5, 10, 4, 'Strip', 6000, 24000),
+(14, 14, 5, 10, 2, 'Strip', 6000, 12000),
+(15, 15, 5, 10, 1, 'Strip', 6000, 6000),
+(16, 16, 5, 10, 2, 'Strip', 6000, 12000),
+(17, 17, 5, 10, 2, 'Strip', 6000, 12000),
+(18, 18, 5, 10, 1, 'Strip', 6000, 6000),
+(19, 19, 5, 10, 1, 'Strip', 6000, 6000),
+(20, 20, 5, 10, 1, 'Strip', 6000, 6000),
+(21, 21, 9, 11, 2, 'Sachet', 2000, 4000),
+(22, 22, 11, 11, 32, 'Sachet', 2000, 64000),
+(23, 23, 11, 11, 22, 'Sachet', 2000, 44000),
+(24, 24, 11, 11, 21, 'Sachet', 2000, 42000),
+(25, 25, 11, 11, 22, 'Sachet', 2000, 44000),
+(26, 26, 7, 7, 6, 'Strip', 6000, 36000),
+(27, 27, 11, 11, 1, 'Sachet', 2000, 2000),
+(28, 28, 11, 11, 2, 'Sachet', 2000, 4000),
+(29, 29, 11, 11, 1, 'Sachet', 2000, 2000),
+(30, 30, 7, 7, 1, 'Strip', 6000, 6000),
+(31, 31, 11, 11, 1, 'Sachet', 2000, 2000),
+(32, 32, 7, 7, 1, 'Strip', 6000, 6000);
 
 -- --------------------------------------------------------
 
@@ -347,7 +364,10 @@ CREATE TABLE `detail_retur_alkes` (
 --
 
 INSERT INTO `detail_retur_alkes` (`id_detail_retur_alkes`, `id_retur_alkes`, `id_alkes`, `jumlah`, `satuan`, `batch_number`, `tanggal_kadaluarsa`, `value`) VALUES
-(30, 7, 6, 1, 'Botol', 'EQ20239', '2025-01-01', 40000);
+(30, 7, 6, 1, 'Botol', 'EQ20239', '2025-01-01', 40000),
+(31, 8, 2, 1, 'Box', 'EQ20231', '2025-01-01', 50000),
+(33, 10, 2, 1, 'Box', 'EQ20231', '2025-01-01', 50000),
+(46, 9, 4, 1, 'Box', 'EQ20232', '2025-01-01', 40000);
 
 -- --------------------------------------------------------
 
@@ -371,7 +391,11 @@ CREATE TABLE `detail_retur_obat` (
 --
 
 INSERT INTO `detail_retur_obat` (`id_detail_retur_obat`, `id_retur_obat`, `id_obat`, `jumlah`, `satuan`, `batch_number`, `tanggal_kadaluarsa`, `value`) VALUES
-(36, 12, 7, 1, 'box', 'MN20231', '2024-01-01', 5000);
+(40, 16, 7, 2, 'box', 'MN20231', '2024-01-01', 5000),
+(60, 12, 11, 1, 'Sachet', 'MN20233', '2024-01-01', 1500),
+(62, 17, 7, 3, 'box', 'MN20231', '2025-01-01', 5000),
+(63, 18, 9, 1, 'Strip', 'MN20234', '2024-01-01', 4000),
+(64, 19, 10, 1, 'Strip', 'MN20236', '2024-01-01', 5000);
 
 -- --------------------------------------------------------
 
@@ -418,11 +442,12 @@ CREATE TABLE `ketersediaan_alkes` (
 --
 
 INSERT INTO `ketersediaan_alkes` (`id_ketersediaan_alkes`, `id_alkes`, `box`, `jumlah_ketersediaan_alkes`, `satuan`, `harga_beli_alkes`, `tanggal_kadaluarsa_alkes`, `batch_number`, `id_supplier`) VALUES
-(2, 2, 0, 10, 'Box', 50000, '2025-01-01', 'EQ20231', 1),
-(3, 4, 0, 10, 'Box', 50000, '2025-01-01', 'EQ20232', 2),
-(4, 5, 0, 10, 'Pack', 5000, '2025-01-01', 'EQ20233', 1),
-(5, 6, 0, 6, 'Botol', 40000, '2025-01-01', 'EQ20239', 2),
-(6, 3, 0, 5, 'Unit', 25000, '2030-01-01', 'EQ202333', 2);
+(2, 2, 0, 1, 'Box', 50000, '2025-01-01', 'EQ20231', 1),
+(3, 4, 0, 9, 'Box', 50000, '2025-01-01', 'EQ20232', 2),
+(4, 5, 0, 3, 'Pack', 5000, '2025-01-01', 'EQ20233', 1),
+(5, 6, 0, 42, 'Botol', 40000, '2025-01-01', 'EQ20239', 2),
+(6, 3, 0, 5, 'Unit', 25000, '2030-01-01', 'EQ202333', 2),
+(7, 3, 0, 1, 'Unit', 25000, '2024-05-10', 'k', 2);
 
 -- --------------------------------------------------------
 
@@ -447,14 +472,17 @@ CREATE TABLE `ketersediaan_obat` (
 --
 
 INSERT INTO `ketersediaan_obat` (`id_ketersediaan_obat`, `id_obat`, `box`, `jumlah_ketersediaan_obat`, `satuan`, `harga_beli_obat`, `tanggal_kadaluarsa_obat`, `batch_number`, `id_supplier`) VALUES
-(18, 7, 24, 240, 'Strip', 5000, '2024-01-01', 'MN20231', 1),
+(18, 7, 38, 350, 'Strip', 5000, '2025-01-01', 'MN20231', 1),
 (19, 8, 3, 30, 'Strip', 4000, '2024-01-01', 'MN20232', 2),
-(20, 11, 0, 80, 'Sachet', 1500, '2024-01-01', 'MN20233', 2),
-(21, 9, 0, 10, 'Strip', 4000, '2024-01-01', 'MN20234', 1),
-(22, 10, 0, 30, 'Strip', 5000, '2024-01-01', 'MN20236', 1),
-(24, 11, 0, 94, 'Sachet', 1000, '2025-10-10', '222gg', 1),
+(20, 11, 0, 78, 'Sachet', 1500, '2024-01-01', 'MN20233', 2),
+(21, 9, 0, 46, 'Strip', 4000, '2024-01-01', 'MN20234', 1),
+(22, 10, 0, 24, 'Strip', 5000, '2024-01-01', 'MN20236', 1),
+(24, 11, 0, 30, 'Sachet', 1000, '2025-10-10', '222gg', 1),
 (25, 9, 0, 2, 'Strip', 4000, '2023-11-03', '121wssx', 1),
-(26, 7, 2, 20, 'strip', 5000, '2023-12-08', 'weww', 1);
+(26, 7, 2, 20, 'strip', 5000, '2023-12-08', 'weww', 1),
+(27, 9, 0, 1, 'Strip', 4000, '2024-04-03', 'h', 1),
+(28, 9, 0, 1, 'Strip', 4000, '2024-05-07', 'h', 1),
+(29, 7, 0, 2, 'box', 5000, '2024-06-27', 'j', 1);
 
 -- --------------------------------------------------------
 
@@ -517,7 +545,6 @@ INSERT INTO `pasien` (`id_pasien`, `kode_pasien`, `nama_pasien`, `jenis_kelamin`
 
 CREATE TABLE `penerimaan_alkes` (
   `id_penerimaan_alkes` int(11) NOT NULL,
-  `id_pengadaan_alkes` int(11) NOT NULL,
   `kode_penerimaan_alkes` varchar(255) NOT NULL,
   `no_faktur` varchar(255) NOT NULL,
   `tanggal_penerimaan_alkes` date NOT NULL,
@@ -529,12 +556,17 @@ CREATE TABLE `penerimaan_alkes` (
 -- Dumping data for table `penerimaan_alkes`
 --
 
-INSERT INTO `penerimaan_alkes` (`id_penerimaan_alkes`, `id_pengadaan_alkes`, `kode_penerimaan_alkes`, `no_faktur`, `tanggal_penerimaan_alkes`, `total_harga`, `id_supplier`) VALUES
-(9, 7, 'PNMS-2023-00001', 'NF2108-456', '2023-08-14', 2500000, 1),
-(10, 8, 'PNMS-2023-00000', 'NF2108-457', '2023-08-14', 2500000, 2),
-(11, 9, 'PNMS-2023-00000', 'NF2108-458', '2023-08-14', 150000, 1),
-(12, 10, 'PNMS-2023-00000', 'NF2108-4511', '2023-08-14', 1600000, 2),
-(13, 11, 'PNMS-2023-00000', 'NF2108-4533', '2023-08-14', 500000, 2);
+INSERT INTO `penerimaan_alkes` (`id_penerimaan_alkes`, `kode_penerimaan_alkes`, `no_faktur`, `tanggal_penerimaan_alkes`, `total_harga`, `id_supplier`) VALUES
+(9, 'PNMS-2023-00001', 'NF2108-456', '2023-08-14', 2500000, 1),
+(10, 'PNMS-2023-00000', 'NF2108-457', '2023-08-14', 2500000, 2),
+(11, 'PNMS-2023-00000', 'NF2108-458', '2023-08-14', 150000, 1),
+(12, 'PNMS-2023-00000', 'NF2108-4511', '2023-08-14', 1600000, 2),
+(13, 'PNMS-2023-00000', 'NF2108-4533', '2023-08-14', 500000, 2),
+(14, 'PNMS-2024-0000', 'NF2108-457', '2024-04-07', 0, 2),
+(15, 'PNMS-2024-0000', 'NF2108-457', '2024-04-07', 0, 2),
+(16, 'PNMS-2024-0001', 'NF2108-456', '2024-04-07', 0, 2),
+(17, 'PNMS-2024-0000', 'NF2108-456', '2024-04-30', 0, 1),
+(18, 'PNMS-2024-0000', 'NF2108-457', '2024-04-30', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -556,23 +588,20 @@ CREATE TABLE `penerimaan_obat` (
 --
 
 INSERT INTO `penerimaan_obat` (`id_penerimaan_obat`, `kode_penerimaan_obat`, `no_faktur`, `tanggal_penerimaan_obat`, `total_harga`, `id_supplier`) VALUES
-(29, 'PNM-2023-0001', 'NF2108-456', '2023-08-14', 1500000, 1),
+(29, 'PNM-2023-0001', 'NF2108-456', '2023-08-14', 1500000, 2),
 (30, 'PNM-2023-0002', 'NF2108-457', '2023-08-14', 1200000, 2),
 (31, 'PNM-2023-0003', 'NF2108-458', '2023-08-14', 900000, 2),
-(32, 'PNM-2023-0004', 'NF2108-4510', '2023-08-14', 1200000, 1),
+(32, 'PNM-2023-0004', 'NF2108-4510', '2023-08-14', 1200000, 2),
 (33, 'PNM-2023-0005', 'NF2108-459', '2023-08-14', 1500000, 1),
-(35, 'PNM-2023-0006', 'RET-2023-0001', '2023-10-30', 0, 1),
-(36, 'PNM-2023-0006', 'RET-2023-0001', '2023-10-30', 0, 1),
-(37, 'PNM-2023-0006', 'RET-2023-0001', '2023-10-30', 0, 1),
-(38, 'PNM-2023-0006', 'RET-2023-0001', '2023-10-30', 0, 1),
-(39, 'PNM-2023-0006', 'RET-2023-0001', '2023-10-30', 0, 1),
 (40, 'PNM-2023-0007', '111', '2023-10-30', 55555, 1),
 (41, 'PNM-2023-0008', 'esferdg', '2023-10-30', 5000, 1),
 (42, 'PNM-2023-0008', 'esferdg', '2023-10-30', 5000, 1),
 (43, 'PNM-2023-0006', 'RET-2023-0001', '2023-10-30', 0, 1),
 (44, 'PNM-2023-0006', 'RET-2023-0001', '2023-10-30', 0, 1),
-(45, 'PNM-2023-0009', 'fsf', '2023-10-30', 0, 1),
-(46, 'PNM-2023-0010', 'NF2108-4510', '2023-11-06', 0, 1);
+(46, 'PNM-2023-0010', 'NF2108-4510', '2023-11-06', 0, 1),
+(47, 'PNM-2024-0011', 'NF2108-458', '2024-04-07', 0, 1),
+(48, 'PNM-2024-0012', 'NF2108-457', '2024-04-29', 0, 1),
+(49, 'PNM-2024-0013', 'NF2108-456', '2024-06-11', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -627,7 +656,8 @@ INSERT INTO `pengadaan_obat` (`id_pengadaan_obat`, `kode`, `jenis_produk`, `tang
 (20, 'PGD-2023-0003', 1, '2023-08-14', 2, 'Diterima'),
 (21, 'PGD-2023-0004', 1, '2023-08-14', 1, 'Diterima'),
 (22, 'PGD-2023-0005', 1, '2023-08-14', 1, 'Diterima'),
-(23, 'PGD-2023-0006', 1, '2023-08-14', 1, 'Diterima');
+(23, 'PGD-2023-0006', 1, '2023-08-14', 1, 'Diterima'),
+(24, 'PGD-2024-0007', 1, '2024-05-28', 1, 'Dipesan');
 
 -- --------------------------------------------------------
 
@@ -653,7 +683,11 @@ INSERT INTO `penjualan_alkes` (`id_penjualan_alkes`, `kode_penjualan_alkes`, `ta
 (3, 'PNJS-2023-0002', '2023-08-14 02:45:11', 440000, 2),
 (4, 'PNJS-2023-0003', '2023-08-14 02:45:33', 12000, 2),
 (5, 'PNJS-2023-0004', '2023-08-14 02:45:43', 172000, 2),
-(6, 'PNJS-2023-0006', '2023-12-02 06:45:06', 550000, 2);
+(6, 'PNJS-2023-0006', '2023-12-02 06:45:06', 550000, 2),
+(7, 'PNJS-2024-0007', '2024-05-15 11:43:49', 605000, 2),
+(8, 'PNJS-2024-0008', '2024-05-15 11:48:23', 220000, 2),
+(9, 'PNJS-2024-0009', '2024-05-15 11:52:59', 165000, 2),
+(10, 'PNJS-2024-0010', '2024-05-29 10:20:13', 43000, 2);
 
 -- --------------------------------------------------------
 
@@ -679,7 +713,32 @@ INSERT INTO `penjualan_obat` (`id_penjualan_obat`, `kode_penjualan_obat`, `tangg
 (4, 'PNJ-2023-0003', '2023-08-14 11:38:18', 35000, 2),
 (5, 'PNJ-2023-0004', '2023-08-14 11:38:27', 48000, 2),
 (6, 'PNJ-2023-0005', '2023-08-14 11:38:35', 30000, 2),
-(7, 'PNJ-2023-0006', '2023-12-02 06:44:44', 60000, 2);
+(7, 'PNJ-2023-0006', '2023-12-02 06:44:44', 60000, 2),
+(8, 'PNJ-2024-0007', '2024-05-12 11:03:31', 2000, 2),
+(9, 'PNJ-2024-0008', '2024-05-12 11:11:38', 2000, 2),
+(10, 'PNJ-2024-0009', '2024-05-12 11:27:46', 2000, 2),
+(11, 'PNJ-2024-0010', '2024-05-12 11:30:00', 4000, 2),
+(12, 'PNJ-2024-0011', '2024-05-12 12:15:32', 2000, 2),
+(13, 'PNJ-2024-0012', '2024-05-12 12:18:22', 24000, 2),
+(14, 'PNJ-2024-0013', '2024-05-12 12:22:17', 12000, 2),
+(15, 'PNJ-2024-0014', '2024-05-12 12:23:02', 6000, 2),
+(16, 'PNJ-2024-0015', '2024-05-12 12:35:25', 12000, 2),
+(17, 'PNJ-2024-0016', '2024-05-12 12:36:00', 12000, 2),
+(18, 'PNJ-2024-0017', '2024-05-12 12:42:59', 6000, 2),
+(19, 'PNJ-2024-0018', '2024-05-12 12:44:01', 6000, 2),
+(20, 'PNJ-2024-0019', '2024-05-12 12:48:59', 6000, 2),
+(21, 'PNJ-2024-0020', '2024-05-14 09:56:55', 4000, 2),
+(22, 'PNJ-2024-0021', '2024-05-15 10:08:25', 64000, 2),
+(23, 'PNJ-2024-0022', '2024-05-15 10:37:53', 44000, 2),
+(24, 'PNJ-2024-0023', '2024-05-15 10:42:35', 42000, 2),
+(25, 'PNJ-2024-0024', '2024-05-15 10:51:44', 44000, 2),
+(26, 'PNJ-2024-0025', '2024-05-15 11:14:53', 36000, 2),
+(27, 'PNJ-2024-0026', '2024-05-29 10:06:53', 2000, 2),
+(28, 'PNJ-2024-0027', '2024-05-29 10:11:17', 4000, 2),
+(29, 'PNJ-2024-0028', '2024-05-29 10:15:37', 2000, 2),
+(30, 'PNJ-2024-0029', '2024-05-29 10:16:37', 6000, 2),
+(31, 'PNJ-2024-0030', '2024-05-29 10:17:04', 2000, 2),
+(32, 'PNJ-2024-0031', '2024-05-29 10:17:36', 6000, 2);
 
 -- --------------------------------------------------------
 
@@ -702,7 +761,10 @@ CREATE TABLE `retur_alkes` (
 
 INSERT INTO `retur_alkes` (`id_retur_alkes`, `kode_retur_alkes`, `id_supplier`, `tanggal_retur`, `no_faktur`, `status`) VALUES
 (6, 'RETS-2023-0001', 1, '2023-11-29', 'NF2108-457', 'Proses'),
-(7, 'RETS-2023-0000', 2, '2023-11-29', 'NF2108-457', 'Proses');
+(7, 'RETS-2023-0000', 2, '2023-11-29', 'NF2108-457', 'Selesai'),
+(8, 'RETS-2024-0000', 2, '2024-04-05', 'NF2108-456', 'Selesai'),
+(9, 'RETS-2024-0001', 2, '2024-04-17', 'NF2108-457', 'Selesai'),
+(10, 'RETS-2024-0000', 1, '2024-04-29', 'NF2108-456', 'Selesai');
 
 -- --------------------------------------------------------
 
@@ -724,7 +786,13 @@ CREATE TABLE `retur_obat` (
 --
 
 INSERT INTO `retur_obat` (`id_retur_obat`, `kode_retur_obat`, `id_supplier`, `tanggal_retur`, `no_faktur`, `status`) VALUES
-(12, 'RET-2023-0004', 1, '2023-11-06', 'NF2108-4510', 'Selesai');
+(12, 'RET-2023-0004', 1, '2023-11-06', 'NF2108-4510', 'Selesai'),
+(14, 'RET-2024-0005', 1, '2024-04-05', 'NF2108-458', 'Selesai'),
+(15, 'RET-2024-0006', 1, '2024-04-29', 'NF2108-457', 'Selesai'),
+(16, 'RET-2024-0007', 1, '2024-04-30', 'NF2108-456', 'Selesai'),
+(17, 'RET-2024-0008', 1, '2024-05-25', 'NF2108-457', 'Proses'),
+(18, 'RET-2024-0009', 2, '2024-05-29', 'NF2108-457', 'Proses'),
+(19, 'RET-2024-0010', 1, '2024-05-29', 'NF2108-457', 'Proses');
 
 -- --------------------------------------------------------
 
@@ -747,11 +815,13 @@ CREATE TABLE `stok_alkes` (
 --
 
 INSERT INTO `stok_alkes` (`id_stok_alkes`, `id_ketersediaan_alkes`, `id_alkes`, `jumlah_stok_alkes`, `satuan`, `harga_jual_alkes`, `tanggal_kadaluarsa_alkes`) VALUES
-(2, 2, 2, 10, 'Box', 55000, '2025-01-01'),
+(2, 2, 2, 0, 'Box', 55000, '2025-01-01'),
 (3, 6, 3, 11, 'Unit', 30000, '2030-01-01'),
 (4, 3, 4, 24, 'Box', 55000, '2025-01-01'),
 (5, 4, 5, 16, 'Pack', 6000, '2025-01-01'),
-(6, 5, 6, 22, 'Botol', 43000, '2025-01-01');
+(6, 5, 6, 21, 'Botol', 43000, '2025-01-01'),
+(7, 2, 2, 0, 'Box', 55000, '2025-01-01'),
+(8, 2, 2, 4, 'Box', 55000, '2025-01-01');
 
 -- --------------------------------------------------------
 
@@ -777,8 +847,17 @@ INSERT INTO `stok_obat` (`id_stok_obat`, `id_ketersediaan_obat`, `id_obat`, `jum
 (2, 18, 7, 220, 'Strip', 6000, '2024-01-01'),
 (3, 19, 8, 238, 'Strip', 5000, '2024-01-01'),
 (4, 21, 9, 236, 'Strip', 5000, '2024-01-01'),
-(5, 22, 10, 234, 'Strip', 6000, '2024-01-01'),
-(6, 20, 11, 476, 'Sachet', 2500, '2024-01-01');
+(5, 22, 10, 207, 'Strip', 6000, '2024-01-01'),
+(6, 20, 11, 476, 'Sachet', 2500, '2024-01-01'),
+(7, 24, 11, 0, 'Sachet', 2000, '2025-10-10'),
+(8, 24, 11, 0, 'Sachet', 2000, '2025-10-10'),
+(9, 24, 11, 0, 'Sachet', 2000, '2025-10-12'),
+(10, 24, 11, 0, 'Sachet', 2000, '2025-10-10'),
+(11, 24, 11, 0, 'Sachet', 2000, '2025-10-10'),
+(12, 24, 11, 10, 'Sachet', 2000, '2025-10-10'),
+(13, 18, 7, 0, 'Strip', 6000, '2025-01-01'),
+(14, 18, 7, 2, 'Strip', 6000, '2025-01-01'),
+(15, 18, 7, 22, 'Strip', 6000, '2025-01-01');
 
 -- --------------------------------------------------------
 
@@ -836,7 +915,7 @@ CREATE TABLE `user` (
   `username` varchar(200) NOT NULL,
   `password` varchar(200) NOT NULL,
   `level` varchar(20) NOT NULL,
-  `id_ttk` int(11) NOT NULL
+  `id_ttk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -844,13 +923,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `level`, `id_ttk`) VALUES
-(16, 'hadi', '76671d4b83f6e6f953ea2dfb75ded921', 'administrator', 0),
-(17, 'jj', 'bf2bc2545a4a5f5683d9ef3ed0d977e0', 'operator', 0),
 (19, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'administrator', 2),
 (20, 'constila', '11d8c28a64490a987612f2332502467f', 'operator', 1),
-(21, 'pimpinan', 'd35ca207bbd950f3db93f29dab24e65e', 'pimpinan', 0),
-(22, 'a', '0cc175b9c0f1b6a831c399e269772661', 'pimpinan', 0),
-(23, 'bb', '21ad0bd836b90d08f4cf640b4c298e7c', 'administrator', 1);
+(24, 'a', '0cc175b9c0f1b6a831c399e269772661', 'pimpinan', NULL);
 
 --
 -- Indexes for dumped tables
@@ -882,8 +957,7 @@ ALTER TABLE `detail_cek_kesehatan`
 --
 ALTER TABLE `detail_penerimaan_alkes`
   ADD PRIMARY KEY (`id_detail_penerimaan_alkes`),
-  ADD KEY `id_penerimaan_alkes` (`id_penerimaan_alkes`,`id_detail_pengadaan_alkes`,`id_alkes`),
-  ADD KEY `id_detail_pengadaan_alkes` (`id_detail_pengadaan_alkes`),
+  ADD KEY `id_penerimaan_alkes` (`id_penerimaan_alkes`,`id_alkes`),
   ADD KEY `id_alkes` (`id_alkes`);
 
 --
@@ -932,13 +1006,17 @@ ALTER TABLE `detail_penjualan_obat`
 -- Indexes for table `detail_retur_alkes`
 --
 ALTER TABLE `detail_retur_alkes`
-  ADD PRIMARY KEY (`id_detail_retur_alkes`);
+  ADD PRIMARY KEY (`id_detail_retur_alkes`),
+  ADD KEY `id_retur_alkes` (`id_retur_alkes`,`id_alkes`),
+  ADD KEY `id_alkes` (`id_alkes`);
 
 --
 -- Indexes for table `detail_retur_obat`
 --
 ALTER TABLE `detail_retur_obat`
-  ADD PRIMARY KEY (`id_detail_retur_obat`);
+  ADD PRIMARY KEY (`id_detail_retur_obat`),
+  ADD KEY `id_retur_obat` (`id_retur_obat`,`id_obat`),
+  ADD KEY `id_obat` (`id_obat`);
 
 --
 -- Indexes for table `kategori_cek_kesehatan`
@@ -979,7 +1057,7 @@ ALTER TABLE `pasien`
 --
 ALTER TABLE `penerimaan_alkes`
   ADD PRIMARY KEY (`id_penerimaan_alkes`),
-  ADD KEY `id_pengadaan_alkes` (`id_pengadaan_alkes`,`id_supplier`),
+  ADD KEY `id_pengadaan_alkes` (`id_supplier`),
   ADD KEY `id_supplier` (`id_supplier`);
 
 --
@@ -1022,13 +1100,15 @@ ALTER TABLE `penjualan_obat`
 -- Indexes for table `retur_alkes`
 --
 ALTER TABLE `retur_alkes`
-  ADD PRIMARY KEY (`id_retur_alkes`);
+  ADD PRIMARY KEY (`id_retur_alkes`),
+  ADD KEY `id_supplier` (`id_supplier`);
 
 --
 -- Indexes for table `retur_obat`
 --
 ALTER TABLE `retur_obat`
-  ADD PRIMARY KEY (`id_retur_obat`);
+  ADD PRIMARY KEY (`id_retur_obat`),
+  ADD KEY `id_supplier` (`id_supplier`);
 
 --
 -- Indexes for table `stok_alkes`
@@ -1073,7 +1153,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `alkes`
 --
 ALTER TABLE `alkes`
-  MODIFY `id_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `cek_kesehatan`
@@ -1091,13 +1171,13 @@ ALTER TABLE `detail_cek_kesehatan`
 -- AUTO_INCREMENT for table `detail_penerimaan_alkes`
 --
 ALTER TABLE `detail_penerimaan_alkes`
-  MODIFY `id_detail_penerimaan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_detail_penerimaan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `detail_penerimaan_obat`
 --
 ALTER TABLE `detail_penerimaan_obat`
-  MODIFY `id_detail_penerimaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_detail_penerimaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `detail_pengadaan_alkes`
@@ -1109,31 +1189,31 @@ ALTER TABLE `detail_pengadaan_alkes`
 -- AUTO_INCREMENT for table `detail_pengadaan_obat`
 --
 ALTER TABLE `detail_pengadaan_obat`
-  MODIFY `id_detail_pengadaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_detail_pengadaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `detail_penjualan_alkes`
 --
 ALTER TABLE `detail_penjualan_alkes`
-  MODIFY `id_detail_penjualan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_detail_penjualan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `detail_penjualan_obat`
 --
 ALTER TABLE `detail_penjualan_obat`
-  MODIFY `id_detail_penjualan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_detail_penjualan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `detail_retur_alkes`
 --
 ALTER TABLE `detail_retur_alkes`
-  MODIFY `id_detail_retur_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_detail_retur_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `detail_retur_obat`
 --
 ALTER TABLE `detail_retur_obat`
-  MODIFY `id_detail_retur_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_detail_retur_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `kategori_cek_kesehatan`
@@ -1145,19 +1225,19 @@ ALTER TABLE `kategori_cek_kesehatan`
 -- AUTO_INCREMENT for table `ketersediaan_alkes`
 --
 ALTER TABLE `ketersediaan_alkes`
-  MODIFY `id_ketersediaan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_ketersediaan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `ketersediaan_obat`
 --
 ALTER TABLE `ketersediaan_obat`
-  MODIFY `id_ketersediaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_ketersediaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `pasien`
@@ -1169,13 +1249,13 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `penerimaan_alkes`
 --
 ALTER TABLE `penerimaan_alkes`
-  MODIFY `id_penerimaan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_penerimaan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `penerimaan_obat`
 --
 ALTER TABLE `penerimaan_obat`
-  MODIFY `id_penerimaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id_penerimaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `pengadaan_alkes`
@@ -1187,43 +1267,43 @@ ALTER TABLE `pengadaan_alkes`
 -- AUTO_INCREMENT for table `pengadaan_obat`
 --
 ALTER TABLE `pengadaan_obat`
-  MODIFY `id_pengadaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_pengadaan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `penjualan_alkes`
 --
 ALTER TABLE `penjualan_alkes`
-  MODIFY `id_penjualan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_penjualan_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `penjualan_obat`
 --
 ALTER TABLE `penjualan_obat`
-  MODIFY `id_penjualan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_penjualan_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `retur_alkes`
 --
 ALTER TABLE `retur_alkes`
-  MODIFY `id_retur_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_retur_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `retur_obat`
 --
 ALTER TABLE `retur_obat`
-  MODIFY `id_retur_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_retur_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `stok_alkes`
 --
 ALTER TABLE `stok_alkes`
-  MODIFY `id_stok_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_stok_alkes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `stok_obat`
 --
 ALTER TABLE `stok_obat`
-  MODIFY `id_stok_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_stok_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -1241,7 +1321,7 @@ ALTER TABLE `ttk`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
@@ -1264,7 +1344,6 @@ ALTER TABLE `detail_cek_kesehatan`
 -- Constraints for table `detail_penerimaan_alkes`
 --
 ALTER TABLE `detail_penerimaan_alkes`
-  ADD CONSTRAINT `detail_penerimaan_alkes_ibfk_1` FOREIGN KEY (`id_detail_pengadaan_alkes`) REFERENCES `detail_pengadaan_alkes` (`id_detail_pengadaan_alkes`),
   ADD CONSTRAINT `detail_penerimaan_alkes_ibfk_2` FOREIGN KEY (`id_alkes`) REFERENCES `alkes` (`id_alkes`);
 
 --
@@ -1284,7 +1363,8 @@ ALTER TABLE `detail_pengadaan_alkes`
 -- Constraints for table `detail_pengadaan_obat`
 --
 ALTER TABLE `detail_pengadaan_obat`
-  ADD CONSTRAINT `detail_pengadaan_obat_ibfk_1` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`);
+  ADD CONSTRAINT `detail_pengadaan_obat_ibfk_1` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`),
+  ADD CONSTRAINT `detail_pengadaan_obat_ibfk_2` FOREIGN KEY (`id_pengadaan_obat`) REFERENCES `pengadaan_obat` (`id_pengadaan_obat`);
 
 --
 -- Constraints for table `detail_penjualan_alkes`
@@ -1301,6 +1381,20 @@ ALTER TABLE `detail_penjualan_obat`
   ADD CONSTRAINT `detail_penjualan_obat_ibfk_1` FOREIGN KEY (`id_penjualan_obat`) REFERENCES `penjualan_obat` (`id_penjualan_obat`),
   ADD CONSTRAINT `detail_penjualan_obat_ibfk_2` FOREIGN KEY (`id_stok_obat`) REFERENCES `stok_obat` (`id_stok_obat`),
   ADD CONSTRAINT `detail_penjualan_obat_ibfk_3` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`);
+
+--
+-- Constraints for table `detail_retur_alkes`
+--
+ALTER TABLE `detail_retur_alkes`
+  ADD CONSTRAINT `detail_retur_alkes_ibfk_1` FOREIGN KEY (`id_retur_alkes`) REFERENCES `retur_alkes` (`id_retur_alkes`),
+  ADD CONSTRAINT `detail_retur_alkes_ibfk_2` FOREIGN KEY (`id_alkes`) REFERENCES `alkes` (`id_alkes`);
+
+--
+-- Constraints for table `detail_retur_obat`
+--
+ALTER TABLE `detail_retur_obat`
+  ADD CONSTRAINT `detail_retur_obat_ibfk_1` FOREIGN KEY (`id_retur_obat`) REFERENCES `retur_obat` (`id_retur_obat`),
+  ADD CONSTRAINT `detail_retur_obat_ibfk_2` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`);
 
 --
 -- Constraints for table `ketersediaan_alkes`
@@ -1320,7 +1414,6 @@ ALTER TABLE `ketersediaan_obat`
 -- Constraints for table `penerimaan_alkes`
 --
 ALTER TABLE `penerimaan_alkes`
-  ADD CONSTRAINT `penerimaan_alkes_ibfk_1` FOREIGN KEY (`id_pengadaan_alkes`) REFERENCES `pengadaan_alkes` (`id_pengadaan_alkes`),
   ADD CONSTRAINT `penerimaan_alkes_ibfk_2` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`);
 
 --
@@ -1348,6 +1441,18 @@ ALTER TABLE `penjualan_obat`
   ADD CONSTRAINT `penjualan_obat_ibfk_1` FOREIGN KEY (`id_ttk`) REFERENCES `ttk` (`id_ttk`);
 
 --
+-- Constraints for table `retur_alkes`
+--
+ALTER TABLE `retur_alkes`
+  ADD CONSTRAINT `retur_alkes_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`);
+
+--
+-- Constraints for table `retur_obat`
+--
+ALTER TABLE `retur_obat`
+  ADD CONSTRAINT `retur_obat_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`);
+
+--
 -- Constraints for table `stok_alkes`
 --
 ALTER TABLE `stok_alkes`
@@ -1358,6 +1463,12 @@ ALTER TABLE `stok_alkes`
 --
 ALTER TABLE `stok_obat`
   ADD CONSTRAINT `stok_obat_ibfk_1` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`);
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_ttk`) REFERENCES `ttk` (`id_ttk`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

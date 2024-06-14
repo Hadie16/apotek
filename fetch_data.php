@@ -5,12 +5,12 @@ error_reporting(E_ALL);
 
 // Assuming you have already established a database connection
 // $con = mysqli_connect("localhost", "username", "password", "database_name");
-include '../connection.php';
+include 'connection.php';
 
-$id_alkes = $_POST['id_alkes_var'];
+$id_obat = $_POST['id_obat'];
 
-// Query to retrieve data from table_1 based on id_alkes
-$query = mysqli_query($con, "SELECT tanggal_kadaluarsa_alkes, id_alkes,sum(jumlah_stok_alkes) as sum_jumlah_stok_alkes,satuan,harga_jual_alkes FROM stok_alkes where id_alkes = '$id_alkes' and tanggal_kadaluarsa_alkes > CURDATE() and jumlah_stok_alkes>0");
+// Query to retrieve data from table_1 based on id_obat
+$query = mysqli_query($con, "SELECT kode_obat, jenis_obat FROM obat WHERE id_obat = '$id_obat'");
 
 $response = array();
 
@@ -18,18 +18,8 @@ if ($query) {
   if (mysqli_num_rows($query) > 0) {
     $row = mysqli_fetch_assoc($query);
     $response['status'] = 'success';
-    $response['data']['id_alkes'] = $row['id_alkes'];
-  
-    $response['data']['jumlah_stok_alkes'] = $row['sum_jumlah_stok_alkes'];
-    $response['data']['satuan'] = $row['satuan'];
-
-
-    $response['data']['harga_jual_alkes'] = $row['harga_jual_alkes'];
-    
-
-
-
-
+    $response['data']['kode_obat'] = $row['kode_obat'];
+    $response['data']['jenis_obat'] = $row['jenis_obat'];
   } else {
     $response['status'] = 'error';
   }

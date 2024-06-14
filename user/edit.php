@@ -54,7 +54,7 @@ if (isset($_POST['submitPassword'])) {
   <div class="col-md-10">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">User</h6>
+        <h6 class="m-0 font-weight-bold text-info">User</h6>
 
       </div>
       <div class="card-body">
@@ -62,12 +62,12 @@ if (isset($_POST['submitPassword'])) {
           <div class="row mb-3">
             <label for="level" class="col-sm-2 col-form-label">Level</label>
             <div class="col-sm-10">
-              <select name="level" id="level" class="form-control" name="level" required>
+              <select name="level" id="level" class="form-control" name="level" required <?php if ($l == 'pimpinan') echo 'disabled'?>>
                 <option value="-" disabled>- Pilih -</option>
-                <option value="administrator" <?php if ($l == 'administrator') echo 'selected'; ?>>Administrator
-                </option>
-                <option value="operator" <?php if ($l == 'operator') echo 'selected'; ?>>Operator</option>
-              </select>
+                <option value="administrator" <?php if ($l == 'administrator') echo 'selected'; ?>>Administrator</option>
+    <option value="operator" <?php if ($l == 'operator') echo 'selected'; ?>>Operator</option>
+    <option value="pimpinan" <?php if ($l == 'pimpinan') echo 'selected'; ?><?php if ($l != 'pimpinan') echo 'disabled'; ?>>Pimpinan</option>
+</select>
             </div>
             <div class="col offset-sm-2">
               <button type="submit" class="btn btn-sm btn-primary mt-2" name="submitLevel"><i class="fas fa-save"></i>
@@ -90,7 +90,8 @@ if (isset($_POST['submitPassword'])) {
           </div>
           <hr>
         </form>
-
+        
+        <div style="<?php echo ($l == 'pimpinan') ? 'display: none;' : ''; ?>">
         <form method="post">
           <div class="row mb-3">
             <label for="ttk" class="col-sm-2 col-form-label">TTK</label>
@@ -121,6 +122,8 @@ if (isset($_POST['submitPassword'])) {
           </div>
           <hr>
         </form>
+
+        </div>
 
 
 

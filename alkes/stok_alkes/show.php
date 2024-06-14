@@ -30,7 +30,7 @@
     
 </div>
 <div class="col-1" style="display: none;" id="myDivStok4">
-<label for="endDateStok" class="col-form-label">To</label>
+<label for="endDateSO" class="col-form-label">To</label>
 </div> 
       <div class="col-5" style="display: none;" id="myDivStok2">
 <input type="date" id="endDateSO" name="max" class="form-control">
@@ -86,7 +86,11 @@
 
     // $query = mysqli_query($con, 'SELECT * stok_alkes group ')
 
-    $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_stok_alkes) as jumlah_stok_alkes,(SELECT tanggal_kadaluarsa_alkes FROM stok_alkes dso WHERE dso.id_alkes = a.id_alkes AND dso.jumlah_stok_alkes > 0 AND dso.tanggal_kadaluarsa_alkes >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_alkes ASC LIMIT 1) AS tanggal_kadaluarsa_alkesss,b.nama_alkes alkess FROM stok_alkes a join alkes b on a.id_alkes=b.id_alkes group by id_alkes ');
+    $query = mysqli_query($con, 'SELECT a.*, sum(a.jumlah_stok_alkes) as jumlah_stok_alkes,
+
+      (SELECT sum(jumlah_stok_alkes) FROM stok_alkes dsos WHERE dsos.id_alkes = a.id_alkes AND dsos.jumlah_stok_alkes > 0 AND dsos.tanggal_kadaluarsa_alkes >= CURDATE() ORDER BY dsos.tanggal_kadaluarsa_alkes ASC LIMIT 1) AS jumlah_stok_alkess,
+
+    (SELECT tanggal_kadaluarsa_alkes FROM stok_alkes dso WHERE dso.id_alkes = a.id_alkes AND dso.jumlah_stok_alkes > 0 AND dso.tanggal_kadaluarsa_alkes >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_alkes ASC LIMIT 1) AS tanggal_kadaluarsa_alkesss,b.nama_alkes alkess, MAX(a.tanggal_kadaluarsa_alkes) as max FROM stok_alkes a join alkes b on a.id_alkes=b.id_alkes where tanggal_kadaluarsa_alkes >= CURDATE() group by id_alkes ');
 
             
 //   if ($c) {
@@ -122,10 +126,15 @@
         
               while ($data = mysqli_fetch_array($query)) { 
 
-                if($expirationDate = $data['tanggal_kadaluarsa_alkesss']==""){
-                  $expirationDate='2023-01-01';}else{
+                if(($expirationDate = $data['tanggal_kadaluarsa_alkesss'])==""){
+                  $expirationDate=$data['max'];}else{
                     $expirationDate= $data['tanggal_kadaluarsa_alkesss'];
                   }   
+
+                  if($d = $data['jumlah_stok_alkes']==0 or ""){
+                    $d='0';}else{
+                      $d= $data['jumlah_stok_alkes'];
+                    }   
                 
                 $id = $data['id_stok_alkes'];
 
@@ -136,14 +145,16 @@
               
           <td> <?php echo $no++?></td>
                 <td ><?php echo $data['alkess']; ?></td>
-                <td><?php echo $data['jumlah_stok_alkes']; ?></td>
+                <!-- <td><?php echo $data['jumlah_stok_alkes']; ?></td> -->
+                <td><?php echo $d; ?></td>
+
                 <td><?php echo $data['satuan']; ?></td>
 
              
                 <td><?php echo number_format($data['harga_jual_alkes'], 0, '.', '.'); ?></td>
 
                 <td><?php if($data['tanggal_kadaluarsa_alkesss']==""){
-echo '2023-01-01';}else{
+echo $data['max'];}else{
   echo $data['tanggal_kadaluarsa_alkesss'];
 } ?></td>
                

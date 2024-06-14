@@ -1,10 +1,30 @@
 <?php
 include '../template/headerPrint.php';
+include '../connection.php';
+
 $startDate = $_GET['startDate']; // Get the start date from the URL
 $endDate = $_GET['endDate'];     // Get the end date from the URL
+// $endDate = $con->query("SELECT MAX(tanggal_kadaluarsa_obat) AS max_date FROM ketersediaan_obat")->fetch_assoc()["max_date"];
+
+if(empty($endDate)){
+
+  $currentDateTime = date('Y-m-d');
+
+  // $endDate = $currentDateTime;
+  $endDate = $con->query("SELECT MAX(tanggal_kadaluarsa_obat) AS max_date FROM ketersediaan_obat")->fetch_assoc()["max_date"];
+}
+
+if($startDate == $endDate){
+  $showDate = $startDate;
+}else{
+  $showDate = "$startDate Sampai $endDate";
+
+}
+
+
 ?>
 <br>
-<h2 align="center">Laporan Data Ketersediaan Obat</h2>
+<h2 align="center">Laporan Data Ketersediaan Obat ( <?php echo $showDate ?>  )</h2>
 <div class="table-responsive mt-3">
   <table border="1" width="95%" align="center" cellpadding="8">
     <thead>
@@ -31,7 +51,7 @@ $endDate = $_GET['endDate'];     // Get the end date from the URL
 
 // $keyword = $_GET['keyword'];
 
-      include '../connection.php';
+      // include '../connection.php';
       // $query = mysqli_query($con, 'SELECT a.*,b.nama_obat obats FROM ketersediaan_obat a join obat b on a.id_obat=b.id_obat');
       $query = mysqli_query($con, "SELECT a.*, sum(a.jumlah_ketersediaan_obat) as jumlah_ketersediaan_obat,(SELECT tanggal_kadaluarsa_obat FROM ketersediaan_obat dso WHERE dso.id_obat = a.id_obat AND dso.jumlah_ketersediaan_obat > 0 AND dso.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_obat ASC LIMIT 1) AS tanggal_kadaluarsa_obatss,b.nama_obat obats FROM ketersediaan_obat a join obat b on a.id_obat=b.id_obat where DATE(tanggal_kadaluarsa_obat) BETWEEN '$startDate' AND '$endDate' group by id_obat ");
                            

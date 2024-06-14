@@ -70,7 +70,7 @@ if ($update) {
           <div class="row mb-3">
             <label for="id_obat" class="col-sm-2 col-form-label">Nama Obat</label>
             <div class="col-sm-10">
-            <select name="id_obat" class="form-control" readonly>
+            <select name="id_obatShow" class="form-control" disabled>
         <option value="">- Pilih -</option>
         <?php
        $query = mysqli_query($con, "SELECT id_obat, nama_obat FROM obat");
@@ -91,6 +91,7 @@ if ($update) {
           </div>
 
           <div class="row mb-3">
+          <input type="hidden" class="form-control" id="" name="id_obat" value="<?php echo $id_obat?>" required>
             <label for="jumlah_ketersediaan_obat" class="col-sm-2 col-form-label">Jumlah</label>
             <div class="col-sm-10">
               <input type="number" class="form-control" id="jumlah_ketersediaan_obat" name="jumlah_ketersediaan_obat" value="<?php echo $jumlah?>" required>

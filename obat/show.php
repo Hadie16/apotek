@@ -40,6 +40,8 @@
             <thead class="bg-secondary text-white" >
               <!-- <thead> -->
               <tr align="center">
+              <th >No</th>
+
                 <th >Kode</th>
                 <th >Gambar</th>
                 <th > Nama</th>
@@ -55,10 +57,13 @@
             <tbody>
               <?php
               include '../connection.php';
+              $no = 1;
               $query = mysqli_query($con, 'SELECT * FROM obat');
               while ($data = mysqli_fetch_array($query)) { ?>
 
               <tr>
+              <td><?php echo $no++ ?></td>
+
                 <td><?php echo $data['kode_obat']; ?></td>
                 <td ><img src="../uploads/<?php echo $data['gambar_obat']; ?>" width="200px" alt="Obat Image"></td>
                 <td><?php echo $data['nama_obat']; ?></td>

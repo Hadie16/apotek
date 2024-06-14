@@ -12,7 +12,7 @@ $id = $_GET['id'];
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">Detail Stok alkes</h6>
+        <h6 class="m-0 font-weight-bold text-info">Detail Stok Alkes</h6>
         <?php
         // $query = mysqli_query($con,  "SELECT a.*,b.kode_penjualan_alkes kode,b.tanggal_penjualan_alkes tanggal FROM detail_penjualan_alkes a join penjualan_alkes b on a.id_penjualan_alkes=b.id_penjualan_alkes  WHERE a.id_penjualan_alkes=$id ");
            $query = mysqli_query($con,  "SELECT * FROM stok_alkes WHERE id_alkes=$id limit 1");
@@ -62,7 +62,7 @@ $id = $_GET['id'];
               <tr align="center">
               <th >No</th>
 
-                <th >Nama alkes</th>
+                <th >Nama Alkes</th>
                 <th >Jumlah</th>
                 <th >Satuan</th>
 
@@ -87,6 +87,8 @@ $id = $_GET['id'];
           //     die('invalid Query : ' . mysqli_error($con));
           // }
 $no=1;
+$idsALK=1;
+$idssALK=1;
               while ($data = mysqli_fetch_array($query)) { ?>
 
               <tr>
@@ -104,9 +106,35 @@ $no=1;
 
             
                 <td>
-                <a class="btn text-info" href="?page=stok_alkes-edit&id=<?php echo $data['id_stok_alkes']; ?>"><i
+                <a id="alk<?php echo $idsALK++ ?>" class="btn text-info" href="?page=stok_alkes-edit&id=<?php echo $data['id_stok_alkes']; ?>"><i
                       class="fas fa-edit"></i>
                   </a>
+                  <script>
+
+  <?php $cd = date("Y-m-d");?>
+
+
+
+    // Your condition check, for example:
+    var condition = Date.parse('<?php echo $data['tanggal_kadaluarsa_obat'];?>'); // Change this to your condition
+
+    // Get the link element
+    var editLinks = document.getElementById('alk<?php echo $idssALK++ ?>');
+
+    // Check the condition
+    if (condition < Date.parse('<?php echo $cd ?>')) {
+
+      // editLinksArray.forEach(function(link) {
+        // Disable the link
+        editLinks.removeAttribute('href'); // Remove the href attribute
+        editLinks.style.pointerEvents = 'none'; // Disable pointer events
+        // editLinks.style.color = '#999'; // Optionally change editLinks color to indicate it's disabled
+        editLinks.classList.remove('text-info'); // Add a class to change color
+        editLinks.classList.add('text-secondary'); // Add a class to change color
+      // });
+    }
+
+</script>
                   <a class="btn text-danger" href="?page=stok_alkes-detail_delete&id=<?php echo $data['id_stok_alkes']; ?>"
                     onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="fas fa-trash"></i>
                   </a>

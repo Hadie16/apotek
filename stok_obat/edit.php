@@ -103,7 +103,7 @@ WHERE id_stok_obat = '$id'");
         <option value="">- Pilih -</option>
         <?php
           $query = mysqli_query($con, "SELECT t1.nama_obat,t2.id_ketersediaan_obat FROM obat t1
-          JOIN ketersediaan_obat t2 ON t1.id_obat = t2.id_obat where jumlah_ketersediaan_obat > 0 and tanggal_kadaluarsa_obat > CURDATE() order by t2.id_obat");
+          JOIN ketersediaan_obat t2 ON t1.id_obat = t2.id_obat where jumlah_ketersediaan_obat > 0 and tanggal_kadaluarsa_obat > CURDATE() and id_ketersediaan_obat = $id_ketersediaan_obat order by t2.id_obat");
         // $query = mysqli_query($con, "SELECT id_obat, nama_obat FROM obat");
         while ($row = mysqli_fetch_assoc($query)) {
             // $id_obat = $row['id_obat'];
@@ -188,12 +188,13 @@ WHERE id_stok_obat = '$id'");
             <div class="col offset-sm-2">
               <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-save"></i>
                 Simpan</button>
-              <a href="?page=stok_obat-show" class="btn btn-danger"><i class="fas fa-chevron-left"></i>
+              <a href="?page=stok_obat-detail&id=<?php echo $id_obat ?>" class="btn btn-danger"><i class="fas fa-chevron-left"></i>
                 Kembali</a>
             </div>
 
           </div>
         </form>
+
       </div>
     </div>
   </div>

@@ -1,11 +1,29 @@
 <?php
 include '../template/headerPrint.php';
+include '../connection.php';
 
 $startDate = $_GET['startDate']; // Get the start date from the URL
 $endDate = $_GET['endDate'];     // Get the end date from the URL
+// $endDate = $con->query("SELECT MAX(tanggal_kadaluarsa_obat) AS max_date FROM stok_obat")->fetch_assoc()["max_date"];
+
+if(empty($endDate)){
+
+  $currentDateTime = date('Y-m-d');
+
+  // $endDate = $currentDateTime;
+$endDate = $con->query("SELECT MAX(tanggal_kadaluarsa_obat) AS max_date FROM stok_obat")->fetch_assoc()["max_date"];
+
+}
+if($startDate == $endDate){
+  $showDate = $startDate;
+}else{
+  $showDate = "$startDate Sampai $endDate";
+
+}
+
 ?>
 <br>
-<h2 align="center">Laporan Data Stok Obat </h2>
+<h2 align="center">Laporan Data Stok Obat ( <?php echo $showDate ?>  )</h2>
 <div class="table-responsive mt-3">
   <table border="1" width="95%" align="center" cellpadding="8">
     <thead>
@@ -34,9 +52,9 @@ $endDate = $_GET['endDate'];     // Get the end date from the URL
 
 
 
-      include '../connection.php';
+      // include '../connection.php';
       // $query = mysqli_query($con, 'SELECT a.*,sum(a.jumlah_stok_obat),b.nama_obat obats from stok_obat a join obat b on a.id_obat=b.id_obat group by a.id_obat');
-
+   
       $query = mysqli_query($con, "
       SELECT a.*, sum(a.jumlah_stok_obat) as jumlah_stok_obat,
         (SELECT tanggal_kadaluarsa_obat FROM stok_obat dso WHERE dso.id_obat = a.id_obat AND dso.jumlah_stok_obat > 0 AND dso.tanggal_kadaluarsa_obat >= CURDATE() ORDER BY dso.tanggal_kadaluarsa_obat ASC LIMIT 1) AS tanggal_kadaluarsa_obatss,

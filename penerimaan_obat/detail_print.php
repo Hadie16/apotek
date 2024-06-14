@@ -23,7 +23,7 @@ $no = 1;
       
       }?>
 <br>
-<h2 align="center">Laporan Data Penerimaan Obat</h2>
+<h2 align="center">Laporan Data Detail Penerimaan Obat</h2>
 <!-- <h2 align="center">Data Pemeriksaan</h2> -->
 
 
@@ -68,8 +68,8 @@ $no = 1;
       include '../connection.php';
       $query = mysqli_query($con,"SELECT a.*, c.nama_obat
           FROM detail_penerimaan_obat a
-          JOIN detail_pengadaan_obat b ON a.id_detail_pengadaan_obat = b.id_detail_pengadaan_obat
-          JOIN obat c ON b.id_obat = c.id_obat where id_penerimaan_obat=$id");
+          -- JOIN detail_pengadaan_obat b ON a.id_detail_pengadaan_obat = b.id_detail_pengadaan_obat
+          JOIN obat c ON a.id_obat = c.id_obat where id_penerimaan_obat=$id");
                            
 $no = 1;
     

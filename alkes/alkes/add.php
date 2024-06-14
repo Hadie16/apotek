@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
           // Move the uploaded file to the target folder
           if (move_uploaded_file($file['tmp_name'], $targetPath)) {
               // Insert the image and other information into the database
-              $insert = mysqli_query($con, "INSERT INTO alkes (kode_alkes, nama_alkes,gambar_alkes) VALUES ('$kode_alkes',  '$nama_alkes','$filename')");
+              $insert = mysqli_query($con, "INSERT INTO alkes (kode_alkes,gambar_alkes, nama_alkes) VALUES ('$kode_alkes','$filename',  '$nama_alkes')");
               
               if ($insert) {
                   echo "Data inserted successfully.";
@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
 // }
 
   // if ($insert) {
-  //   echo "<script>window.location.href = '?page=alkes-show';</script>";
+    // echo "<script>window.location.href = '?page=alkes-show';</script>";
   // }
 }
 ?>
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
   <div class="col">
     <div class="card shadow mb-4">
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-info">alkes</h6>
+        <h6 class="m-0 font-weight-bold text-info">Alkes</h6>
       </div>
 
 
@@ -93,7 +93,12 @@ if (isset($_POST['submit'])) {
             </div>
           </div>
 
-
+        <div class="row mb-3">
+  <label for="gambar_alkes" class="col-sm-2 col-form-label">Gambar</label>
+  <div class="col-sm-10">
+    <input type="file" class="form-control" id="gambar_alkes" name="gambar_alkes" accept="image/*" required>
+  </div>
+</div>
 
 
           <div class="row mb-3">
@@ -104,12 +109,7 @@ if (isset($_POST['submit'])) {
             </div>
           </div>
 
-          <div class="row mb-3">
-  <label for="gambar_alkes" class="col-sm-2 col-form-label">Gambar</label>
-  <div class="col-sm-10">
-    <input type="file" class="form-control" id="gambar_alkes" name="gambar_alkes" accept="image/*" required>
-  </div>
-</div>
+  
 
           
           <hr>

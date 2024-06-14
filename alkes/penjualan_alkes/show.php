@@ -22,8 +22,10 @@
           FPDF</a> -->
         <!-- <a href="../penjualan_alkes/print.php" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print"></i> -->
         <!-- <button  class="btn btn-sm btn-warning"id="print_keyPobats"><i class="fas fa-print"></i>Cetak</button> -->
-        <a href="../alkes/penjualan_alkes/print.php" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print"></i>
-          Cetak</a>
+        <button  class="btn btn-sm btn-warning"id="print_keyPobats"><i class="fas fa-print"></i>Cetak</button>
+
+        <!-- <a href="../alkes/penjualan_alkes/print.php" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-print"></i>
+          Cetak</a> -->
           <button onclick="toggleDiv('myDiv1', 'myDiv2','myDiv3','myDiv4','myDivBtn')" class="btn btn-sm" style="background:skyblue;color:white"  id="myDivBtn" ><i class="fas fa-filter"></i></button>
           <!-- <button onclick="toggleDiv()" class="btn btn-sm btn-warning" target="_blank"><i class="fas fa-filter"></i></button> -->
           <!-- <div class="row mb-3"> -->
@@ -55,7 +57,7 @@
         <hr>
 
         <div class="table-responsive mt-3" >
-          <table class="table table-bordered table-hover" id="viewPenjualanObat" style="width: 100%;">
+          <table class="table table-bordered table-hover" id="viewPenjualanAlkes" style="width: 100%;">
             <thead class="bg-secondary text-white" >
               <!-- <thead> -->
               <tr align="center">

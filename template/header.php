@@ -57,18 +57,6 @@
 }
 
 
-/* .transition-effect {
-  transition: opacity 2.3s ease;
-} */
-
-
-/* .dataTables_wrapper {
-  transition: height 0.3s ease;
-}
-
-.dataTables_scrollHeadInner table {
-  transition: opacity 0.3s ease;
-} */
 
 </style>
 
@@ -77,25 +65,6 @@
   <link rel="stylesheet" href="../vendor/datatables/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../css/select2/dist/css/select2.min.css">
   <link rel="stylesheet" href="../css/select2/dist/css/select2-bootstrap4.min.css">
-
-
-  <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <style>
-  /* Dark theme styles */
-  .ui-datepicker {
-    background-color: #333;
-    color: #fff;
-  }
-  .ui-datepicker-header {
-    background-color: #555;
-    color: #fff;
-  }
-  .ui-datepicker-calendar .ui-state-default {
-    background-color: #555;
-    color: #fff;
-  }
-  /* Add more custom styles as needed */
-</style> -->
 
 
 
@@ -194,12 +163,7 @@
 
 
   <style>
-/* added code 19-07-23 */
-/* .sidebar-scroll {
-  height: 100%;
-  overflow-y: auto;
-} */
-/* end added code */
+
  
 /* sidebar scroll */
     .sidebar-scroll{
@@ -224,24 +188,6 @@
 }
 
 
-/* .sidebar-scroll::-webkit-scrollbar { */
-  /* width: 8px; */
-   /* Adjust the width of the scrollbar */
-/* } */
-/* .sidebar-scroll::-webkit-scrollbar-thumb { */
-  /* background-color: #888;  */
-  /* Set the color of the scrollbar thumb */
-  /* border-radius: 4px;  */
-  /* Set the border radius of the thumb */
-/* }
-::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-} */
-
-/* .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Set the color of the thumb on hover */
-/* }  */
-
   </style>
           <style>
   /* Custom CSS to make checkbox input bigger */
@@ -250,102 +196,9 @@
     height: 20px;
   }
 </style>
-<!-- button test effect -->
-<style>
-/* hr {
-  position: relative;
-  border: none;
-  border-top: 1px solid #000;
-  margin: 20px 0;
-}
 
-.line-text {
-  background-color: #fff;
-  padding: 0 10px;
-} */
 
-</style>
 
-<!-- load animation -->
-<!-- <style>
-  #loader{
-    display: none; 
-    border: 16px solid #f3f3f3; /* Light gray border */
-  border-top: 16px solid #3498db; /* Blue border on top */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite; /* Animation for rotation */
-  margin: 0 auto; /* Center the loader */
-  }
-  .loader {
-  
-  border: 16px solid #f3f3f3; /* Light gray border */
-  border-top: 16px solid #3498db; /* Blue border on top */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite; /* Animation for rotation */
-  margin: 0 auto; /* Center the loader */
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-</style> -->
-
-<!-- darkmode toggle -->
-<!-- <style>
-  body {
-  background-color: #f4f4f4;
-  color: #333;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.container {
-  text-align: center;
-  margin-top: 20%;
-}
-
-/* Toggle switch styles */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input {
-  display: none;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-</style> -->
 
 
 <style>

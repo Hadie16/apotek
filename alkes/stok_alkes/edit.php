@@ -103,7 +103,7 @@ WHERE id_stok_alkes = '$id'");
         <option value="">- Pilih -</option>
         <?php
           $query = mysqli_query($con, "SELECT t1.nama_alkes,t2.id_ketersediaan_alkes FROM alkes t1
-          JOIN ketersediaan_alkes t2 ON t1.id_alkes = t2.id_alkes where jumlah_ketersediaan_alkes > 0 and tanggal_kadaluarsa_alkes > CURDATE() order by t2.id_alkes");
+          JOIN ketersediaan_alkes t2 ON t1.id_alkes = t2.id_alkes where jumlah_ketersediaan_alkes > 0 and tanggal_kadaluarsa_alkes > CURDATE() and id_ketersediaan_alkes = $id_ketersediaan_alkes order by t2.id_alkes");
         // $query = mysqli_query($con, "SELECT id_alkes, nama_alkes FROM alkes");
         while ($row = mysqli_fetch_assoc($query)) {
             // $id_alkes = $row['id_alkes'];
@@ -188,7 +188,7 @@ WHERE id_stok_alkes = '$id'");
             <div class="col offset-sm-2">
               <button type="submit" class="btn btn-primary" name="submit"><i class="fas fa-save"></i>
                 Simpan</button>
-              <a href="?page=stok_alkes-show" class="btn btn-danger"><i class="fas fa-chevron-left"></i>
+              <a href="?page=stok_alkes-detail&id=<?php echo $id_alkes ?>"  class="btn btn-danger"><i class="fas fa-chevron-left"></i>
                 Kembali</a>
             </div>
 

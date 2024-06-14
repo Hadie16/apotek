@@ -89,14 +89,18 @@ $(document).on('change', '.select-optionALK', function() {
   $.ajax({
     url: '../alkes/penerimaan_alkes/fetch_penerimaan_ALK.php',
     type: 'POST',
-    data: { id_detail_pengadaan_alkes: selectedOption },
+    data: { id_detail_fetch_alkes: selectedOption },
     dataType: 'json',
     success: function(response) {
       if (response.status === 'success') {
         // Update the fields with retrieved data
+        currentRow.find('#result_id_alkes').val(response.data.id_alkes);
+
         currentRow.find('.id_alkes').val(response.data.id_alkes);
         currentRow.find('.jumlah').val(response.data.jumlah);
         currentRow.find('.satuan').val(response.data.satuan);
+        currentRow.find('.valuese').val(response.data.valuese);
+
         // currentRow.find('.jumlah_stok_sisa').val(response.data.jumlah_stok_alkes);
 // response.data.satuan)
   //  $('#myTablePNMS').on('input', '.jumlah','.satuan', function() 

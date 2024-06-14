@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
   VALUES('$kode_penjualan_alkes','$tanggal_penjualan_alkes','$total_harga','$id_ttk')");
 
 if ($insert) {
-  echo "<p>query berhasil<p/>";
+  // echo "<p>query berhasil<p/>";
 } else {
   die('invalid Query : ' . mysqli_error($con));
 }
@@ -71,8 +71,8 @@ for ($i = 0; $i < count($id_stok_alkes_array); $i++) {
   // Execute the insert query
   $result = mysqli_query($con, $insert_query);
 
-
-$update = mysqli_query($con, "UPDATE stok_alkes SET jumlah_stok_alkes='$jumlah_stok_sisa' WHERE id_stok_alkes=$id_stok_alkes");
+  // manual hitung stok alkes tanpa loop
+// $update = mysqli_query($con, "UPDATE stok_alkes SET jumlah_stok_alkes='$jumlah_stok_sisa' WHERE id_stok_alkes=$id_stok_alkes");
 
 
 //log alkes keluar
@@ -85,7 +85,7 @@ $update = mysqli_query($con, "UPDATE stok_alkes SET jumlah_stok_alkes='$jumlah_s
 // }
 
 
-$dataQuery = "SELECT * FROM stok_alkes WHERE id_stok_alkes = $id_stok_alkes AND jumlah_stok_alkes > 0 GROUP BY tanggal_kadaluarsa_alkes";
+$dataQuery = "SELECT * FROM stok_alkes WHERE id_alkes = $id_alkes AND jumlah_stok_alkes > 0 AND tanggal_kadaluarsa_alkes > CURDATE() ORDER BY tanggal_kadaluarsa_alkes";
 $dataResult = mysqli_query($con, $dataQuery);
 
 // Iterate over the data
@@ -111,8 +111,9 @@ while ($rowData = mysqli_fetch_assoc($dataResult)) {
 }
 ?>
 <script>
-   window.open('../penjualan_alkes/nota.php?id=<?php echo $firstTableID ?>','_blank');
+   window.open('../alkes/penjualan_alkes/nota.php?id=<?php echo $firstTableID ?>','_blank');
   //  window.location.href = '../penjualan_alkes/nota.php?id=<?php echo $firstTableID ?>'
+  window.location.href = '?page=penjualan_alkes-show';
 
 </script>
 
@@ -197,16 +198,16 @@ while ($rowData = mysqli_fetch_assoc($dataResult)) {
                           <select name="id_stok_alkes[]" id="id_stok_alkes_select" class="form-control select-optionPNJALK" required>
         <option value="">- Pilih -</option>
         <?php
-          $query = mysqli_query($con, "SELECT t1.nama_alkes,t2.id_stok_alkes FROM alkes t1
-          JOIN stok_alkes t2 ON t1.id_alkes = t2.id_alkes where t2.tanggal_kadaluarsa_alkes > CURDATE() and t2.jumlah_stok_alkes>0");
+          $query = mysqli_query($con, "SELECT t1.id_alkes, t1.nama_alkes,t2.id_stok_alkes FROM alkes t1
+          JOIN stok_alkes t2 ON t1.id_alkes = t2.id_alkes where t2.tanggal_kadaluarsa_alkes > CURDATE() and t2.jumlah_stok_alkes>0 group by nama_alkes");
         // $query = mysqli_query($con, "SELECT id_alkes, nama_alkes FROM alkes");
         while ($row = mysqli_fetch_assoc($query)) {
             // $id_alkes1 = $row['id_alkes'];
-            $id_stok_alkes2 = $row['id_stok_alkes'];
+            $id_alkes2 = $row['id_alkes'];
 
             $nama_alkes = $row['nama_alkes'];
             // $idd = 2;
-            echo '<option value="' . $id_stok_alkes2 . '" >' . $nama_alkes . '</option>';
+            echo '<option value="' . $id_alkes2 . '" >' . $nama_alkes . '</option>';
         }
         ?>
     </select>
@@ -249,6 +250,8 @@ while ($rowData = mysqli_fetch_assoc($dataResult)) {
     var desiredQuantity = parseInt($(input).val());
     var stock = parseInt($('.stock-left').val());
 
+      // Remove any non-numeric characters
+      input.value = input.value.replace(/\D/g, '');
     // var stockDisplay = $(input).siblings('.stock-display');
     // var stock = parseInt(stockDisplay.text().split(":")[1]);
 

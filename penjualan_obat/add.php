@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
   VALUES('$kode_penjualan_obat','$tanggal_penjualan_obat','$total_harga','$id_ttk')");
 
 if ($insert) {
-  echo "<p>query berhasil<p/>";
+  // echo "<p>query berhasil<p/>";
 } else {
   die('invalid Query : ' . mysqli_error($con));
 }
@@ -72,7 +72,8 @@ for ($i = 0; $i < count($id_stok_obat_array); $i++) {
   $result = mysqli_query($con, $insert_query);
 
 
-$update = mysqli_query($con, "UPDATE stok_obat SET jumlah_stok_obat='$jumlah_stok_sisa' WHERE id_stok_obat=$id_stok_obat");
+  // manual hitung stok obat tanpa loop
+// $update = mysqli_query($con, "UPDATE stok_obat SET jumlah_stok_obat='$jumlah_stok_sisa' WHERE id_stok_obat=$id_stok_obat");
 
 
 //log obat keluar
@@ -85,7 +86,7 @@ $update = mysqli_query($con, "UPDATE stok_obat SET jumlah_stok_obat='$jumlah_sto
 // }
 
 
-$dataQuery = "SELECT * FROM stok_obat WHERE id_stok_obat = $id_stok_obat AND jumlah_stok_obat > 0 GROUP BY tanggal_kadaluarsa_obat";
+$dataQuery = "SELECT * FROM stok_obat WHERE id_obat = $id_obat AND jumlah_stok_obat > 0 AND tanggal_kadaluarsa_obat > CURDATE() ORDER BY tanggal_kadaluarsa_obat";
 $dataResult = mysqli_query($con, $dataQuery);
 
 // Iterate over the data
@@ -99,20 +100,26 @@ while ($rowData = mysqli_fetch_assoc($dataResult)) {
   $newStocks = $availableStocks - $deductQuantity;
   $updateQuery = "UPDATE stok_obat SET jumlah_stok_obat = $newStocks WHERE id_stok_obat = " . $rowData['id_stok_obat'];
   mysqli_query($con, $updateQuery);
-
+ 
+    
   // Subtract the deducted quantity from the remaining quantity
   $jumlah_detail_penjualan_obat -= $deductQuantity;
-
+// echo $jumlah_detail_penjualan_obat;
   // Exit the loop if the remaining quantity is fulfilled
   if ($jumlah_detail_penjualan_obat <= 0) {
     break;
   }
+  
 }
 }
 ?>
 <script>
+  // window.location.href = '?page=penjualan_obat-show';
+
    window.open('../penjualan_obat/nota.php?id=<?php echo $firstTableID ?>','_blank');
   //  window.location.href = '../penjualan_obat/nota.php?id=<?php echo $firstTableID ?>'
+  window.location.href = '?page=penjualan_obat-show';
+
 
 </script>
 
@@ -198,16 +205,16 @@ while ($rowData = mysqli_fetch_assoc($dataResult)) {
                           <select name="id_stok_obat[]" id="id_stok_obat_select" class="form-control select-option select-option2" required>
         <option value="">- Pilih -</option>
         <?php
-          $query = mysqli_query($con, "SELECT t1.nama_obat,t2.id_stok_obat FROM obat t1
-          JOIN stok_obat t2 ON t1.id_obat = t2.id_obat where t2.tanggal_kadaluarsa_obat > CURDATE() and t2.jumlah_stok_obat>0");
+          $query = mysqli_query($con, "SELECT t1.id_obat, t1.nama_obat,t2.id_stok_obat FROM obat t1
+          JOIN stok_obat t2 ON t1.id_obat = t2.id_obat where t2.tanggal_kadaluarsa_obat > CURDATE() and t2.jumlah_stok_obat>0 group by nama_obat");
         // $query = mysqli_query($con, "SELECT id_obat, nama_obat FROM obat");
         while ($row = mysqli_fetch_assoc($query)) {
             // $id_obat1 = $row['id_obat'];
-            $id_stok_obat2 = $row['id_stok_obat'];
+            $id_obat = $row['id_obat'];
 
             $nama_obat = $row['nama_obat'];
             // $idd = 2;
-            echo '<option value="' . $id_stok_obat2 . '" >' . $nama_obat . '</option>';
+            echo '<option value="' . $id_obat . '" >' . $nama_obat . '</option>';
         }
         ?>
     </select>
@@ -236,7 +243,11 @@ while ($rowData = mysqli_fetch_assoc($dataResult)) {
 
     
 
-                          <td><input type="number" required="required" class="form-control qty-input jumlah_detail_penjualan_obat" name="jumlah_detail_penjualan_obat[]" placeholder="Qty" oninput="checkStock(this)">
+                          <td><input  type="number" required="required" class="form-control qty-input jumlah_detail_penjualan_obat" name="jumlah_detail_penjualan_obat[]" placeholder="Qty" oninput="checkStock(this)">
+
+
+                      
+
   <!-- <p align="center" class="stock-left jumlah_stok_obat" >kk</p>                         -->
   Stok :<input type="text" class="col-form-control stock-left jumlah_stok_sisa border-0 text-secondary" name="jumlah_stok_sisa[]" readonly>
   <input type="hidden" class="stock-left jumlah_stok_obat border-0" name="jumlah_stok_obat[]" readonly>
@@ -249,6 +260,10 @@ while ($rowData = mysqli_fetch_assoc($dataResult)) {
   function checkStock(input) {
     var desiredQuantity = parseInt($(input).val());
     var stock = parseInt($('.stock-left').val());
+
+      // Remove any non-numeric characters
+      input.value = input.value.replace(/\D/g, '');
+
 
     // var stockDisplay = $(input).siblings('.stock-display');
     // var stock = parseInt(stockDisplay.text().split(":")[1]);

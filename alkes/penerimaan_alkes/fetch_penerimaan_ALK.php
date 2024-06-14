@@ -7,10 +7,27 @@ error_reporting(E_ALL);
 // $con = mysqli_connect("localhost", "username", "password", "database_name");
 include '../connection.php';
 
-$id_detail_pengadaan_alkes = $_POST['id_detail_pengadaan_alkes'];
+$id_detail_fetch_alkes = $_POST['id_detail_fetch_alkes'];
 
+// Use regular expression to split the string into two parts
+if (preg_match('/(\d+)([A-Za-z\s]+)?/', $id_detail_fetch_alkes, $matches)) {
+  $firstPart = $matches[1];  // Contains "123"
+  $secondPart = $matches[2] ?: ''; // Contains "ID"
+  // echo "First Part: " . $firstPart . "<br>";
+  // echo "Second Part: " . $secondPart;
+} else {
+  echo "Invalid format - couldn't split the string into two parts.";
+}
+
+if($secondPart == "pesan"){
+  //pesan
 // Query to retrieve data from table_1 based on id_detail_pengadaan_alkes
-$query = mysqli_query($con, "SELECT * FROM detail_pengadaan_alkes WHERE id_detail_pengadaan_alkes = '$id_detail_pengadaan_alkes'");
+$query = mysqli_query($con, "SELECT * FROM detail_pengadaan_alkes WHERE id_detail_pengadaan_alkes = '$firstPart'");
+}else{
+//retur
+$query = mysqli_query($con, "SELECT * FROM detail_retur_alkes WHERE id_detail_retur_alkes = '$firstPart'");
+
+}
 
 $response = array();
 
@@ -23,6 +40,15 @@ if ($query) {
     $response['data']['jumlah'] = $row['jumlah'];
 
     $response['data']['satuan'] = $row['satuan'];
+
+    if($secondPart == "pesan"){
+
+    $response['data']['valuese'] = 0;
+    }
+else{
+    $response['data']['valuese'] = $row['value'];
+
+}
 
 
 
