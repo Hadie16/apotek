@@ -91,16 +91,11 @@ function loadCanvas(datasss) {
         chartContainer.innerHTML = ""; // Clear any existing content
         chartContainer.appendChild(newCanvas);
 
-        // Now that the canvas is in the DOM, you can use your charting library to render a chart
-        // renderChart();
-        // var ainz =  '<?php include 'testbar2.php' ?> ';
-        // var testbar2Container = document.getElementById("testbar2Container");
-        // testbar2Container.innerHTML = ainz; 
-        
+    
 
         (function () {
 
-console.log('Script s working...');
+// console.log('Script s working...');
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
@@ -183,7 +178,7 @@ if (isFinite(maxValue)) {
     maxValue += 10;
 }
 
-console.log(maxValue);
+// console.log(maxValue);
 
 
 // Bar Chart Example

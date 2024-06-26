@@ -115,15 +115,12 @@ $conn->close();
 // echo json_encode($months);
 
 ?>
-// console.log(<?php echo json_encode($months)?>);
-// console.log(<?php echo json_encode($prices)?>);
 
 const month = <?php echo json_encode($months)?>;
 const price = <?php echo json_encode($prices)?>;
 const price2 = <?php echo json_encode($prices2)?>;
 const price3= <?php echo json_encode($prices3)?>;
 
-// =====================kode tambahan under process=========
 function fillMissingMonths(months, values, defaultValue = 0) {
   // const allMonths = [
   //   'January', 'February', 'March', 'April', 'May', 'June',
@@ -147,9 +144,7 @@ function fillMissingMonths(months, values, defaultValue = 0) {
 }
 
 
-// Example usage:
-// const months = ['January', 'August'];
-// const values = [20, 30];
+
 
 const filledData = fillMissingMonths(month, price, 0);
 const filledData2 = fillMissingMonths(month, price2, 0);
@@ -162,14 +157,6 @@ const valuesOnly = filledData.map(item => item.value);
 const valuesOnly2 = filledData2.map(item => item.value);
 const valuesOnly3 = filledData3.map(item => item.value);
 
-
-// Display only the values
-// console.log(valuesOnly);
-// console.log(monthsOnly);
-
-
-
-// =====================kode tambahan under process=========
 
 const data ={
     labels: monthsOnly,

@@ -100,7 +100,7 @@
   });
 
   // Handle form submission
-  $('#inputForm').submit(function(e) {
+  $('#inputForms').submit(function(e) {
     e.preventDefault(); // Prevent the default form submission
 
     // Get the input value and the ID
@@ -693,13 +693,6 @@ var grandTotal = 0;
 </script>
 
 
-
-
-<div id="testbar2Container">
-<!-- <?php include 'testbar2.php'?> -->
-
-</div>
-
 <?php include '../laporan_penjualan/grafikSelectScript.php' ?>
 
 <?php include '../laporan_penjualan/labaSelectScript.php' ?>
@@ -707,6 +700,9 @@ var grandTotal = 0;
 <?php include '../laporan_penjualan/tabelSelectScript.php' ?>
 
 <?php include '../laporan_penjualan/tabelSelectScriptAlkes.php' ?>
+
+<?php include '../cek_kesehatan/modal_script.php' ?>
+
 
 
 

@@ -39,7 +39,7 @@
 
               include '../connection.php';
 
-              $query = mysqli_query($con, 'SELECT a.*,b.nama_supplier suppliers FROM pengadaan_obat a join supplier b on a.id_supplier=b.id_supplier where status="Dipesan" OR status="Draft"');
+              $query = mysqli_query($con, 'SELECT a.*,b.nama_supplier suppliers FROM pengadaan_obat a join supplier b on a.id_supplier=b.id_supplier where status="Dipesan"');
              
               if (!$query) {
                 die('Query Error: ' . mysqli_error($con));

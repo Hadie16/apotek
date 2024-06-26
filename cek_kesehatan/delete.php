@@ -1,7 +1,6 @@
 <?php
 include "../connection.php";
 $id = $_GET['id'];
-$result = mysqli_query($con, "DELETE FROM cek_kesehatan WHERE id_cek_kesehatan=$id");
 
 $query = mysqli_query($con, "SELECT * FROM detail_cek_kesehatan WHERE id_cek_kesehatan=$id");
 
@@ -23,6 +22,8 @@ if (!empty($ids)) {
 } else {
     echo "No records found.";
 }
+
+$result = mysqli_query($con, "DELETE FROM cek_kesehatan WHERE id_cek_kesehatan=$id");
 
 
 echo "<meta http-equiv='refresh' content='0; url=?page=cek_kesehatan-show'>";

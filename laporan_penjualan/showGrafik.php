@@ -22,25 +22,6 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                         <?php 
               include '../connection.php';
-                          
-    //           $daylyQuery = "SELECT SUM(pendapatan) AS dayly_sum, DATE(tanggal) AS day
-    //           FROM ( SELECT total_biaya as pendapatan, tanggal_cek_kesehatan as tanggal FROM cek_kesehatan UNION ALL
-    // SELECT total_harga as pendapatan, tanggal_penjualan_obat as tanggal  FROM penjualan_obat ) AS combined_data
-    //           GROUP BY day";
-//     daylyResult = mysqli_query($con, $daylyQuery);
-
-// // Fetch the results
-// $daylySum = array();
-// while ($row = mysqli_fetch_assoc($daylyResult)) {
-//   $daylySum[$row['day']] = $row['dayly_sum'];
-// }
-
-// // Get the current day
-// $currentDate = date('Y-m-d');
-
-// // Echo the sum for the current day
-// $currentdaySum = $daylySum[$currentday];
-// echo 'Rp'.number_format($currentdaySum, 0, '.', '.');
               $dailyQuery = "SELECT SUM(pendapatan) AS daily_sum, DATE(tanggal) AS day
               FROM ( 
                 SELECT total_biaya as pendapatan, tanggal_cek_kesehatan as tanggal FROM cek_kesehatan
@@ -239,41 +220,7 @@ echo 'Rp'.number_format($currentYearSum, 0, '.', '.');
                   </div>
                 </div>
               </div>
-
-
-              <?php 
-//               include '../connection.php';
-
-//                               // Assuming you have a database connection established ($conn)
-// $query = "SELECT jumlah_stok_obat as stok FROM stok_obat WHERE id_stok_obat = '7'";
-
-// // $query = "SELECT jumlah_stok_obat as stok FROM stok_obat";
-// $result = mysqli_query($con, $query);
-// $row = mysqli_fetch_assoc($result);
-// $stock = $row['stok'];
-// $maxStock = 1000; // The maximum stock value (adjust according to your requirements)
-// $percentage = ($stock / $maxStock) * 100;
-
-
-                              ?> 
-           
-
-
-
-
               </div>
-
-
-  
-
-
-
-
-
-
-
-
-
 
             <!-- Content Row -->
 
@@ -306,13 +253,10 @@ echo 'Rp'.number_format($currentYearSum, 0, '.', '.');
                         class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                         aria-labelledby="dropdownMenuLink"
                       >
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
+                       
                         <a class="dropdown-item" href="#"
-                          >Something else here</a
-                        >
+                       <?php  $current_year = date('Y'); ?>
+                          >Pendapatan dalam satu tahun (tahun <?php echo $current_year; ?>) </a>
                       </div>
                     </div>
                   </div>
@@ -353,13 +297,9 @@ echo 'Rp'.number_format($currentYearSum, 0, '.', '.');
                         class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                         aria-labelledby="dropdownMenuLink"
                       >
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
+                       
                         <a class="dropdown-item" href="#"
-                          >Something else here</a
-                        >
+                        >Pendapatan dalam satu tahun (tahun <?php echo $current_year; ?>) </a>
                       </div>
                     </div>
                   </div>

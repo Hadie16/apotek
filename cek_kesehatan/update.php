@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // $value3 = $_POST['value3'];
 
 
+
   // Perform the update query using the retrieved values
   // Modify this code according to your database connection and update logic
 //   $con = mysqli_connect('localhost', 'username', 'password', 'database');

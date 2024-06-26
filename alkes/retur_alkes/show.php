@@ -60,7 +60,7 @@
                 <!-- <th >Nama alkes</th> -->
                 <th >Supplier</th>
                 <th > Tanggal Retur</th>
-                <th >Nama alkes</th>
+                <th >Nama Alkes</th>
                 <th >Jumlah</th>
                 <th >Satuan</th>
                 <th >Batch Number</th>

@@ -15,7 +15,7 @@ $connn = new mysqli($j, $j1, $j4, $j3);
 if ($connn->connect_error) {
     die("Connection failed: " . $connn->connect_error);
 }
-$jojo = "SELECT SUM(total_biaya) AS total_price FROM cek_kesehatan";
+$jojo = "SELECT SUM(total_biaya) AS total_price FROM cek_kesehatan WHERE YEAR(tanggal_cek_kesehatan) = YEAR(CURRENT_DATE())";
 $koko = $connn->query($jojo);
 // Store the sorted months in an array
 $lolo = null;
@@ -25,7 +25,7 @@ $lolo=$row["total_price"];
 }
 
 
-$jojo2 = "SELECT SUM(total_harga) AS total_price2 FROM penjualan_alkes";
+$jojo2 = "SELECT SUM(total_harga) AS total_price2 FROM penjualan_alkes WHERE YEAR(tanggal_penjualan_alkes) = YEAR(CURRENT_DATE())";
 $koko2 = $connn->query($jojo2);
 // Store the sorted months in an array
 $lolo2 = null;
@@ -34,7 +34,7 @@ $lolo2=$row["total_price2"];
 }
 
 
-$jojo3 = "SELECT SUM(total_harga) AS total_price3 FROM penjualan_obat";
+$jojo3 = "SELECT SUM(total_harga) AS total_price3 FROM penjualan_obat WHERE YEAR(tanggal_penjualan_obat) = YEAR(CURRENT_DATE())";
 $koko3 = $connn->query($jojo3);
 // Store the sorted months in an array
 $lolo3 = null;
@@ -49,9 +49,9 @@ $connn->close();
 // echo json_encode($months);
 
 ?>
-console.log(<?php echo json_encode($lolo)?>);
-console.log(<?php echo json_encode($lolo2)?>);
-console.log(<?php echo json_encode($lolo3)?>);
+// console.log(<?php echo json_encode($lolo)?>);
+// console.log(<?php echo json_encode($lolo2)?>);
+// console.log(<?php echo json_encode($lolo3)?>);
 
 
 

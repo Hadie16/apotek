@@ -167,7 +167,7 @@ if ($insert) {
     if (mysqli_num_rows($query) > 0) {
       $row = mysqli_fetch_assoc($query);
       $lastKodeNumber = $row['kode_penerimaan_alkes'];
-      $lastKodeNumber = intval(substr($lastKodeNumber, 9)); // Extract the numeric part only
+      $lastKodeNumber = intval(substr($lastKodeNumber, 10)); // Extract the numeric part only
       $newKodeNumber = $lastKodeNumber + 1;
     } else {
       $newKodeNumber = 1;

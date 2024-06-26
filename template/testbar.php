@@ -70,8 +70,8 @@ var maxValue;
 
 // Check if datas.datasets is not empty and contains valid numeric values
 if (datas.datasets.length > 0 && datas.datasets.some(dataset => Array.isArray(dataset.data) && dataset.data.length > 0)) {
-    maxValue = Math.max.apply(Math, datas.datasets.map(function(dataset) {
-        return Math.max.apply(Math, dataset.data.filter(value => typeof value === 'number' && isFinite(value)));
+  var maxValue = Math.max.apply(Math, datas.datasets.map(function(dataset) {
+    return Math.max.apply(Math, dataset.data);
     }));
 } else {
     // If datas.datasets is empty or contains no valid numeric values, set maxValue to a default value
@@ -84,7 +84,7 @@ if (isFinite(maxValue)) {
     maxValue += 10;
 }
 
-console.log(maxValue);
+// console.log(maxValue);
 
 
 

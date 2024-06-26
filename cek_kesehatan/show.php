@@ -1,3 +1,9 @@
+<?php
+// Start or resume the session
+// session_start();s
+
+?>
+
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800"><?= $title ?></h1>
 </div>
@@ -14,25 +20,6 @@
       </div>
       <div class="card-body">
 
-        <!-- <hr> -->
-<!-- <script>window.addEventListener('scroll', function() {
-  var navbar = document.querySelector('.navbar');
-  var threshold = 100; // Set your desired scroll threshold here
-
-  if (window.scrollY > threshold) {
-    navbar.classList.add('sticky');
-  } else {
-    navbar.classList.remove('sticky');
-  }
-});
-</script> -->
-
-
-<!-- chat gpt -->
-<!-- <div class="table-responsive mt-3" style="height: 400px; overflow-y: scroll;">
-  <table class="table table-bordered table-hover" id="viewpenjualan_obat" style="width: 100%;">
-    <thead style="position: sticky; top: 0;"> -->
-    <!-- ori -->
         <div class="table-responsive mt-3" >
           <table class="table table-bordered table-hover" id="viewProses" style="width: 100%;">
             <thead class="bg-secondary text-white" >
@@ -64,7 +51,7 @@
           //     echo "Loop executed.";
           //     var_dump($data);
           // }
-          
+          $no=1;
               while ($data = mysqli_fetch_array($query)) {  ?>
 
               <tr>
@@ -75,13 +62,13 @@
 
             
                 <td align="center">
-           
-                <button data-id="<?php echo $data['id_cek_kesehatan']; ?>" data-target="#myModal" class="btn btn-primary input-data-btn" data-toggle="modal" >Input</button>
-                <!-- data-target="#myModal" -->
-                <!-- <a href="#myModal" class="btn btn-primary input-data-btn" data-toggle="modal" data-id="<?php echo $data['id_cek_kesehatan']; ?>">Input</a> -->
+              <!-- <form id="filterFormModal<?php echo $no++; ?>"> -->
+              <!-- <input type="text" class="form-control" id="id<?php echo $no++; ?>" name="" value="<?php echo $data['id_cek_kesehatan']; ?>"> -->
 
+                <button id="myButton" data-id="<?php echo $data['id_cek_kesehatan']; ?>" data-target="#myModal" class="btn btn-primary input-data-btn myButton" data-toggle="modal" >Input</button>
 
-            
+              <!-- </form> -->
+         
                 </td>
               </tr>
 
@@ -150,24 +137,7 @@
   </div>       
   </div>
         <hr>
-<!-- <script>window.addEventListener('scroll', function() {
-  var navbar = document.querySelector('.navbar');
-  var threshold = 100; // Set your desired scroll threshold here
 
-  if (window.scrollY > threshold) {
-    navbar.classList.add('sticky');
-  } else {
-    navbar.classList.remove('sticky');
-  }
-});
-</script> -->
-
-
-<!-- chat gpt -->
-<!-- <div class="table-responsive mt-3" style="height: 400px; overflow-y: scroll;">
-  <table class="table table-bordered table-hover" id="viewpenjualan_obat" style="width: 100%;">
-    <thead style="position: sticky; top: 0;"> -->
-    <!-- ori -->
         <div class="table-responsive mt-3" >
           <table class="table table-bordered table-hover" id="viewSelesai" style="width: 100%;">
             <thead class="bg-secondary text-white" >
@@ -241,6 +211,7 @@
             </tbody>
           </table>
         </div>
+ 
       </div>
     </div>
   </div>
@@ -253,7 +224,7 @@
 <!-- modal cek kesehatan-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <form id="inputForm">
         <div class="modal-header">
@@ -262,72 +233,12 @@
         </div>
       
         <div class="modal-body">
-        <?php
-        // Start or resume the session
-        session_start();
 
-        // Check if the $_SESSION['id'] is set and echo it inside the modal
-        if (isset($_SESSION['id'])) {
-          $id = $_SESSION['id'];
-  //  $id=52;
+        <div class="col-sm-12" id="printContainerCek">
 
-        $query = mysqli_query($con, "SELECT * FROM detail_cek_kesehatan dck join cek_kesehatan ck on dck.id_cek_kesehatan=ck.id_cek_kesehatan where dck.id_cek_kesehatan=$id");
+      </div>  
 
-        // Initialize arrays to store $b and $k values
-        $biaya_values = array();
-        $id_kategori_values = array();
-        
-        while ($data = mysqli_fetch_assoc($query)) {
-            $biaya_values[] = $data['biaya'];
-            $id_kategori_values[] = $data['id_kategori'];
-
-            
-        }
-//         echo "<pre>";
-// var_dump($biaya_values);
-// echo "</pre>";
-// echo "<pre>";
-// var_dump($id_kategori_values);
-// echo "</pre>";
-$b1=$biaya_values[0];
-$b2=$biaya_values[1];
-$b3=$biaya_values[2];
-$k1=$id_kategori_values[0];
-$k2=$id_kategori_values[1];
-$k3=$id_kategori_values[2];
-
-    
-
-      }
-      
-        ?>
-        
-          <input type="hidden" id="idInput" name="id">
-          <div class="form-group">
-          <label for="inputValue">Input Nilai Gula Darah:</label>
-            <!-- <input name="nilai" type="number" class="form-control" id="nilai" <?php echo ($nilai1=== 10000) ? '' : 'disabled'; ?>> -->
-
-            <input type="text" class="form-control" id="inputValue" name="inputValue" <?php echo ($b1 == 10000 && $k1 == 1) ? '' : 'disabled'; ?>>
-            <!-- <?php echo $b1.','.$k1?>
-            <?php echo $b2.','.$k2?>
-            <?php echo $b3.','.$k3?> -->
-
-
-          </div>
-    
-          <div class="form-group">
-            <label for="inputValue2">Input Nilai Asam Urat:</label>
-            <input type="text" class="form-control" id="inputValue2" name="inputValue2" <?php echo ($b2 == 10000 && $k2 == 2) ? '' : 'disabled'; ?>>
-
-       
-          </div>
      
-          <div class="form-group">
-            <label for="inputValue3">Input Nilai Kolesterol:</label>
-            <input type="text" class="form-control" id="inputValue3" name="inputValue3" <?php echo ($b3 == 20000 && $k3 == 3) ? '' : 'disabled'; ?>>
-
-        
-          </div>
         </div>
      
         <div class="modal-footer">

@@ -16,7 +16,7 @@
                 type: 'POST',
                 data: { conds: conds },
                 success: function (response) {
-                console.log(response);
+                // console.log(response);
                     document.getElementById('tableContainerTambah').innerHTML = response;
                     document.getElementById('tableContainerTambah').style.width = '100%';
                      }

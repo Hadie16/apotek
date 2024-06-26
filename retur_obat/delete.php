@@ -1,10 +1,7 @@
 <?php
 include "../connection.php";
-$id = $_GET['id'];
-$result = mysqli_query($con, "DELETE FROM retur_obat WHERE id_retur_obat=$id");
-// $result2 = mysqli_query($con, "DELETE FROM detail_retur_obat WHERE id_retur_obat=$id");
 
-// $id = 123; // Example id_retur_obat value
+$id = $_GET['id'];
 
 // Retrieve all records with the specified id_retur_obat
 $query = mysqli_query($con, "SELECT * FROM detail_retur_obat WHERE id_retur_obat=$id");
@@ -28,5 +25,6 @@ if (!empty($ids)) {
     echo "No records found.";
 }
 
+$result = mysqli_query($con, "DELETE FROM retur_obat WHERE id_retur_obat='$id'");
 
 echo "<meta http-equiv='refresh' content='0; url=?page=retur_obat-show'>";
